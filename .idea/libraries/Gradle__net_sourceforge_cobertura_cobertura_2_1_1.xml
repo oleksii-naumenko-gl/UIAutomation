@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: net.sourceforge.cobertura:cobertura:2.1.1">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/net.sourceforge.cobertura/cobertura/2.1.1/eab984794b3f7d0d37736a9e5b7f790128f611b5/cobertura-2.1.1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/net.sourceforge.cobertura/cobertura/2.1.1/e7e3dafb8293e70a1f756f4f817b2cbdf91ba382/cobertura-2.1.1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

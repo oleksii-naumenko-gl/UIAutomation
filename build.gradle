@@ -1,0 +1,33 @@
+group 'com.grasshopper.testAutomation'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+//apply plugin: 'idea'
+
+repositories {
+    mavenCentral()
+}
+
+ext {
+    ext
+            {
+                seleniumVersion = "2.53.1"
+            }
+}
+
+
+dependencies {
+    compile "com.github.samueltbrown:gradle-cucumber-plugin:0.8"
+    compile "io.appium:java-client:4.0.0"
+    compile "org.seleniumhq.selenium:selenium-api:$seleniumVersion"
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+
+    compile "info.cukes:cucumber-java:1.1.5"
+    compile "info.cukes:cucumber-jvm:1.1.5"
+    compile "info.cukes:cucumber-junit:1.1.5"
+    compile "net.sourceforge.cobertura:cobertura:2.1.1"
+    compile "info.cukes:cucumber-jvm-deps:1.0.5"
+    compile "net.masterthought:cucumber-reporting:1.0.0"
+    compile "info.cukes:gherkin:2.12.2"
+    compile "org.mockito:mockito-all:2.0.2-beta"
+}
