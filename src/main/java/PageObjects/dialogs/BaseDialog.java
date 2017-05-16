@@ -42,7 +42,9 @@ public class BaseDialog extends BasePage {
     }
 
     public void acceptDialog(){
-        allowButton.click();
+        if (isDialogPresent()){
+            allowButton.click();
+        }
     }
 
     public void waitUntilProgressDisappears() throws InterruptedException {

@@ -1,8 +1,10 @@
 package com.citrix.grasshopper.at.steps;
 
+import PageObjects.ExtensionsLoginScreen;
 import PageObjects.GetStartedPage;
 import PageObjects.LoginPage;
 import PageObjects.dialogs.BaseDialog;
+import PageObjects.dialogs.NumberConfirmationDialog;
 import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
@@ -16,6 +18,10 @@ public class LoginSteps extends BaseSteps{
     private BaseDialog dialog = new BaseDialog(driverAppium);
 
     private GetStartedPage startPage = new GetStartedPage(driverAppium);
+
+    private ExtensionsLoginScreen extensionsLoginScreen = new ExtensionsLoginScreen(driverAppium);
+
+    private NumberConfirmationDialog numberConfirmationDialog = new NumberConfirmationDialog(driverAppium);
 
 
     @Given("^Grasshopper is installed on a clean device$")
@@ -35,23 +41,23 @@ public class LoginSteps extends BaseSteps{
 
         dialog.waitUntilProgressDisappears();
 
-        if (dialog.isDialogPresent()){
-
-            dialog.acceptDialog();
-        }
+        dialog.acceptDialog();
 
         startPage.enterPhone("6314524045");
 
         startPage.navigateNext();
 
-        if (dialog.isDialogPresent()){
+        dialog.waitUntilProgressDisappears();
 
-            dialog.acceptDialog();
-        }
+        numberConfirmationDialog.acceptDialog();
 
         dialog.waitUntilProgressDisappears();
-    }
 
+        // extension
+
+        extensionsLoginScreen.selectRandomExtension();
+
+    }
 
 
 }

@@ -28,5 +28,4 @@ public class GetStartedPage extends BasePage {
         nextButton.click();
     }
 
-
 }

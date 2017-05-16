@@ -9,4 +9,4 @@ Feature: Grasshopper Smoke Test
 
       Examples:
       | login                       | password            |
-      | oleksii                     | abc123              |
+      | oleksii                     | abcd1234            |

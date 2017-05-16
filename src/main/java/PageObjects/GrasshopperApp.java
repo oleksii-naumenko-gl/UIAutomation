@@ -33,7 +33,7 @@ public class GrasshopperApp {
 
     public AppiumDriver getAndroidWebDriver() {
         File appDir = new File("/Users/admin/IdeaProjects/GrasshopperAutomation/AT");
-        File app = new File(appDir, "Grasshopper.apk");
+        File app = new File(appDir, "Grasshopper2.apk");
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability("device","Android");
 
