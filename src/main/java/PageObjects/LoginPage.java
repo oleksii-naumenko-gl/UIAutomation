@@ -27,23 +27,19 @@ public class LoginPage extends BasePage {
 
     public void enterLogin(String text){
         loginUserId.click();
-
         loginUserId.sendKeys(text);
     }
 
     public void enterPassword(String text){
         loginPassword.click();
-
         loginPassword.sendKeys(text);
     }
 
     public void clickSignIn() throws InterruptedException {
-
         Thread.sleep(1000);
-
         loginSignIn.click();
-
     }
+
 
 
 }

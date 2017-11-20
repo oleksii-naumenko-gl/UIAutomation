@@ -15,14 +15,11 @@ public abstract class BasePage {
 
     public BasePage(AppiumDriver driver) {
         this.driver = driver;
-
         PageFactory.initElements(new AppiumFieldDecorator(driver), this);
     }
 
     public MobileElement findElementWithTimeout(By by, int timeOutInSeconds) {
-
         return (MobileElement)(new WebDriverWait(driver, timeOutInSeconds)).until(ExpectedConditions.presenceOfElementLocated(by));
-
     }
 
     protected void takeScreenShot(){
@@ -32,4 +29,11 @@ public abstract class BasePage {
     public void navigateBack(){
         driver.navigate().back();
     }
+
+    private void PressHome(){
+    }
+
+
+
+    // todo method from generic steps here
 }

@@ -19,22 +19,24 @@ public class BaseDialog extends BasePage {
     }
 
     @AndroidFindBy(id = "com.grasshopper.dialer:id/circle_progress")
-    @iOSFindBy(id = "phone_input") //tbd
     private MobileElement progressBar;
 
     @AndroidFindBy(id = "com.android.packageinstaller:id/permission_deny_button")
-    @iOSFindBy(id = "phone_input") //tbd
     private MobileElement denyButton;
 
     @AndroidFindBy(id = "com.android.packageinstaller:id/permission_allow_button")
-    @iOSFindBy(id = "phone_input") //tbd
     private MobileElement allowButton;
 
     @AndroidFindBy(id = "com.android.packageinstaller:id/dialog_container")
     private MobileElement dialog;
 
     public boolean isDialogPresent(){
-        return dialog.isDisplayed();
+
+        if (dialog != null){
+            return dialog.isDisplayed();
+        }
+
+        return false;
     }
 
     public void denyDialog(){
@@ -46,24 +48,6 @@ public class BaseDialog extends BasePage {
     }
 
     public void waitUntilProgressDisappears() throws InterruptedException {
-//        Thread.sleep(2000);
-//
-//        boolean waitFlag = true;
-//        int counter = 10;
-//
-//        while (waitFlag) {
-//
-//            // будет падать если его не было с самого начала
-//                if ((!progressBar.isDisplayed()) || (counter == 0)) {
-//                    waitFlag = false;
-//                }
-//
-//                counter--;
-//
-//                Thread.sleep(2000);
-//
-//        }
-
         try {
             (new WebDriverWait(driver, 10)).until(ExpectedConditions.invisibilityOfElementLocated(By.id("com.grasshopper.dialer:id/circle_progress")));
         } catch (TimeoutException e) {

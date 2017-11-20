@@ -1,57 +1,66 @@
 package com.citrix.grasshopper.at.steps;
 
-import PageObjects.GetStartedPage;
-import PageObjects.LoginPage;
-import PageObjects.dialogs.BaseDialog;
-import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
-import cucumber.deps.com.thoughtworks.xstream.core.util.ThreadSafePropertyEditor;
-import cucumber.deps.com.thoughtworks.xstream.mapper.SystemAttributeAliasingMapper;
 
 public class LoginSteps extends BaseSteps{
 
-    private LoginPage page = new LoginPage(driverAppium);
-
-    private BaseDialog dialog = new BaseDialog(driverAppium);
-
-    private GetStartedPage startPage = new GetStartedPage(driverAppium);
-
-
     @Given("^Grasshopper is installed on a clean device$")
     public void grasshopperIsInstalledOnACleanDevice() throws Throwable {
-            // empty step
-
-//        page.enterLogin("oleksii");
-//        page.enterPassword("boydivision");
-//        page.clickSignIn();
     }
 
     @And("^user logs in with (.*) and (.*)$")
     public void userLogsInWithLoginAndPassword(String login, String password) throws Throwable {
-        page.enterLogin(login);
-        page.enterPassword(password);
-        page.clickSignIn();
 
-        dialog.waitUntilProgressDisappears();
+        app.loginPage().enterLogin(login);
+        app.loginPage().enterPassword(password);
+        app.loginPage().clickSignIn();
 
-        if (dialog.isDialogPresent()){
+        // this can be moved to other page, maybe the base one
+        app.baseDialog().waitUntilProgressDisappears();
 
-            dialog.acceptDialog();
+        if (app.baseDialog().isDialogPresent()){
+
+            app.baseDialog().acceptDialog();
         }
 
-        startPage.enterPhone("6314524045");
+        // todo get user info from external source
+        app.getStartedPage().enterPhone("6314524045");
 
-        startPage.navigateNext();
+        app.getStartedPage().navigateNext();
 
-        if (dialog.isDialogPresent()){
-
-            dialog.acceptDialog();
+        // number confirmation
+        if (app.baseAlert().isAlertPresent()){
+            app.baseAlert().clickYes();
         }
 
-        dialog.waitUntilProgressDisappears();
+        app.baseDialog().waitUntilProgressDisappears();
+
+        app.extensionSelectionScreen().selectFirstExtension();
+
+        app.baseDialog().waitUntilProgressDisappears();
+
+        // Contacts access
+        if (app.baseDialog().isDialogPresent()){
+
+            app.baseDialog().acceptDialog();
+        }
+
+        app.baseDialog().waitUntilProgressDisappears();
+
+        // Legal Disclamer
+        if (app.baseAlert().isAlertPresent()){
+            app.baseAlert().clickYes();
+        }
+
+        app.baseDialog().waitUntilProgressDisappears();
+
+        // Media access
+        if (app.baseDialog().isDialogPresent()){
+
+            app.baseDialog().acceptDialog();
+        }
+
     }
-
-
 
 }

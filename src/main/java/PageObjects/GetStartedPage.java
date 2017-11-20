@@ -12,15 +12,12 @@ public class GetStartedPage extends BasePage {
     }
 
     @AndroidFindBy(id = "com.grasshopper.dialer:id/phone_input")
-    @iOSFindBy(id = "phone_input") //tbd
     private MobileElement phoneInput;
 
     @AndroidFindBy(id = "com.grasshopper.dialer:id/action_next")
-    @iOSFindBy(id = "phone_input") //tbd
     private MobileElement nextButton;
 
     public void enterPhone(String number){
-        phoneInput.click();
         phoneInput.sendKeys(number);
     }
 
