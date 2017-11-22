@@ -55,6 +55,18 @@ public class LoginSteps extends BaseSteps{
 
         app.baseDialog().waitUntilProgressDisappears();
 
+        // wifi goes here
+        if (app.voipLoginPage().isWifiDialogPresent()){
+            app.voipLoginPage().acceptWifiCalls();
+        }
+
+        app.baseDialog().waitUntilProgressDisappears();
+
+        // Cellular Data alert
+        if (app.baseAlert().isAlertPresent()){
+            app.baseAlert().clickYes();
+        }
+
         // Media access
         if (app.baseDialog().isDialogPresent()){
 

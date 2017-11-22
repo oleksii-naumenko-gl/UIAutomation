@@ -32,11 +32,16 @@ public class BaseDialog extends BasePage {
 
     public boolean isDialogPresent(){
 
-        if (dialog != null){
-            return dialog.isDisplayed();
+        boolean isPresent = false;
+
+        try {
+            isPresent = dialog.isDisplayed();
+        }
+        catch (Exception x){
+
         }
 
-        return false;
+        return isPresent;
     }
 
     public void denyDialog(){
@@ -49,7 +54,7 @@ public class BaseDialog extends BasePage {
 
     public void waitUntilProgressDisappears() throws InterruptedException {
         try {
-            (new WebDriverWait(driver, 10)).until(ExpectedConditions.invisibilityOfElementLocated(By.id("com.grasshopper.dialer:id/circle_progress")));
+            (new WebDriverWait(driver, 30)).until(ExpectedConditions.invisibilityOfElementLocated(By.id("com.grasshopper.dialer:id/circle_progress")));
         } catch (TimeoutException e) {
         }
 

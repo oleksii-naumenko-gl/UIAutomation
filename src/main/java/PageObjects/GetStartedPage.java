@@ -18,6 +18,8 @@ public class GetStartedPage extends BasePage {
     private MobileElement nextButton;
 
     public void enterPhone(String number){
+        phoneInput.clear();
+
         phoneInput.sendKeys(number);
     }
 

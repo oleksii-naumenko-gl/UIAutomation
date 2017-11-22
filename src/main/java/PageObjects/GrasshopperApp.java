@@ -49,15 +49,13 @@ public class GrasshopperApp {
 
     public BottomNavigationBar bottomNavigationBar(){return new BottomNavigationBar(driver);}
 
+    public VOIPLoginPage voipLoginPage(){return new VOIPLoginPage(driver);}
+
     public BaseDialog baseDialog(){
         return new BaseDialog(driver);
     }
 
     public BaseAlert baseAlert() {return new BaseAlert(driver);  }
-
-
-
-
 
     public static void getProperties(){
         try {

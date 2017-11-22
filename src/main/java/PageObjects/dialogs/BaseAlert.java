@@ -27,11 +27,16 @@ public class BaseAlert extends BasePage {
 
     public boolean isAlertPresent(){
 
-        if (alert != null){
-            return alert.isDisplayed();
+        boolean isPresent = false;
+
+        try {
+            isPresent = alert.isDisplayed();
+        }
+        catch (Exception x){
+
         }
 
-        return false;
+        return isPresent;
     }
 
     public void clickYes(){
