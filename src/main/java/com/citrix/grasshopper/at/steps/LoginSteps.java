@@ -1,7 +1,9 @@
 package com.citrix.grasshopper.at.steps;
 
+import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
+import helper.DefaultUser;
 
 public class LoginSteps extends BaseSteps{
 
@@ -19,6 +21,7 @@ public class LoginSteps extends BaseSteps{
         // this can be moved to other page, maybe the base one
         app.baseDialog().waitUntilProgressDisappears();
 
+        // allow to manage phone calls
         if (app.baseDialog().isDialogPresent()){
 
             app.baseDialog().acceptDialog();
@@ -53,26 +56,39 @@ public class LoginSteps extends BaseSteps{
             app.baseAlert().clickYes();
         }
 
-        app.baseDialog().waitUntilProgressDisappears();
+        // media access
+        if (app.permissionRequest().isPermissionMessagePresent()){
+            app.permissionRequest().allowAccess();
+            app.permissionRequest().allowAccess();
+        }
 
         // wifi goes here
         if (app.voipLoginPage().isWifiDialogPresent()){
             app.voipLoginPage().acceptWifiCalls();
         }
 
-        app.baseDialog().waitUntilProgressDisappears();
+//        app.baseDialog().waitUntilProgressDisappears();
 
         // Cellular Data alert
         if (app.baseAlert().isAlertPresent()){
             app.baseAlert().clickYes();
         }
 
-        // Media access
-        if (app.baseDialog().isDialogPresent()){
-
-            app.baseDialog().acceptDialog();
+        // media access
+        if (app.permissionRequest().isPermissionMessagePresent()){
+            app.permissionRequest().allowAccess();
+            app.permissionRequest().allowAccess();
         }
 
+        // Removing all the tour banners
+        // todo: tapping three times at the moment as there are no valid ids for these items.
+        app.inboxPage().tapInTheMiddle();
+        app.inboxPage().tapInTheMiddle();
+        app.inboxPage().tapInTheMiddle();
     }
 
+    @And("^user logs in with default credentials$")
+    public void userLogsInWithDefaultCredentials() throws Throwable {
+        userLogsInWithLoginAndPassword(DefaultUser.login, DefaultUser.password);
+    }
 }
