@@ -17,7 +17,6 @@ public class DefaultUser {
                     new Number("(617) 249-0540", true),
                     new Number("(800) 683-9753", true),
                     new Number("(888) 963-9553", true)
-
             };
 
     public static Extension[] extensions = new Extension[]

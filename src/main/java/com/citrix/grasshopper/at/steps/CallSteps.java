@@ -13,7 +13,7 @@ public class CallSteps extends BaseSteps {
     public void eachItemFromCallDropdownCanBeSelected() throws Throwable {
         for (Number value: DefaultUser.numbers)
         {
-            app.recentPage().setDropdownValue(value.number);
+            app.callPage().setDropdownValue(value.number);
 
             // todo: need to add constants class
             Thread.sleep(3000);
