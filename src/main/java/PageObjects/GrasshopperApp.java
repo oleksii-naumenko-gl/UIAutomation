@@ -57,6 +57,8 @@ public class GrasshopperApp {
 
     public CallPage callPage() { return new CallPage(driver); }
 
+    public TextsPage textsPage() { return new TextsPage(driver); }
+
     public BaseDialog baseDialog(){
         return new BaseDialog(driver);
     }
