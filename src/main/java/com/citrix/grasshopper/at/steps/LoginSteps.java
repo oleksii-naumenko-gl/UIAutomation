@@ -18,13 +18,12 @@ public class LoginSteps extends BaseSteps{
         app.loginPage().enterPassword(password);
         app.loginPage().clickSignIn();
 
-        // this can be moved to other page, maybe the base one
         app.baseDialog().waitUntilProgressDisappears();
 
         // allow to manage phone calls
-        if (app.baseDialog().isDialogPresent()){
+        if (app.permissionRequest().isPermissionMessagePresent()){
 
-            app.baseDialog().acceptDialog();
+            app.permissionRequest().allowAccess();
         }
 
         // todo get user info from external source
@@ -44,12 +43,10 @@ public class LoginSteps extends BaseSteps{
         app.baseDialog().waitUntilProgressDisappears();
 
         // Contacts access
-        if (app.baseDialog().isDialogPresent()){
+        if (app.permissionRequest().isPermissionMessagePresent()){
 
-            app.baseDialog().acceptDialog();
+            app.permissionRequest().allowAccess();
         }
-
-        app.baseDialog().waitUntilProgressDisappears();
 
         // Legal Disclamer
         if (app.baseAlert().isAlertPresent()){
@@ -66,8 +63,6 @@ public class LoginSteps extends BaseSteps{
         if (app.voipLoginPage().isWifiDialogPresent()){
             app.voipLoginPage().acceptWifiCalls();
         }
-
-//        app.baseDialog().waitUntilProgressDisappears();
 
         // Cellular Data alert
         if (app.baseAlert().isAlertPresent()){

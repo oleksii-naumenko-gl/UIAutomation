@@ -8,7 +8,7 @@ import org.junit.Assert;
 import javax.print.attribute.standard.MediaSize;
 
 
-public class SettingsSteps extends BaseSteps {
+public class SettingsSteps  extends BaseSteps{
 
 
 

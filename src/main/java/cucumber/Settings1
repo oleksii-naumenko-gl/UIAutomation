@@ -5,10 +5,10 @@ Feature: Settings screen
     And user logs in with Oleksii.Naumenko@logmein.com and abc123
 
 
-Scenario: Navigation to the Settings screen
+  Scenario: Navigation to the Settings screen
     When user navigates to Settings screen
     Then Settings screen is displayed
-    And all default settings are displayed
+#    And all default settings are displayed
 
     # verify in the method
 #    And Sign Out button is displayed

@@ -9,12 +9,6 @@ import org.junit.Assert;
 
 public class CallSteps extends BaseSteps {
 
-    @When("^user navigates to Call tab$")
-    public void userNavigatesToCallTab() throws Throwable {
-        // TODO REMOVE!!
-        app.callPage().selectTab(NavigationTab.CALL);
-    }
-
     @Then("^each item from Call dropdown can be selected$")
     public void eachItemFromCallDropdownCanBeSelected() throws Throwable {
         for (Number value: DefaultUser.numbers)
