@@ -19,7 +19,7 @@ public class BaseAlert extends BasePage {
     @AndroidFindBy(id = "android:id/button1")
     private MobileElement yesButton;
 
-    @AndroidFindBy(id = "android:id/button1")
+    @AndroidFindBy(id = "android:id/button2")
     private MobileElement noButton;
 
     @AndroidFindBy(id = "com.grasshopper.dialer:id/action_bar_root")

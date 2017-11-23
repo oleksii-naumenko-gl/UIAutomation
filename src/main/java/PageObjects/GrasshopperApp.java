@@ -2,8 +2,8 @@ package PageObjects;
 
 import PageObjects.dialogs.BaseAlert;
 import PageObjects.dialogs.BaseDialog;
+import PageObjects.dialogs.PermissionRequest;
 import helper.SharedData;
-import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
@@ -47,15 +47,23 @@ public class GrasshopperApp {
 
     public ExtensionSelectionScreen extensionSelectionScreen() { return new ExtensionSelectionScreen(driver); }
 
-    public BottomNavigationBar bottomNavigationBar(){return new BottomNavigationBar(driver);}
+    public BaseActionPage bottomNavigationBar(){ return new BaseActionPage(driver); }
 
-    public VOIPLoginPage voipLoginPage(){return new VOIPLoginPage(driver);}
+    public VOIPLoginPage voipLoginPage(){ return new VOIPLoginPage(driver); }
+
+    public InboxPage inboxPage() { return new InboxPage(driver); }
+
+    public RecentPage recentPage() { return new RecentPage(driver); }
+
+    public CallPage callPage() { return new CallPage(driver); }
 
     public BaseDialog baseDialog(){
         return new BaseDialog(driver);
     }
 
-    public BaseAlert baseAlert() {return new BaseAlert(driver);  }
+    public BaseAlert baseAlert() { return new BaseAlert(driver); }
+
+    public PermissionRequest permissionRequest() {return new PermissionRequest(driver);}
 
     public static void getProperties(){
         try {
