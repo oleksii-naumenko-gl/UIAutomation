@@ -21,6 +21,9 @@ public class LoginPage extends BasePage {
     @iOSFindBy(id = "sign_in")
     private MobileElement loginSignIn;
 
+    @AndroidFindBy(id = "com.grasshopper.dialer:id/textinput_error")
+    private MobileElement inputError;
+
     public LoginPage(AppiumDriver driver) {
         super(driver);
     }
@@ -40,6 +43,14 @@ public class LoginPage extends BasePage {
         loginSignIn.click();
     }
 
+    public String getErrorMessage(){
+        try {
+            return inputError.getText();
+        }
+        catch (Exception x){
+        }
 
+        return "Error is not present";
+    }
 
 }

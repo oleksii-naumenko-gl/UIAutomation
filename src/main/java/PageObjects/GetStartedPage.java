@@ -17,15 +17,27 @@ public class GetStartedPage extends BasePage {
     @AndroidFindBy(id = "com.grasshopper.dialer:id/action_next")
     private MobileElement nextButton;
 
+    @AndroidFindBy(id = "com.grasshopper.dialer:id/textinput_error")
+    private MobileElement errorMessage;
+
     public void enterPhone(String number){
         phoneInput.clear();
 
         phoneInput.sendKeys(number);
     }
 
+    public String getErrorMessage(){
+        try {
+            return errorMessage.getText();
+        }
+        catch (Exception x){
+        }
+
+        return "Error is not present";
+    }
+
     public void navigateNext(){
         nextButton.click();
     }
-
 
 }

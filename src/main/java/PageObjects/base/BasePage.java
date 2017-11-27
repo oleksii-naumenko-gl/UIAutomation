@@ -35,7 +35,6 @@ public abstract class BasePage {
     }
 
     // todo method from generic steps here
-
     public void tapInTheMiddle(){
         try {
             WebElement x = driver.findElementById("com.grasshopper.dialer:id/toolbar");

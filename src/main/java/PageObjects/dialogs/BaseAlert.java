@@ -47,6 +47,10 @@ public class BaseAlert extends BasePage {
         noButton.click();
     }
 
+    public String getAlertTitle(){
+        return alertTitle.getText();
+    }
+
     // TODO: add methods to get text fields
 
 }

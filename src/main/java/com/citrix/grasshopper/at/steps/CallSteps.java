@@ -1,5 +1,6 @@
 package com.citrix.grasshopper.at.steps;
 
+import cucumber.api.PendingException;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import helper.DefaultUser;
@@ -22,5 +23,11 @@ public class CallSteps extends BaseSteps {
 
             // todo: verify the list of actual elements
         }
+    }
+
+    @Then("^user is able to perform call from dialer$")
+    public void userIsAbleToPerformCallFromDialer() throws Throwable {
+
+
     }
 }
