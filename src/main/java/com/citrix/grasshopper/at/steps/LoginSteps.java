@@ -17,6 +17,8 @@ public class LoginSteps extends BaseSteps{
 
     @And("^user logs in with (.*) and (.*)$")
     public void userLogsInWithLoginAndPassword(String login, String password) throws Throwable {
+        logger.debug("Testx");
+
         app.loginPage().enterLogin(login);
         app.loginPage().enterPassword(password);
         app.loginPage().clickSignIn();
@@ -83,12 +85,12 @@ public class LoginSteps extends BaseSteps{
 
         // Removing all the tour banners
         // todo: tapping three times at the moment as there are no valid ids for these items.
-        app.inboxPage().tapInTheMiddle();
-        app.inboxPage().tapInTheMiddle();
-        app.inboxPage().tapInTheMiddle();
+        app.inboxPage().tapInTheMiddleOfTheScreen();
+        app.inboxPage().tapInTheMiddleOfTheScreen();
+        app.inboxPage().tapInTheMiddleOfTheScreen();
     }
 
-    @And("^user logs in with default credentials$")
+    @And("^user logs in with the default credentials$")
     public void userLogsInWithDefaultCredentials() throws Throwable {
         userLogsInWithLoginAndPassword(DefaultUser.login, DefaultUser.password);
     }
@@ -110,7 +112,7 @@ public class LoginSteps extends BaseSteps{
 
     @Then("^password error message (.*) is displayed$")
     public void passwordErrorMessageErrorIsDisplayed(String errorMessage) throws Throwable {
-        Assert.assertTrue("Verify password error message is shown", app.loginPage().getErrorMessage().equalsIgnoreCase(errorMessage));
+        Assert.assertTrue("Verify password error message is shown", app.loginPage().getLoginErrorMessage().equalsIgnoreCase(errorMessage));
     }
 
     @And("^user enters valid credentials$")
@@ -136,6 +138,6 @@ public class LoginSteps extends BaseSteps{
 
     @Then("^invalid number error (.*) should be shown$")
     public void invalidNumberErrorShouldBeShown(String errorMessage) throws Throwable {
-        Assert.assertTrue("Verify invalid number error is shown", app.getStartedPage().getErrorMessage().equalsIgnoreCase(errorMessage));
+        Assert.assertTrue("Verify invalid number error is shown", app.getStartedPage().getInputErrorMessage().equalsIgnoreCase(errorMessage));
     }
 }

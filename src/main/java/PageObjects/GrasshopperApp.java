@@ -59,6 +59,8 @@ public class GrasshopperApp {
 
     public TextsPage textsPage() { return new TextsPage(driver); }
 
+    public WifiCallPage wifiCallPage() { return new WifiCallPage(driver); }
+
     public BaseDialog baseDialog(){
         return new BaseDialog(driver);
     }
