@@ -1,5 +1,7 @@
 package com.citrix.grasshopper.at.steps;
 
+import cucumber.api.PendingException;
+import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import helper.Constants;
 import helper.DefaultUser;
@@ -31,5 +33,10 @@ public class CallSteps extends BaseSteps {
         Assert.assertTrue("Verify Call is being performed", app.wifiCallPage().isWifiCallPresent());
 
         app.wifiCallPage().endCall();
+    }
+
+    @And("^opens Favorites screen$")
+    public void opensFavoritesScreen() throws Throwable {
+        app.callPage().openFavorites();
     }
 }
