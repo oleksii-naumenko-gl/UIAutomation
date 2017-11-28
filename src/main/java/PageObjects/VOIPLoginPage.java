@@ -10,7 +10,7 @@ public class VOIPLoginPage extends BasePage {
         super(driver);
     }
 
-    @AndroidFindBy(id = "com.grasshopper.dialer:id/enable_wifi_calling")
+    @AndroidFindBy(id = "com.grasshopper.dialer:id/wifi_promo_use_wifi")
     private MobileElement acceptWifiCalls;
 
 
