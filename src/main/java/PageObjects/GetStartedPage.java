@@ -26,7 +26,7 @@ public class GetStartedPage extends BasePage {
         phoneInput.sendKeys(number);
     }
 
-    public String getErrorMessage(){
+    public String getInputErrorMessage(){
         try {
             return errorMessage.getText();
         }

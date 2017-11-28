@@ -30,4 +30,6 @@ dependencies {
     compile "net.masterthought:cucumber-reporting:1.0.0"
     compile "info.cukes:gherkin:2.12.2"
     compile "org.mockito:mockito-all:2.0.2-beta"
+    compile group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.10.0'
+    compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.10.0'
 }
