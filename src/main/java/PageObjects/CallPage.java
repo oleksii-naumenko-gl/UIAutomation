@@ -30,6 +30,8 @@ public class CallPage extends BaseActionPage {
     private MobileElement keypadParent;
 
     public void enterPhoneNumber(String number) throws InterruptedException {
+        logger.debug("Entering " + number + " number.");
+
         List<MobileElement> keys = keypadParent.findElements(By.id("com.grasshopper.dialer:id/tv_keypad_label"));
 
         for (char ch: number.toCharArray()) {
@@ -37,7 +39,8 @@ public class CallPage extends BaseActionPage {
             for(MobileElement element : keys)
             {
                 if (element.getText().equalsIgnoreCase(Character.toString(ch))){
-                 element.click();
+                    logger.debug("Clicking " + ch + " button");
+                    element.click();
                 }
             }
         }
@@ -45,9 +48,13 @@ public class CallPage extends BaseActionPage {
     }
 
     public void clickCall(){
+        logger.debug("Clicking Call button");
         callButton.click();
-
     }
 
+    public void openFavorites(){
+        logger.debug("Clicking Favorites button");
+        favoritesButton.click();
+    }
 
 }
