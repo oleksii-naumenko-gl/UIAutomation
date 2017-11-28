@@ -34,7 +34,7 @@ public class BaseActionPage extends BasePage{
     private MobileElement dropbox;
 
     private List<MobileElement> getNavigationTabs(){
-        return parentBar.findElements(By.id("com.grasshopper.dialer:id/bottom_navigation_container"));
+        return parentBar.findElements(By.className("android.widget.FrameLayout"));
     }
 
     public void selectTab(NavigationTab tab)
