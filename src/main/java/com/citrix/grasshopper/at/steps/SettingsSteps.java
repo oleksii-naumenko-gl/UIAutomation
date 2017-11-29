@@ -55,6 +55,10 @@ public class SettingsSteps extends BaseSteps {
         Assert.assertTrue(app.callForwardingSettingsPage().getTextFromPageDescription().equalsIgnoreCase(pageDescription));
 
     }
+    @And("^print all available extensions$")
+    public void printAllAvailableExtensions(){
+        app.callForwardingSettingsPage().printList();
+    }
 
 
 }

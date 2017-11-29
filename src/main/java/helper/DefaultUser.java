@@ -19,24 +19,24 @@ public class DefaultUser {
                     new Number("(888) 963-9553", true)
             };
 
-    public static Extension[] extensions = new Extension[]
-            {
-                    new Extension("Ext 0", "Representative"),
-                    new Extension("Ext 1", "Sales"),
-                    new Extension("Ext 2", "Support"),
-                    new Extension("Ext 700", "New Extension"),
-                    new Extension("Ext 701", "New Extension"),
-                    new Extension("Ext 702", "New Extension"),
-                    new Extension("Ext 703", "New Extension"),
-                    new Extension("Ext 704", "New Extension"),
-                    new Extension("Ext 705", "New Extension"),
-                    new Extension("Ext 706", "New Extension"),
-                    new Extension("Ext 707", "New Extension"),
-                    new Extension("Ext 708", "New Extension"),
-                    new Extension("Ext 709", "New Extension"),
-                    new Extension("Ext 710", "New Extension"),
-            };
-
-
+//    public static Extension[] extensions = new Extension[]
+//            {
+//                    new Extension("Ext 0", "Representative"),
+//                    new Extension("Ext 1", "Sales"),
+//                    new Extension("Ext 2", "Support"),
+//                    new Extension("Ext 700", "New Extension"),
+//                    new Extension("Ext 701", "New Extension"),
+//                    new Extension("Ext 702", "New Extension"),
+//                    new Extension("Ext 703", "New Extension"),
+//                    new Extension("Ext 704", "New Extension"),
+//                    new Extension("Ext 705", "New Extension"),
+//                    new Extension("Ext 706", "New Extension"),
+//                    new Extension("Ext 707", "New Extension"),
+//                    new Extension("Ext 708", "New Extension"),
+//                    new Extension("Ext 709", "New Extension"),
+//                    new Extension("Ext 710", "New Extension"),
+//            };
+//
+//
 
 }
