@@ -158,6 +158,8 @@ public class GrasshopperApp {
         File appDir = new File(SharedData.appPath);
 
         File app = new File(appDir, SharedData.grasshopperVersion + ".apk");
+        capabilities.setCapability("fullReset", false);
+        capabilities.setCapability("noReset", true);
 
         capabilities.setCapability("device", "Android");
 

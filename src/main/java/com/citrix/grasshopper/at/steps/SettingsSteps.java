@@ -4,10 +4,15 @@ import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import helper.Extension;
 import org.junit.Assert;
+
+import java.util.Arrays;
+import java.util.List;
 
 import static helper.DefaultUser.login;
 import static helper.DefaultUser.numbers;
+import  static helper.DefaultUser.extensions;
 
 
 public class SettingsSteps extends BaseSteps {
@@ -56,9 +61,15 @@ public class SettingsSteps extends BaseSteps {
 
     }
     @And("^print all available extensions$")
-    public void printAllAvailableExtensions(){
-        app.callForwardingSettingsPage().printList();
-    }
+    public void printAllAvailableExtensions() throws InterruptedException {
+        List<Extension> x = app.callForwardingSettingsPage().getAllAvailableExtensions();
 
+        Thread.sleep(300);
+    }
+    @And ("^all extensions are displayed on Call Forwarding page$")
+    public void allExtensionAreDisplayed(){
+    Assert.assertTrue(app.callForwardingSettingsPage().getAllAvailableExtensions().equals(Arrays.asList(extensions)));
+
+    }
 
 }

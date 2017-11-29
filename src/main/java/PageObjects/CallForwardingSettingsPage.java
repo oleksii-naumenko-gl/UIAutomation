@@ -66,38 +66,35 @@ public class CallForwardingSettingsPage extends BasePage {
 
 
         for (MobileElement element : list) {
-            String extensionName = element.findElement(By.id("com.grasshopper.dialer:id/name")).getText();
-            String extensionDescription = element.findElement(By.id("com.grasshopper.dialer:id/description")).getText();
+
+            String extensionName;
+            String extensionDescription;
+
+            try {
+                extensionDescription = element.findElement(By.id("com.grasshopper.dialer:id/description")).getText();
+                extensionName = element.findElement(By.id("com.grasshopper.dialer:id/name")).getText();
+            }
+            catch(Exception x){
+                return extList;
+            }
 
             String[] status = element.findElement(By.id("com.grasshopper.dialer:id/status")).getText().split(" ");
             String s = status[0];
             int forwardingNumberCounter = Integer.parseInt(s);
 
-
-
-                extList.add(new Extension(extensionName, extensionDescription, forwardingNumberCounter));
+            extList.add(new Extension(extensionName, extensionDescription, forwardingNumberCounter));
 
                 //element.click();
 
                 // достаем номер дескрипшн и кол-во экстешнов
-
-//            element.findElement(......)
-
-
-
-        }
-
-
+         }
         return extList;
     }
-    public void printList(){
-        getAllAvailableExtensions().forEach(System.out::println);
 
-    }
 
     // public List<String> getNumbersForExtension
 
-    // public void addNumberForExtension(Extension x, String number)
+    // public void addNumberForExtension(Extension x, String name)
 
     // public void deleteNumberFromExtension(Extension x, StringNumber)
 

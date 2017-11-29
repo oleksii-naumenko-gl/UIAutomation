@@ -1,5 +1,9 @@
 package helper;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class DefaultUser {
 
     public static String login = "Oleksii.Naumenko@logmein.com";
@@ -10,6 +14,7 @@ public class DefaultUser {
 
     public static boolean isMMSEnabled = false;
 
+
     public static Number[] numbers = new Number[]
             {
                     new Number("(617) 221-3553", true),
@@ -19,24 +24,23 @@ public class DefaultUser {
                     new Number("(888) 963-9553", true)
             };
 
-//    public static Extension[] extensions = new Extension[]
-//            {
-//                    new Extension("Ext 0", "Representative"),
-//                    new Extension("Ext 1", "Sales"),
-//                    new Extension("Ext 2", "Support"),
-//                    new Extension("Ext 700", "New Extension"),
-//                    new Extension("Ext 701", "New Extension"),
-//                    new Extension("Ext 702", "New Extension"),
-//                    new Extension("Ext 703", "New Extension"),
-//                    new Extension("Ext 704", "New Extension"),
-//                    new Extension("Ext 705", "New Extension"),
-//                    new Extension("Ext 706", "New Extension"),
-//                    new Extension("Ext 707", "New Extension"),
-//                    new Extension("Ext 708", "New Extension"),
-//                    new Extension("Ext 709", "New Extension"),
-//                    new Extension("Ext 710", "New Extension"),
-//            };
-//
-//
+    public static Extension[] extensions = new Extension[]
+            {
+                    new Extension("Representative", "Ext 0"),
+                    new Extension("Sales", "Ext 1"),
+                    new Extension("Support", "Ext 2"),
+                    new Extension("New Extension", "Ext 700"),
+                    new Extension("New Extension", "Ext 701"),
+                    new Extension("New Extension", "Ext 702"),
+                    new Extension("New Extension", "Ext 703"),
+//                    new Extension("New Extension","Ext 704"),
+//                    new Extension("New Extension","Ext 705"),
+//                    new Extension("New Extension","Ext 706"),
+//                    new Extension("New Extension","Ext 707"),
+//                    new Extension("New Extension","Ext 708"),
+//                    new Extension("New Extension","Ext 709"),
+//                    new Extension("New Extension","Ext 710"),
+            };
+
 
 }

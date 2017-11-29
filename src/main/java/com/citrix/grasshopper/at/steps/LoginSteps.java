@@ -34,7 +34,7 @@ public class LoginSteps extends BaseSteps{
 
         app.getStartedPage().navigateNext();
 
-        // number confirmation
+        // name confirmation
         if (app.baseAlert().isAlertPresent()){
             app.baseAlert().clickYes();
         }
@@ -136,6 +136,6 @@ public class LoginSteps extends BaseSteps{
 
     @Then("^invalid number error (.*) should be shown$")
     public void invalidNumberErrorShouldBeShown(String errorMessage) throws Throwable {
-        Assert.assertTrue("Verify invalid number error is shown", app.getStartedPage().getErrorMessage().equalsIgnoreCase(errorMessage));
+        Assert.assertTrue("Verify invalid name error is shown", app.getStartedPage().getErrorMessage().equalsIgnoreCase(errorMessage));
     }
 }
