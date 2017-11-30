@@ -7,9 +7,10 @@ import org.junit.runner.RunWith;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
-        features = "src/main/java/cucumber/Settings1",
-        glue = "com.citrix.grasshopper.at.steps",
-        strict=true
+        features = "src/main/java/cucumber",
+        glue = {"com.citrix.grasshopper.at.steps"},
+        tags = {"@login"},
+        strict=false
 )
 public class RunCucumberTest {
 }

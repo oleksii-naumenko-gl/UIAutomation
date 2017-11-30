@@ -39,4 +39,5 @@ public class CallSteps extends BaseSteps {
     public void opensFavoritesScreen() throws Throwable {
         app.callPage().openFavorites();
     }
+
 }

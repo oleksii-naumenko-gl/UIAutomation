@@ -14,7 +14,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public abstract class BasePage {
 
-    public static final org.apache.logging.log4j.Logger logger = LogManager.getLogger("PageLogger");
+    public static org.apache.logging.log4j.Logger logger = LogManager.getLogger("PageLogger");
 
     protected final AppiumDriver driver;
 

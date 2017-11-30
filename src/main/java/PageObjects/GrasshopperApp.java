@@ -36,6 +36,11 @@ public class GrasshopperApp {
         return instance;
     }
 
+    public void endSession(){
+        driver.quit();
+        instance = null;
+    }
+
     // Pages initialization
     public LoginPage loginPage(){
         return new LoginPage(driver);
@@ -60,6 +65,8 @@ public class GrasshopperApp {
     public TextsPage textsPage() { return new TextsPage(driver); }
 
     public WifiCallPage wifiCallPage() { return new WifiCallPage(driver); }
+
+    public FavoritesPage favoritesPage() { return new FavoritesPage(driver); }
 
     public SettingsScreen settingsScreen() {
         return new SettingsScreen(driver);
