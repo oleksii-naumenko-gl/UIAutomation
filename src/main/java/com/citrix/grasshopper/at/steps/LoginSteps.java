@@ -16,8 +16,6 @@ public class LoginSteps extends BaseSteps{
 
     @And("^user logs in with (.*) and (.*)$")
     public void userLogsInWithLoginAndPassword(String login, String password) throws Throwable {
-        logger.debug("Testx");
-
         app.loginPage().enterLogin(login);
         app.loginPage().enterPassword(password);
         app.loginPage().clickSignIn();
@@ -89,7 +87,7 @@ public class LoginSteps extends BaseSteps{
         app.inboxPage().tapInTheMiddleOfTheScreen();
     }
 
-    @And("^user logs in with the default credentials$")
+    @And("^user logs in with default credentials$")
     public void userLogsInWithDefaultCredentials() throws Throwable {
         userLogsInWithLoginAndPassword(DefaultUser.login, DefaultUser.password);
     }
