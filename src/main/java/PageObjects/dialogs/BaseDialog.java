@@ -14,6 +14,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.util.List;
 
 public class BaseDialog extends BasePage {
+
     public BaseDialog(AppiumDriver driver) {
         super(driver);
     }

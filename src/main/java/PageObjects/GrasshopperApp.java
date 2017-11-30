@@ -36,6 +36,11 @@ public class GrasshopperApp {
         return instance;
     }
 
+    public void endSession(){
+        driver.quit();
+        instance = null;
+    }
+
     // Pages initialization
     public LoginPage loginPage(){
         return new LoginPage(driver);
