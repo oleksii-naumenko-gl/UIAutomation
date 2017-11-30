@@ -1,3 +1,4 @@
+@login
 Feature: Grasshopper Smoke Test
 
   Scenario Outline: Verify Logging In

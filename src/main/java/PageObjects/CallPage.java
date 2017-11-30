@@ -20,7 +20,7 @@ public class CallPage extends BaseActionPage {
     @AndroidFindBy(id = "com.grasshopper.dialer:id/contacts")
     private MobileElement contactsButton;
 
-    @AndroidFindBy(id = "com.grasshopper.dialer:id/favorites")
+    @AndroidFindBy(id = "com.grasshopper.dialer:id/dialer_key_favorites")
     private MobileElement favoritesButton;
 
     @AndroidFindBy(uiAutomator = "new UiSelector().text(\"Paste\")")

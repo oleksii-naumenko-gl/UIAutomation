@@ -61,6 +61,8 @@ public class GrasshopperApp {
 
     public WifiCallPage wifiCallPage() { return new WifiCallPage(driver); }
 
+    public FavoritesPage favoritesPage() { return new FavoritesPage(driver); }
+
     public BaseDialog baseDialog(){
         return new BaseDialog(driver);
     }
@@ -122,6 +124,11 @@ public class GrasshopperApp {
         return driver;
     }
 
+    public void endSession(){
+        driver.quit();
+        instance = null;
+    }
+
     /**
      * Setups all basic cababilites for Appium driver excluding emulator specific ones or needed for restarting the script
      * with the same app installed
@@ -136,6 +143,10 @@ public class GrasshopperApp {
 
         capabilities.setCapability("deviceName", "Android");
         capabilities.setCapability("platformName", "Android");
+
+        // FOR TESTING NEEDS ONLY. WILL OPEN THE APP WITH THE USER LOGGED ON
+//        capabilities.setCapability("fullReset", false);
+//        capabilities.setCapability("noReset", true);
 
         capabilities.setCapability("platformVersion", SharedData.phoneAndroidVersion);
         capabilities.setCapability("app", app.getAbsolutePath());
@@ -195,4 +206,5 @@ public class GrasshopperApp {
 
         return driver;
     }
+
 }
