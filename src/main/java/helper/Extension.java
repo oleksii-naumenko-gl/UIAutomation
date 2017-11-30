@@ -4,7 +4,7 @@ import java.util.List;
 
 public class Extension {
 
-    public String name;
+    private String name;
 
     public String description;
 
@@ -19,26 +19,27 @@ public class Extension {
     public List<String> forwardingNumbers;
 
 
-
     public int availableNumbers = 0;
 
-    public Extension(String extDescription, String extNumber, int forwardingNumberCounter){
+    public Extension(String extDescription, String extNumber, int forwardingNumberCounter) {
         name = extDescription;
         description = extNumber;
         this.forwardingNumberCounter = forwardingNumberCounter;
     }
-    public Extension(String extDescription, String extNumber){
+
+    public Extension(String extDescription, String extNumber) {
         name = extDescription;
         description = extNumber;
 
     }
 
+    
     @Override
     public String toString() {
         return "Extension{" +
                 "name='" + name + '\'' +
                 ", description='" + description + '\'' +
-               '}';
+                '}';
     }
 
     @Override
