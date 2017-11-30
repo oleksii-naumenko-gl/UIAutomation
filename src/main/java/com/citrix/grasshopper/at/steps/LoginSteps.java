@@ -34,7 +34,7 @@ public class LoginSteps extends BaseSteps{
 
         app.getStartedPage().navigateNext();
 
-        // name confirmation
+        // number confirmation
         if (app.baseAlert().isAlertPresent()){
             app.baseAlert().clickYes();
         }
@@ -83,9 +83,9 @@ public class LoginSteps extends BaseSteps{
 
         // Removing all the tour banners
         // todo: tapping three times at the moment as there are no valid ids for these items.
-        app.inboxPage().tapInTheMiddle();
-        app.inboxPage().tapInTheMiddle();
-        app.inboxPage().tapInTheMiddle();
+        app.inboxPage().tapInTheMiddleOfTheScreen();
+        app.inboxPage().tapInTheMiddleOfTheScreen();
+        app.inboxPage().tapInTheMiddleOfTheScreen();
     }
 
     @And("^user logs in with default credentials$")
@@ -110,7 +110,7 @@ public class LoginSteps extends BaseSteps{
 
     @Then("^password error message (.*) is displayed$")
     public void passwordErrorMessageErrorIsDisplayed(String errorMessage) throws Throwable {
-        Assert.assertTrue("Verify password error message is shown", app.loginPage().getErrorMessage().equalsIgnoreCase(errorMessage));
+        Assert.assertTrue("Verify password error message is shown", app.loginPage().getLoginErrorMessage().equalsIgnoreCase(errorMessage));
     }
 
     @And("^user enters valid credentials$")
@@ -136,6 +136,6 @@ public class LoginSteps extends BaseSteps{
 
     @Then("^invalid number error (.*) should be shown$")
     public void invalidNumberErrorShouldBeShown(String errorMessage) throws Throwable {
-        Assert.assertTrue("Verify invalid name error is shown", app.getStartedPage().getErrorMessage().equalsIgnoreCase(errorMessage));
+        Assert.assertTrue("Verify invalid number error is shown", app.getStartedPage().getInputErrorMessage().equalsIgnoreCase(errorMessage));
     }
 }

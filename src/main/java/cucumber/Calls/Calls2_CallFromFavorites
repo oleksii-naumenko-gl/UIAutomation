@@ -1,8 +1,9 @@
 Feature: Grasshopper Smoke Test
 
-  Scenario: Verify Call Dropbox Default Values
+  Scenario: Verify Calling from Favorites
     Given Grasshopper is installed on a clean device
     And user logs in with the default credentials
     When user navigates to Call screen
-    Then each item from Call dropdown can be selected
+    And opens Favorites screen
+    Then user is able to perform call from the Favorites screen
 

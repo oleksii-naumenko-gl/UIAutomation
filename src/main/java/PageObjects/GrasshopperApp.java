@@ -37,7 +37,7 @@ public class GrasshopperApp {
     }
 
     // Pages initialization
-    public LoginPage loginPage() {
+    public LoginPage loginPage(){
         return new LoginPage(driver);
     }
 
@@ -45,45 +45,21 @@ public class GrasshopperApp {
         return new GetStartedPage(driver);
     }
 
-    public ExtensionSelectionScreen extensionSelectionScreen() {
-        return new ExtensionSelectionScreen(driver);
-    }
+    public ExtensionSelectionScreen extensionSelectionScreen() { return new ExtensionSelectionScreen(driver); }
 
-    public BaseActionPage bottomNavigationBar() {
-        return new BaseActionPage(driver);
-    }
+    public BaseActionPage bottomNavigationBar(){ return new BaseActionPage(driver); }
 
-    public VOIPLoginPage voipLoginPage() {
-        return new VOIPLoginPage(driver);
-    }
+    public VOIPLoginPage voipLoginPage(){ return new VOIPLoginPage(driver); }
 
-    public InboxPage inboxPage() {
-        return new InboxPage(driver);
-    }
+    public InboxPage inboxPage() { return new InboxPage(driver); }
 
-    public RecentPage recentPage() {
-        return new RecentPage(driver);
-    }
+    public RecentPage recentPage() { return new RecentPage(driver); }
 
-    public CallPage callPage() {
-        return new CallPage(driver);
-    }
+    public CallPage callPage() { return new CallPage(driver); }
 
-    public TextsPage textsPage() {
-        return new TextsPage(driver);
-    }
+    public TextsPage textsPage() { return new TextsPage(driver); }
 
-    public BaseDialog baseDialog() {
-        return new BaseDialog(driver);
-    }
-
-    public BaseAlert baseAlert() {
-        return new BaseAlert(driver);
-    }
-
-    public PermissionRequest permissionRequest() {
-        return new PermissionRequest(driver);
-    }
+    public WifiCallPage wifiCallPage() { return new WifiCallPage(driver); }
 
     public SettingsScreen settingsScreen() {
         return new SettingsScreen(driver);
@@ -93,8 +69,15 @@ public class GrasshopperApp {
         return new CallForwardingSettingsPage(driver);
     }
 
+    public BaseDialog baseDialog(){
+        return new BaseDialog(driver);
+    }
 
-    public static void getProperties() {
+    public BaseAlert baseAlert() { return new BaseAlert(driver); }
+
+    public PermissionRequest permissionRequest() {return new PermissionRequest(driver);}
+
+    public static void getProperties(){
         try {
             File file = new File("config.properties");
             FileInputStream fileInput = new FileInputStream(file);
@@ -114,7 +97,7 @@ public class GrasshopperApp {
         }
     }
 
-    public static AndroidDriver setup(String emulatorName, String androidVersion) {
+    public static AndroidDriver setup(String emulatorName, String androidVersion){
         DesiredCapabilities capabilities = new DesiredCapabilities();
         setupBasicCapabilities(capabilities);
         setupEmulatorCapabilities(capabilities, emulatorName, androidVersion);
@@ -122,7 +105,7 @@ public class GrasshopperApp {
         return setupDriver(capabilities);
     }
 
-    public static AndroidDriver setup() {
+    public static AndroidDriver setup(){
         DesiredCapabilities capabilities = new DesiredCapabilities();
         setupBasicCapabilities(capabilities);
 
@@ -131,11 +114,10 @@ public class GrasshopperApp {
 
     /**
      * Setting up new instance of Appium Driver using
-     *
      * @param capabilities the capabilities to be used
      * @return new instance of Driver
      */
-    private static AndroidDriver setupDriver(DesiredCapabilities capabilities) {
+    private static AndroidDriver setupDriver(DesiredCapabilities capabilities){
         AndroidDriver driver = null;
 
         try {
@@ -151,15 +133,12 @@ public class GrasshopperApp {
     /**
      * Setups all basic cababilites for Appium driver excluding emulator specific ones or needed for restarting the script
      * with the same app installed
-     *
      * @param capabilities
      */
-    private static void setupBasicCapabilities(DesiredCapabilities capabilities) {
+    private static void setupBasicCapabilities(DesiredCapabilities capabilities){
         File appDir = new File(SharedData.appPath);
 
         File app = new File(appDir, SharedData.grasshopperVersion + ".apk");
-        capabilities.setCapability("fullReset", false);
-        capabilities.setCapability("noReset", true);
 
         capabilities.setCapability("device", "Android");
 
@@ -170,27 +149,25 @@ public class GrasshopperApp {
         capabilities.setCapability("app", app.getAbsolutePath());
     }
 
-    private static void setupEmulatorCapabilities(DesiredCapabilities capabilities, String emulatorName, String androidVersion) {
+    private static void setupEmulatorCapabilities(DesiredCapabilities capabilities, String emulatorName, String androidVersion){
         capabilities.setCapability("avd", emulatorName);
         capabilities.setCapability("platformVersion", androidVersion);
     }
 
     /**
      * Sets up capabilities for running the script with restarting the same version of app etc/
-     *
      * @param capabilities
      */
-    private void setupRestartCapabilities(DesiredCapabilities capabilities) {
+    private void setupRestartCapabilities(DesiredCapabilities capabilities){
         capabilities.setCapability("fullReset", false);
         capabilities.setCapability("noReset", true);
     }
 
     /**
      * Sets up emulator.
-     *
      * @return
      */
-    public static AndroidDriver SetupEmulator() {
+    public static AndroidDriver SetupEmulator(){
         AndroidDriver driver = null;
 
         File appDir = new File(SharedData.appPath);

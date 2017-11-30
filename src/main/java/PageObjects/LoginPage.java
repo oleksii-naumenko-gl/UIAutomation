@@ -43,7 +43,7 @@ public class LoginPage extends BasePage {
         loginSignIn.click();
     }
 
-    public String getErrorMessage(){
+    public String getLoginErrorMessage(){
         try {
             return inputError.getText();
         }
