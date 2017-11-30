@@ -61,6 +61,14 @@ public class GrasshopperApp {
 
     public WifiCallPage wifiCallPage() { return new WifiCallPage(driver); }
 
+    public SettingsScreen settingsScreen() {
+        return new SettingsScreen(driver);
+    }
+
+    public CallForwardingSettingsPage callForwardingSettingsPage(){
+        return new CallForwardingSettingsPage(driver);
+    }
+
     public BaseDialog baseDialog(){
         return new BaseDialog(driver);
     }
