@@ -16,6 +16,7 @@ public class LoginSteps extends BaseSteps{
 
     @And("^user logs in with (.*) and (.*)$")
     public void userLogsInWithLoginAndPassword(String login, String password) throws Throwable {
+        logger.info(String.format("Login user name -%s , password -%s", login, password));
         app.loginPage().enterLogin(login);
         app.loginPage().enterPassword(password);
         app.loginPage().clickSignIn();
