@@ -1,3 +1,4 @@
+@calls
 Feature: Grasshopper Smoke Test
 
   Scenario: Verify Calling from Dialer

@@ -2,15 +2,16 @@ package PageObjects;
 
 import PageObjects.base.BasePage;
 import helper.Contact;
+import helper.SharedData;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import org.openqa.selenium.By;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class FavoritesPage extends BasePage{
+
     public FavoritesPage(AppiumDriver driver) {
         super(driver);
     }
@@ -41,13 +42,12 @@ public class FavoritesPage extends BasePage{
     @AndroidFindBy(id = "com.grasshopper.dialer:id/toolbar")
     private MobileElement parentTopBar;
 
-    // com.grasshopper.dialer:id/add
+    private List<MobileElement> favoritesOnTheScreen;
 
-    // com.grasshopper.dialer:id/cancel done
+    public Map<Contact, MobileElement> getFavoritesMap(){
 
-
-    // todo
-//    private MobileElement screenName = parentTopBar.findElementByXPath("//[@resource-id='com.grasshopper.dialer:id/toolbar'/*[1]");
+        return SharedData.favoritesMap;
+    }
 
     public void pressEdit(){
         try{
@@ -59,31 +59,50 @@ public class FavoritesPage extends BasePage{
         }
     }
 
-    public List<Contact> getFavoriteContacts(){
-
-        List<MobileElement> favorites = favoritesParent.findElements(By.id(favoriteLineId));
-
-        List<Contact> contacts = new ArrayList<>();
-
-        if (favorites.isEmpty()){
-            return null;
-        }
-        else{
-            for (MobileElement element : favorites){
-                String name = element.findElement(By.id(contactNameId)).getText();
-                String number = element.findElement(By.id(contactNumberId)).getText();
-                contacts.add(new Contact(name, number));
-            }
-        }
-
-        return contacts;
-    }
-
-    public void addNewFavorite(String contactName){
+    public void addNewFavorite(){
         pressEdit();
 
         addButton.click();
     }
+
+    public void callFavoite(Contact contact){
+
+        try{
+            getFavoritesMap().get(contact).click();
+        }
+        catch (Exception x)
+        {
+            logger.error("Contact is not present");
+        }
+    }
+
+    public Contact getRandomFavoite(){
+        getFavoritesMap();
+
+        List<Contact> keysAsArray = new ArrayList<>(getFavoritesMap().keySet());
+
+        Random r = new Random();
+
+        return keysAsArray.get(r.nextInt(keysAsArray.size()));
+    }
+
+    public void initializeFavorites(){
+        favoritesOnTheScreen = favoritesParent.findElements(By.id(favoriteLineId));
+
+        if (favoritesOnTheScreen.isEmpty()){
+            return;
+        }
+
+        else{
+            for (MobileElement element : favoritesOnTheScreen){
+                String name = element.findElement(By.id(contactNameId)).getText();
+                String number = element.findElement(By.id(contactNumberId)).getText();
+
+                SharedData.favoritesMap.put(new Contact(name, number), element);
+            }
+        }
+    }
+
 
 
 }
