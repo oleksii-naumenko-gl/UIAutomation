@@ -1,6 +1,5 @@
 package com.citrix.grasshopper.at.steps;
 
-import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import helper.Constants;
@@ -16,18 +15,16 @@ public class CallSteps extends BaseSteps {
         {
             app.callPage().setDropdownValue(value.number);
 
-            // todo: need to add constants class
-            Thread.sleep(3000);
+            Thread.sleep(Constants.Timeouts.defaultActionTimeout);
 
             Assert.assertTrue(app.recentPage().getSelectedDropdownValue().equalsIgnoreCase(value.number));
-
-            // todo: verify the list of actual elements
         }
     }
 
     @Then("^user is able to perform call from dialer$")
     public void userIsAbleToPerformCallFromDialer() throws Throwable {
         app.callPage().enterPhoneNumber(Constants.smsOutgoingNumber);
+
         app.callPage().clickCall();
 
         Assert.assertTrue("Verify Call is being performed", app.wifiCallPage().isWifiCallPresent());

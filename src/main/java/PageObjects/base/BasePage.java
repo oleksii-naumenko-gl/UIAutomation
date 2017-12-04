@@ -1,11 +1,13 @@
 package PageObjects.base;
 
 import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import org.apache.logging.log4j.LogManager;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
@@ -50,4 +52,10 @@ public abstract class BasePage {
             throw e;
         }
     }
+
+    public void swipeLeftfromObject(MobileElement element, Integer steps){
+        Dimension size = driver.manage().window().getSize();
+        driver.swipe(element.getLocation().getX()+Math.round(((element.getSize().width)*98)/100),element.getLocation().getY()+Math.round((element.getSize().height)/2),Math.round(size.getWidth()/10), element.getLocation().getY()+Math.round((element.getSize().height)/2),steps);
+    }
+
 }
