@@ -76,6 +76,10 @@ public class GrasshopperApp {
         return new CallForwardingSettingsPage(driver);
     }
 
+    public CallForwardingNumbersPage callForwardingNumbersPage() { return new CallForwardingNumbersPage(driver); }
+
+    public NewDestinationPage newDestinationPage() {return new NewDestinationPage(driver); }
+
     public BaseDialog baseDialog(){
         return new BaseDialog(driver);
     }
@@ -151,6 +155,10 @@ public class GrasshopperApp {
 
         capabilities.setCapability("deviceName", "Android");
         capabilities.setCapability("platformName", "Android");
+
+        // todo remove
+        capabilities.setCapability("fullReset", false);
+        capabilities.setCapability("noReset", true);
 
         capabilities.setCapability("platformVersion", SharedData.phoneAndroidVersion);
         capabilities.setCapability("app", app.getAbsolutePath());

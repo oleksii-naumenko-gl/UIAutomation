@@ -8,8 +8,9 @@ import io.appium.java_client.pagefactory.AndroidFindBy;
 import org.openqa.selenium.By;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-import java.util.stream.Stream;
+import java.util.Map;
 
 public class CallForwardingSettingsPage extends BasePage {
 
@@ -19,7 +20,7 @@ public class CallForwardingSettingsPage extends BasePage {
     }
 
     @AndroidFindBy(className = "android.widget.LinearLayout")
-    public static MobileElement pageContainer;
+    private static MobileElement pageContainer;
 
     @AndroidFindBy(id = "com.grasshopper.dialer:id/status")
     private MobileElement forwardingNumberCounter;
@@ -33,9 +34,11 @@ public class CallForwardingSettingsPage extends BasePage {
 
     private MobileElement pageTitle = parentTopToolBar.findElementByClassName("android.widget.TextView");
 
-    private MobileElement backButton = parentTopToolBar.findElementByClassName("android.widget.ImageButton");
 
-    private MobileElement pageDescription = pageContainer.findElementsByClassName("android.widget.TextView").get(0);
+
+   private MobileElement pageDescription = pageContainer.findElementsByClassName("android.widget.TextView").get(0);
+
+    private List<MobileElement> listOfExtension = listOfExtensionsContainer.findElements(By.className("android.widget.RelativeLayout"));
 
     public String getTextFromPageTitle() {
         return pageTitle.getText();
@@ -45,6 +48,73 @@ public class CallForwardingSettingsPage extends BasePage {
         return pageDescription.getText();
     }
 
+    protected MobileElement backButton = parentTopToolBar.findElementByClassName("android.widget.ImageButton");
+
+    // public List<Extension> getAllAvailableExtensions without scrolling without actual numbers WITH counter
+
+    public List<Extension> getAllAvailableExtensions() {
+        List<Extension> extList = new ArrayList<>();
+
+        for (MobileElement element : listOfExtension) {
+
+            String extensionName;
+            String extensionDescription;
+
+
+            try {
+                extensionDescription = element.findElement(By.id("com.grasshopper.dialer:id/description")).getText();
+                extensionName = element.findElement(By.id("com.grasshopper.dialer:id/name")).getText();
+            } catch (Exception x) {
+                return extList;
+            }
+
+            String[] status = element.findElement(By.id("com.grasshopper.dialer:id/status")).getText().split(" ");
+            String s = status[0];
+            int forwardingNumberCounter = Integer.parseInt(s);
+
+            extList.add(new Extension(extensionName, extensionDescription, forwardingNumberCounter));
+
+
+            //element.click();
+
+            // достаем номер дескрипшн и кол-во экстешнов
+        }
+
+        return extList;
+    }
+
+
+    public Map<String, MobileElement> setExtensionMap() {
+        Map extensionHashMap = new HashMap<String, MobileElement>();
+        MobileElement statusButton;
+        String extensionDescription;
+
+        for (MobileElement element : listOfExtension){
+
+            extensionDescription= element.findElement(By.id("com.grasshopper.dialer:id/description")).getText();
+            statusButton = element.findElement(By.id("com.grasshopper.dialer:id/status"));
+            extensionHashMap.put(extensionDescription, statusButton);
+        }
+        return extensionHashMap;
+
+    }
+
+
+
+    public void clickOnExtentionStatusButton(String extDescription){
+        setExtensionMap().get(extDescription).click();
+    }
+
+    public String getForwardingStatusOfExtension(String extDescription){
+        String status = (setExtensionMap().get(extDescription).getText());
+        return status;
+    }
+
+
+//      todo
+    public void scroll(){
+
+    }
     public boolean isBackButtonDisplayed() {
 
         boolean isPresent = false;
@@ -58,45 +128,12 @@ public class CallForwardingSettingsPage extends BasePage {
         return isPresent;
     }
 
+            // public List<String> getNumbersForExtension
 
-    // public List<Extension> getAllAvailableExtensions without scrolling without actual numbers WITH counter
-
-    public List<Extension> getAllAvailableExtensions() {
-        List<MobileElement> list = listOfExtensionsContainer.findElements(By.className("android.widget.RelativeLayout"));
-        List<Extension> extList = new ArrayList<>();
-
-
-        for (MobileElement element : list) {
-
-            String extensionName;
-            String extensionDescription;
-
-            try {
-                extensionDescription = element.findElement(By.id("com.grasshopper.dialer:id/description")).getText();
-                extensionName = element.findElement(By.id("com.grasshopper.dialer:id/name")).getText();
-            }
-            catch(Exception x){
-                return extList;
-            }
-
-            String[] status = element.findElement(By.id("com.grasshopper.dialer:id/status")).getText().split(" ");
-            String s = status[0];
-            int forwardingNumberCounter = Integer.parseInt(s);
-
-            extList.add(new Extension(extensionName, extensionDescription, forwardingNumberCounter));
-
-                //element.click();
-
-                // достаем номер дескрипшн и кол-во экстешнов
-         }
-        return extList;
-    }
+    // public void addNumberForExtension(Extension x, String name){
 
 
 
-    // public List<String> getNumbersForExtension
-
-    // public void addNumberForExtension(Extension x, String name)
 
     // public void deleteNumberFromExtension(Extension x, StringNumber)
 
