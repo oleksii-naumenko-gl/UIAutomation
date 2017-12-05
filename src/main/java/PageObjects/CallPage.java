@@ -14,7 +14,7 @@ public class CallPage extends BaseActionPage {
     @AndroidFindBy(id = "com.grasshopper.dialer:id/et_number_entry")
     private MobileElement numberInput;
 
-    @AndroidFindBy(id = "com.grasshopper.dialer:id/call_row")
+    @AndroidFindBy(id = "com.grasshopper.dialer:id/dialer_key_start_call")
     private MobileElement callButton;
 
     @AndroidFindBy(id = "com.grasshopper.dialer:id/contacts")
