@@ -2,6 +2,8 @@ package helper;
 
 import java.util.List;
 
+import static helper.DefaultUser.extensions;
+
 public class Extension {
 
     private String name;
@@ -18,6 +20,7 @@ public class Extension {
 
     public List<String> forwardingNumbers;
 
+
     public int availableNumbers = 0;
 
     public Extension(String extDescription, String extNumber, int forwardingNumberCounter) {
@@ -30,6 +33,16 @@ public class Extension {
         name = extDescription;
         description = extNumber;
 
+    }
+
+    public static String getExtensionName(String extDescription){
+        String extensionName="";
+        for(int index=0; index < extensions.length; index++){
+            if(extDescription.equalsIgnoreCase(extensions[index].description)){
+                extensionName =  extensions[index].name;
+            }
+        }
+        return extensionName;
     }
     
     @Override

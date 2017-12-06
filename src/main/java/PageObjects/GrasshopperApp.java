@@ -78,9 +78,13 @@ public class GrasshopperApp {
 
     public VoicemailDetails voicemailDetails() { return new VoicemailDetails(driver); }
 
-    public ContactsPage contactsPage() { return new ContactsPage(driver); }
-
     public SingleContactPage singleContactPage() { return new SingleContactPage(driver); }
+
+    public CallForwardingNumbersPage callForwardingNumbersPage() { return new CallForwardingNumbersPage(driver); }
+
+    public NewDestinationPage newDestinationPage() {return new NewDestinationPage(driver); }
+
+    public ContactsPage contactsPage() { return new ContactsPage(driver); }
 
     public BaseDialog baseDialog(){ return new BaseDialog(driver); }
 
@@ -169,7 +173,7 @@ public class GrasshopperApp {
      * Sets up capabilities for running the script with restarting the same version of app etc/
      * @param capabilities
      */
-    private static void setupRestartCapabilities(DesiredCapabilities capabilities){
+    private void setupRestartCapabilities(DesiredCapabilities capabilities){
         capabilities.setCapability("fullReset", false);
         capabilities.setCapability("noReset", true);
     }

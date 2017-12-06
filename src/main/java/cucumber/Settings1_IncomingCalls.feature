@@ -1,14 +1,11 @@
+@Settings1_IncomingCalls
 Feature: Settings screen
 
-  Scenario: Navigation to the Settings screen
+  Scenario: Verify Incoming calls section
     Given Grasshopper is installed on a clean device
     And user logs in with Oleksii.Naumenko@logmein.com and abc123
     When user navigates to Settings screen
     Then Settings screen is displayed
-
-
-  Scenario: Verify Incoming calls section
-
     Given INCOMING CALLS section is displayed on Settings screen
     When user navigates to Settings screen
     And Call Forwarding settings item is displayed
@@ -16,5 +13,12 @@ Feature: Settings screen
     Then Call Forwarding Settings page is displayed
     And Choose extension for which you want to update the call forwarding numbers page description text is displayed
     And all extensions are displayed on Call Forwarding page
+    When user adds new forwarding number for Ext 0 extension
+    Then counter of Forwarding numbers for extension has been changed
+
+
+
+
+
 
 
