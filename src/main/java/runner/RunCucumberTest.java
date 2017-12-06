@@ -6,9 +6,9 @@ import org.junit.runner.RunWith;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
-        features = "src/main/java/cucumber/Settings1_IncomingCalls.feature",
+        features = "src/main/java/cucumber/",
         glue = {"com.citrix.grasshopper.at.steps"},
-        //tags = {"@Settings"},
+        tags = {"@calls"},
         strict = false
 )
 public class RunCucumberTest {

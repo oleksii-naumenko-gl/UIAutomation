@@ -30,7 +30,6 @@ public final class Constants {
 
     public static String smsOutgoingNumberFormatted = "(617) 990-6284";
 
-
     public static class Timeouts{
 
         public static int defaultActionTimeout = 3000;
@@ -39,7 +38,7 @@ public final class Constants {
 
         public static int defaultIncomingCallTimeout = 15000;
 
-        public static int voicemailTimeout = 18000;
+        public static int voicemailTimeout = 30000;
     }
 
     public static class MMSFiles{
@@ -56,6 +55,5 @@ public final class Constants {
 
         public static String jpgFileBig = "large.jpg";
     }
-
 
 }
