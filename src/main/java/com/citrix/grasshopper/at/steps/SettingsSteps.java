@@ -16,6 +16,8 @@ import helper.DefaultUser;
 
 
 public class SettingsSteps extends BaseSteps {
+    private int counterBeforeAddingNewNumber;
+    private int counterAfterAddingNewNumbers;
 
     @Then("^Settings page is displayed$")
     public void settingsPageIsDisplayed() {
@@ -72,21 +74,27 @@ public class SettingsSteps extends BaseSteps {
     public void allExtensionAreDisplayed(){
         Assert.assertTrue(app.callForwardingSettingsPage().getAllAvailableExtensions().equals(Arrays.asList(DefaultUser.extensions)));
     }
+
     @When("^user adds new forwarding number for (.*) extension$")
-public void addNewForwardingNumber(String extDescription) throws IOException {
+public void addNewForwardingNumber(String extDescription) throws Exception {
+        counterBeforeAddingNewNumber= app.callForwardingSettingsPage().getCounterOfForwardingNumbers(extDescription);
         app.callForwardingSettingsPage().clickOnExtentionStatusButton(extDescription);
         String extName=Extension.getExtensionName(extDescription);
         Assert.assertTrue("Verify " + extName + "page  is displayed ", app.callForwardingNumbersPage().getTextFromPageTitle().equalsIgnoreCase(extName));
         Assert.assertTrue("Verify backButton is present ", app.callForwardingNumbersPage().isBackButtonDisplayed());
         Assert.assertTrue(app.callForwardingNumbersPage().isIconToAddDisplayed());
+
         app.callForwardingNumbersPage().clickOnIconToAdd();
         app.newDestinationPage().enterPhone(DefaultUser.forwardingNumber);
         app.newDestinationPage().clickSaveButton();
         app.callForwardingNumbersPage().clickOnBackButton();
+        counterAfterAddingNewNumbers = app.callForwardingSettingsPage().getCounterOfForwardingNumbers(extDescription);
+
     }
-    @Then("^(.*) status is displayed for (.*) extension$")
-    public void verifyForwardingStatusOfExtension(String status,String extDescription){
-        app.callForwardingSettingsPage().getForwardingStatusOfExtension(extDescription).equalsIgnoreCase(status);
+
+    @Then("^counter of Forwarding numbers for extension has been changed$")
+    public void verifyCounterOfForwardingNumber(){
+    Assert.assertTrue(counterAfterAddingNewNumbers==counterBeforeAddingNewNumber+1);
     }
 
 }

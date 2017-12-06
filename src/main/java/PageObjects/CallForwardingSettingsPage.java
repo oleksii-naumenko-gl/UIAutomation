@@ -29,14 +29,10 @@ public class CallForwardingSettingsPage extends BasePage {
     private MobileElement listOfExtensionsContainer;
 
 
-    // public List<Extension> getAllAvailableExtensions without scrolling without actual numbers WITH counter
-
 
     private MobileElement pageTitle = parentTopToolBar.findElementByClassName("android.widget.TextView");
 
-
-
-   private MobileElement pageDescription = pageContainer.findElementsByClassName("android.widget.TextView").get(0);
+    private MobileElement pageDescription = pageContainer.findElementsByClassName("android.widget.TextView").get(0);
 
     private List<MobileElement> listOfExtension = listOfExtensionsContainer.findElements(By.className("android.widget.RelativeLayout"));
 
@@ -59,7 +55,7 @@ public class CallForwardingSettingsPage extends BasePage {
 
             String extensionName;
             String extensionDescription;
-
+            int forwardingNumberCounter;
 
             try {
                 extensionDescription = element.findElement(By.id("com.grasshopper.dialer:id/description")).getText();
@@ -70,14 +66,10 @@ public class CallForwardingSettingsPage extends BasePage {
 
             String[] status = element.findElement(By.id("com.grasshopper.dialer:id/status")).getText().split(" ");
             String s = status[0];
-            int forwardingNumberCounter = Integer.parseInt(s);
+            forwardingNumberCounter = Integer.parseInt(s);
 
             extList.add(new Extension(extensionName, extensionDescription, forwardingNumberCounter));
 
-
-            //element.click();
-
-            // достаем номер дескрипшн и кол-во экстешнов
         }
 
         return extList;
@@ -99,17 +91,21 @@ public class CallForwardingSettingsPage extends BasePage {
 
     }
 
-
-
     public void clickOnExtentionStatusButton(String extDescription){
         setExtensionMap().get(extDescription).click();
     }
 
-    public String getForwardingStatusOfExtension(String extDescription){
-        String status = (setExtensionMap().get(extDescription).getText());
-        return status;
-    }
+    public int getCounterOfForwardingNumbers(String extDescription) {
+        List<Extension> extensionList= getAllAvailableExtensions();
+        int forwardingStatus=0;
+        for(Extension ext: extensionList){
+            if(ext.description.equalsIgnoreCase(extDescription)){
+               forwardingStatus = ext.forwardingNumberCounter;
+            }
+        }
 
+       return forwardingStatus;
+    }
 
 //      todo
     public void scroll(){

@@ -3,7 +3,7 @@ Feature: Settings screen
 
   Scenario: Navigation to the Settings screen
     Given Grasshopper is installed on a clean device
-#    And user logs in with Oleksii.Naumenko@logmein.com and abc123
+    And user logs in with Oleksii.Naumenko@logmein.com and abc123
     When user navigates to Settings screen
     Then Settings screen is displayed
 
@@ -17,7 +17,7 @@ Feature: Settings screen
     And Choose extension for which you want to update the call forwarding numbers page description text is displayed
     And all extensions are displayed on Call Forwarding page
     When user adds new forwarding number for Ext 0 extension
-    Then 1 Enabled status is displayed for Ext 0 extension
+    Then counter of Forwarding numbers for extension has been changed
 
 
 
