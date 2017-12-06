@@ -1,10 +1,13 @@
 package helper;
 
+import java.util.Arrays;
 import java.util.List;
+
+import static helper.DefaultUser.extensions;
 
 public class Extension {
 
-    private String name;
+    public String name;
 
     public String description;
 
@@ -32,6 +35,17 @@ public class Extension {
         description = extNumber;
 
     }
+    public static String getExtensionName(String extDescription){
+        String extensionName="";
+        for(int index=0; index < extensions.length; index++){
+            if(extDescription.equalsIgnoreCase(extensions[index].description)){
+                extensionName =  extensions[index].name;
+            }
+        }
+        return extensionName;
+    }
+
+
 
     
     @Override

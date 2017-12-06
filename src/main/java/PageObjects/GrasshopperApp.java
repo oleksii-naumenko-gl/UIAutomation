@@ -75,10 +75,15 @@ public class GrasshopperApp {
     public CallForwardingSettingsPage callForwardingSettingsPage(){
         return new CallForwardingSettingsPage(driver);
     }
-
     public ContactsPage contactsPage() { return new ContactsPage(driver); }
 
-    public BaseDialog baseDialog(){ return new BaseDialog(driver); }
+    public CallForwardingNumbersPage callForwardingNumbersPage() { return new CallForwardingNumbersPage(driver); }
+
+    public NewDestinationPage newDestinationPage() {return new NewDestinationPage(driver); }
+
+    public BaseDialog baseDialog(){
+        return new BaseDialog(driver);
+    }
 
     public BaseAlert baseAlert() { return new BaseAlert(driver); }
 
