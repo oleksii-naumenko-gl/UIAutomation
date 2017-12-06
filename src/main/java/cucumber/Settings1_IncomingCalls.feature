@@ -1,14 +1,11 @@
-@Settings
+@Settings1_IncomingCalls
 Feature: Settings screen
 
-  Scenario: Navigation to the Settings screen
+  Scenario: Verify Incoming calls section
     Given Grasshopper is installed on a clean device
     And user logs in with Oleksii.Naumenko@logmein.com and abc123
     When user navigates to Settings screen
     Then Settings screen is displayed
-
-#  Scenario: Verify Incoming calls section
-
     Given INCOMING CALLS section is displayed on Settings screen
     When user navigates to Settings screen
     And Call Forwarding settings item is displayed

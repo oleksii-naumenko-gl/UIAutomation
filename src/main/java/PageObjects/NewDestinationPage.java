@@ -10,34 +10,20 @@ public class NewDestinationPage extends BasePage {
         super(driver);
     }
 
-   // private MobileElement closeButtonOnTheTopToolBar = parentTopToolBar.findElementByClassName("android.widget.ImageButton");
-
-    @AndroidFindBy(className="android.widget.EditText")
+    @AndroidFindBy(className = "android.widget.EditText")
     private MobileElement phoneInput;
 
-    @AndroidFindBy(id="com.grasshopper.dialer:id/save")
+    @AndroidFindBy(id = "com.grasshopper.dialer:id/save")
     private MobileElement saveButton;
 
-    @AndroidFindBy(id="com.grasshopper.dialer:id/your_mobile_number")
-    private  MobileElement inputFieldDescription;
-    //todo remove to BasePage
-    //private MobileElement pageTitle = parentTopToolBar.findElementByClassName("android.widget.TextView");
+    @AndroidFindBy(id = "com.grasshopper.dialer:id/your_mobile_number")
+    private MobileElement inputFieldDescription;
 
-
-//  //  public String getTextFromPageTitle() {
-//        return pageTitle.getText();
-//    }
-
-    public void enterPhone(String number){
-//        phoneInput.clear();
-
+    public void enterPhone(String number) {
         phoneInput.sendKeys(number);
     }
-//    public void clickOnCloseButtonOnTheTopToolBar(){
-//        closeButtonOnTheTopToolBar.click();
-//    }
 
-    public void clickSaveButton(){
+    public void clickSaveButton() {
         saveButton.click();
     }
 }
