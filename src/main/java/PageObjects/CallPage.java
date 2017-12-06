@@ -17,11 +17,11 @@ public class CallPage extends BaseActionPage {
     @AndroidFindBy(id = "com.grasshopper.dialer:id/dialer_key_start_call")
     private MobileElement callButton;
 
-    @AndroidFindBy(id = "com.grasshopper.dialer:id/contacts")
-    private MobileElement contactsButton;
-
     @AndroidFindBy(id = "com.grasshopper.dialer:id/dialer_key_favorites")
     private MobileElement favoritesButton;
+
+    @AndroidFindBy(id = "com.grasshopper.dialer:id/dialer_key_contacts")
+    private MobileElement contactsButton;
 
     @AndroidFindBy(uiAutomator = "new UiSelector().text(\"Paste\")")
     private MobileElement pasteButton;
@@ -57,4 +57,8 @@ public class CallPage extends BaseActionPage {
         favoritesButton.click();
     }
 
+    public void openContacts(){
+        logger.debug("Clicking Contacts button");
+        contactsButton.click();
+    }
 }

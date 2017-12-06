@@ -9,10 +9,8 @@ import org.openqa.selenium.By;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Stream;
 
 public class CallForwardingSettingsPage extends BasePage {
-
 
     public CallForwardingSettingsPage(AppiumDriver driver) {
         super(driver);
@@ -27,9 +25,7 @@ public class CallForwardingSettingsPage extends BasePage {
     @AndroidFindBy(id = "com.grasshopper.dialer:id/list")
     private MobileElement listOfExtensionsContainer;
 
-
     // public List<Extension> getAllAvailableExtensions without scrolling without actual numbers WITH counter
-
 
     private MobileElement pageTitle = parentTopToolBar.findElementByClassName("android.widget.TextView");
 

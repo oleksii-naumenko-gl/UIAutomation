@@ -17,4 +17,9 @@ public class SharedData {
 
     public static Map<Contact, MobileElement> favoritesMap = new HashMap<>();
 
+    public static Map<RecentInboxEntry, MobileElement> inboxMap = new HashMap<>();
+
+    public static Map<RecentInboxEntry, MobileElement> recentMap = new HashMap<>();
+
+    public static Map<TextsEntry, MobileElement> textsMap = new HashMap<>();
 }

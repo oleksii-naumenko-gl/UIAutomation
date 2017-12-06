@@ -1,9 +1,10 @@
 package com.citrix.grasshopper.at.steps;
 
-import cucumber.api.PendingException;
+import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import helper.InboxDropdownValue;
 import helper.NavigationTab;
+import helper.SharedData;
 import org.junit.Assert;
 
 public class InboxSteps extends BaseSteps {
@@ -24,6 +25,15 @@ public class InboxSteps extends BaseSteps {
             // todo: verify the list of actual elements
         }
 
+    }
+
+    @And("^opens first Voicemails details$")
+    public void opensFirstVoicemailsDetails() throws Throwable {
+        app.inboxPage().setDropdownValue(InboxDropdownValue.VOICEMAILS.getText());
+
+        app.inboxPage().refreshHistory();
+
+        app.inboxPage().openEntityDetails(SharedData.inboxMap.get(app.inboxPage().getFirstEntry()));
     }
 
 }

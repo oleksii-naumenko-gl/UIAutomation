@@ -18,7 +18,6 @@ public class Extension {
 
     public List<String> forwardingNumbers;
 
-
     public int availableNumbers = 0;
 
     public Extension(String extDescription, String extNumber, int forwardingNumberCounter) {
@@ -32,7 +31,6 @@ public class Extension {
         description = extNumber;
 
     }
-
     
     @Override
     public String toString() {
