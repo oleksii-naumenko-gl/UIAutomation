@@ -3,7 +3,7 @@ Feature: Settings screen
 
   Scenario: Verify Incoming calls section
     Given Grasshopper is installed on a clean device
-    And user logs in with Oleksii.Naumenko@logmein.com and abc123
+    And user logs in with default credentials
     When user navigates to Settings screen
     Then Settings screen is displayed
     Given INCOMING CALLS section is displayed on Settings screen

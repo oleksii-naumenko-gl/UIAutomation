@@ -10,6 +10,7 @@ import org.junit.Assert;
 
 public class LoginSteps extends BaseSteps{
 
+
     @Given("^Grasshopper is installed on a clean device$")
     public void grasshopperIsInstalledOnACleanDevice() throws Throwable {
     }
@@ -134,8 +135,8 @@ public class LoginSteps extends BaseSteps{
         app.getStartedPage().navigateNext();
     }
 
-    @Then("^invalid number error (.*) should be shown$")
-    public void invalidNumberErrorShouldBeShown(String errorMessage) throws Throwable {
-        Assert.assertTrue("Verify invalid number error is shown", app.getStartedPage().getInputErrorMessage().equalsIgnoreCase(errorMessage));
+    @Then("^invalid number error message should be shown$")
+    public void invalidNumberErrorShouldBeShown() throws Throwable {
+        Assert.assertTrue("Verify invalid number error is shown", app.getStartedPage().getInputErrorMessage().equalsIgnoreCase(app.getStartedPage().INVALID_NUMBER_ERROR_MESSAGE));
     }
 }
