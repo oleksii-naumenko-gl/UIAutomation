@@ -8,6 +8,6 @@ Feature: Grasshopper Smoke Test
 
     Examples:
       | login                           |   password                                         | alert               |
-      | login                           |   password                                         |   Sign In Failed    |
+      | login                           |   password                                         |   SignIn Failed    |
 
 
