@@ -24,13 +24,13 @@ package runner;
 )
 public class RunCucumberTest {
     @BeforeClass
-    public static void beforeScenario() {
+    public static void beforeScenarios() {
         AppiumFactory.startAppium();
         app = GrasshopperApp.getInstance();
     }
 
     @AfterClass
-    public static void afterScenario() {
+    public static void afterScenarios() {
         app.endSession();
         AppiumFactory.stopAppium();
 

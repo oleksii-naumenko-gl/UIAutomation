@@ -12,7 +12,7 @@ Feature: Default Dropbox Values
 
   @Important
   Scenario: Verify Call Dropbox Default Values
-    When user navigates to Call screen
+    When user navigates to Calls screen
     Then each item from Call dropdown can be selected
 
   @Important

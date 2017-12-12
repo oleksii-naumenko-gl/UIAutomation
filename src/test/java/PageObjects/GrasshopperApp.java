@@ -3,8 +3,12 @@ package PageObjects;
 import PageObjects.dialogs.BaseAlert;
 import PageObjects.dialogs.BaseDialog;
 import PageObjects.dialogs.PermissionRequest;
+import cucumber.api.Scenario;
 import helper.SharedData;
 import io.appium.java_client.android.AndroidDriver;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.io.File;
@@ -214,5 +218,19 @@ public class GrasshopperApp {
         }
 
         return driver;
+    }
+
+
+    public void takeScreenshot(Scenario scenario) {
+        if (scenario.isFailed()) {
+            try {
+                byte[] screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
+                scenario.embed(screenshot, "image/png");
+            } catch (final UnsupportedOperationException somePlatformsDontSupportScreenshots) {
+                System.err.println(somePlatformsDontSupportScreenshots.getMessage());
+            } catch (final WebDriverException e) {
+                scenario.write("WARNING. Failed take screenshots with exception:" + e.getMessage());
+            }
+        }
     }
 }
