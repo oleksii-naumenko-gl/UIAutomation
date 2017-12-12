@@ -1,13 +1,15 @@
 package com.citrix.grasshopper.at.steps;
 
-//public class Hooks extends BaseSteps {
+import PageObjects.GrasshopperApp;
+
+public class Hooks extends BaseSteps {
 //    @Before
-//    public void beforeScenario() {
-//        app = GrasshopperApp.getInstance();
-//    }
-//
+    public void beforeScenario() {
+        app = GrasshopperApp.getInstance();
+    }
+
 //    @After
-//    public void afterScenario() {
-//        app.endSession();
-//    }
-//}
+    public void afterScenario() {
+        app.endSession();
+    }
+}
