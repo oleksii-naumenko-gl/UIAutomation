@@ -17,5 +17,6 @@ Feature: Default Dropbox Values
 
   @Important
   Scenario: Verify Texts Dropbox Default Values
-    When user navigates to Texts screen
+    #screenName with error
+    When user navigates to Text screen
     Then each item from Texts dropdown can be selected

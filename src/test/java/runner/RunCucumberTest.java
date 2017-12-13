@@ -1,14 +1,13 @@
 package runner;
+import PageObjects.GrasshopperApp;
+import cucumber.api.CucumberOptions;
+import cucumber.api.junit.Cucumber;
+import helper.AppiumFactory;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.runner.RunWith;
 
-        import PageObjects.GrasshopperApp;
-        import cucumber.api.CucumberOptions;
-        import cucumber.api.junit.Cucumber;
-        import helper.AppiumFactory;
-        import org.junit.AfterClass;
-        import org.junit.BeforeClass;
-        import org.junit.runner.RunWith;
-
-        import static com.citrix.grasshopper.at.steps.BaseSteps.app;
+import static com.citrix.grasshopper.at.steps.BaseSteps.app;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
