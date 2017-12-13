@@ -10,7 +10,7 @@ Feature: Default Dropbox Values
     When user navigates to Recent screen
     Then each item from Recent dropdown can be selected
 
-  @Important
+  @ignored
   Scenario: Verify Call Dropbox Default Values
     When user navigates to Call screen
     Then each item from Call dropdown can be selected
