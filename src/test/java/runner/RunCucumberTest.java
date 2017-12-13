@@ -18,7 +18,7 @@ import static com.citrix.grasshopper.at.steps.BaseSteps.app;
         },
         features = "src/test/java/cucumber",
         glue = {"com.citrix.grasshopper.at.steps"},
-        tags = {"@dropbox"},
+        tags = {"~@ignored"},
         strict = false
 )
 public class RunCucumberTest {
