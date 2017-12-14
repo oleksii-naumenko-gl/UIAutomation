@@ -18,13 +18,13 @@ public class BaseHistoryPage extends BaseActionPage {
     @AndroidFindBy(id = "com.grasshopper.dialer:id/swipe_chat")
     private MobileElement swipeTextBackButton;
 
-    @AndroidFindBy(id = "com.grasshopper.dialer:id/swipe_chat")
+    @AndroidFindBy(id = "com.grasshopper.dialer:id/swipe_more")
     private MobileElement swipeMoreButton;
 
     @AndroidFindBy(id = "com.grasshopper.dialer:id/block_phone_number")
     private MobileElement moreAddToBlockedButton;
 
-    @AndroidFindBy(id = "com.grasshopper.dialer:id/block_phone_number")
+    @AndroidFindBy(id = "com.grasshopper.dialer:id/modify_contact")
     private MobileElement moreAddContactButton;
 
     @AndroidFindBy(id = "com.grasshopper.dialer:id/modify_contact")
@@ -47,7 +47,9 @@ public class BaseHistoryPage extends BaseActionPage {
     }
 
     public void addToContacts(MobileElement element){
-
+        swipeLeftfromObject(element, 3000);
+        pressMore();
+        moreAddContactButton.click();
     }
 
     public void editContact(MobileElement element){
@@ -59,8 +61,8 @@ public class BaseHistoryPage extends BaseActionPage {
     }
 
 
-    private void pressMore(MobileElement element){
-
+    private void pressMore(){
+        swipeMoreButton.click();
     }
 
 

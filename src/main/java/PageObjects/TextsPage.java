@@ -1,5 +1,6 @@
 package PageObjects;
 
+import helper.Helper;
 import helper.SharedData;
 import helper.TextsEntry;
 import helper.enums;
@@ -9,7 +10,6 @@ import io.appium.java_client.pagefactory.AndroidFindBy;
 import org.openqa.selenium.By;
 
 import java.util.List;
-import java.util.Map;
 
 public class TextsPage extends BaseHistoryPage{
 
@@ -26,11 +26,8 @@ public class TextsPage extends BaseHistoryPage{
     @AndroidFindBy(id = "com.grasshopper.dialer:id/swipe_done")
     private MobileElement swipeDoneButton;
 
-    private String textFromId = "com.grasshopper.dialer:id/from";
-
-    private String textMessageId = "com.grasshopper.dialer:id/message";
-
-    private String textTimestampId = "com.grasshopper.dialer:id/received_time";
+    @AndroidFindBy(id = "com.grasshopper.dialer:id/new_chat")
+    private MobileElement startConversationButton;
 
     private String textEntryId = "com.grasshopper.dialer:id/swipe";
 
@@ -48,6 +45,8 @@ public class TextsPage extends BaseHistoryPage{
         }
     }
 
+
+    // todo: add scrolling
     public void refreshHistory(){
         SharedData.textsMap.clear();
 
@@ -56,17 +55,8 @@ public class TextsPage extends BaseHistoryPage{
         if (elementList.size() != 0){
 
             for (MobileElement element : elementList){
-
-                try {
-                    TextsEntry entry = new TextsEntry(element.findElement(By.id(textFromId)).getText(),
-                            element.findElement(By.id(textTimestampId)).getText(),
-                            element.findElement(By.id(textMessageId)).getText());
-                    SharedData.textsMap.put(entry, element);
-                }
-                catch (Exception x){
-                    //todo: ADD SCROLLING
-                    logger.debug("Element is not present");
-                }
+                    TextsEntry entry = new TextsEntry(element);
+                    SharedData.textsMap.add(entry);
             }
         }
         else
@@ -75,15 +65,73 @@ public class TextsPage extends BaseHistoryPage{
         }
     }
 
-    public TextsEntry getFirstEntry(){
-        Map.Entry<TextsEntry, MobileElement> entry = SharedData.textsMap.entrySet().iterator().next();
-        return entry.getKey();
-    }
-
     public void markMessageAsDone(MobileElement element){
         swipeLeftfromObject(element, 3000);
 
         swipeDoneButton.click();
+    }
+
+    /**
+     * Starts new conversation
+     */
+    public void startNewConversation(){
+        startConversationButton.click();
+    }
+
+    /**
+     * Searches for the texts entry based on Contact Name. Returns null if there are no such dialog present.
+     * @return
+     */
+    public TextsEntry findEntryByContactName(String contactName){
+
+        for (TextsEntry entry : SharedData.textsMap){
+            if (entry.contact.equalsIgnoreCase(contactName))
+            {
+                return entry;
+            }
+        }
+
+        return null;
+    }
+
+    public void createContactForEntry(TextsEntry entry, String contactName){
+        addToContacts(entry.mobileElement);
+    }
+
+    public void editContactForEntry(TextsEntry entry){
+        createContactForEntry(entry, "");
+    }
+
+    public void updateUnreadDropdownCounters(){
+        SharedData.textDropdownUnreadCounter.clear();
+
+        openDropdownMenu();
+
+        for (MobileElement element : getDropboxItems()){
+
+            String number = element.findElement(By.id("android:id/text1")).getText();
+
+            int counter = Helper.getUnreadDropdownCounter(element.findElement(By.id("com.grasshopper.dialer:id/count")).getText());
+
+            SharedData.textDropdownUnreadCounter.put(number, counter);
+        }
+
+        // closing
+        navigateBack();
+    }
+
+    public int getUnreadDropdownCounterForNumber(String number){
+        updateUnreadDropdownCounters();
+
+       return SharedData.textDropdownUnreadCounter.get(number);
+    }
+
+    /**
+     * Getting the list of elements that represent parents of each line in the dropdown menu.
+     * @return
+     */
+    private List<MobileElement> getDropboxItems() {
+        return driver.findElements(By.className("android.widget.RelativeLayout"));
     }
 
 }
