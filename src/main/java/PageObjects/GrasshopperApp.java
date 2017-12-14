@@ -86,11 +86,17 @@ public class GrasshopperApp {
 
     public ContactsPage contactsPage() { return new ContactsPage(driver); }
 
+    public NewConversationScreen newConversationScreen() { return new NewConversationScreen(driver); }
+
     public BaseDialog baseDialog(){ return new BaseDialog(driver); }
 
     public BaseAlert baseAlert() { return new BaseAlert(driver); }
 
     public PermissionRequest permissionRequest() {return new PermissionRequest(driver);}
+
+    public AddNewContactMoto addNewContactMoto() {return new AddNewContactMoto(driver); }
+
+    public LegalDisclaimerDialog legalDisclaimerDialog() { return new LegalDisclaimerDialog(driver); }
 
     public static void getProperties(){
         try {
@@ -162,6 +168,8 @@ public class GrasshopperApp {
 
         capabilities.setCapability("platformVersion", SharedData.phoneAndroidVersion);
         capabilities.setCapability("app", app.getAbsolutePath());
+
+//        setupRestartCapabilities(capabilities);
     }
 
     private static void setupEmulatorCapabilities(DesiredCapabilities capabilities, String emulatorName, String androidVersion){
@@ -173,7 +181,7 @@ public class GrasshopperApp {
      * Sets up capabilities for running the script with restarting the same version of app etc/
      * @param capabilities
      */
-    private void setupRestartCapabilities(DesiredCapabilities capabilities){
+    private static void setupRestartCapabilities(DesiredCapabilities capabilities){
         capabilities.setCapability("fullReset", false);
         capabilities.setCapability("noReset", true);
     }

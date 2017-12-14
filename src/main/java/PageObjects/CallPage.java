@@ -1,5 +1,6 @@
 package PageObjects;
 
+import helper.Helper;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
@@ -31,6 +32,8 @@ public class CallPage extends BaseActionPage {
 
     public void enterPhoneNumber(String number) throws InterruptedException {
         logger.debug("Entering " + number + " number.");
+
+        number = Helper.modifyFormattedNumber(number);
 
         List<MobileElement> keys = keypadParent.findElements(By.id("com.grasshopper.dialer:id/tv_keypad_label"));
 

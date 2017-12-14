@@ -22,7 +22,8 @@ public class BaseAlert extends BasePage {
     @AndroidFindBy(id = "android:id/button2")
     private MobileElement noButton;
 
-    @AndroidFindBy(id = "com.grasshopper.dialer:id/action_bar_root")
+    @AndroidFindBy(id = "com.grasshopper.dialer:id/titleDividerNoCustom")
+    // есть везде
     private MobileElement alert;
 
     public boolean isAlertPresent(){

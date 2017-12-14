@@ -2,6 +2,7 @@ package PageObjects;
 
 import PageObjects.base.BasePage;
 import helper.NavigationTab;
+import helper.SharedData;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
@@ -42,6 +43,10 @@ public class BaseActionPage extends BasePage{
         getNavigationTabs().get(tab.getValue()).click();
     }
 
+    public void openDropdownMenu(){
+        dropbox.click();
+    }
+
     public boolean isTabSelected(NavigationTab tab){
         MobileElement neededTab = getNavigationTabs().get(tab.getValue());
         MobileElement neededTabIcon = neededTab.findElement(By.id(iconId));
@@ -55,8 +60,7 @@ public class BaseActionPage extends BasePage{
     }
 
     public void setDropdownValue(String value) throws InterruptedException {
-
-        dropbox.click();
+        openDropdownMenu();
 
         // getting all elements
         List<MobileElement> listOfValues = driver.findElements(By.id("android:id/text1"));
@@ -71,4 +75,27 @@ public class BaseActionPage extends BasePage{
         throw (new NoSuchElementException());
     }
 
+    public void updateUnreadCounters(){
+
+        SharedData.unreadCounterMap.clear();
+
+        for (NavigationTab tab : NavigationTab.values()){
+
+            Integer counter = 0;
+
+            if (tab.getText() == NavigationTab.INBOX.getText() || tab.getText() == NavigationTab.TEXTS.getText()){
+
+                MobileElement neededTab = getNavigationTabs().get(tab.getValue());
+               try {
+                   counter = Integer.valueOf(neededTab.findElement(By.id("com.grasshopper.dialer:id/bottom_navigation_notification")).getText());
+               }
+               catch (Exception x)
+               {
+                   logger.debug("Counter is not present for " + tab.getText());
+               }
+
+               SharedData.unreadCounterMap.put(tab, counter);
+            }
+        }
+    }
 }

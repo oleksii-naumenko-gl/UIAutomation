@@ -1,3 +1,4 @@
+@DefaultValues
 Feature: Grasshopper Smoke Test
 
   Scenario: Verify Inbox Dropbox Default Values

@@ -1,5 +1,6 @@
 package com.citrix.grasshopper.at.steps;
 
+import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import helper.*;
@@ -22,7 +23,7 @@ public class CallSteps extends BaseSteps {
 
     @Then("^user is able to perform call from dialer$")
     public void userIsAbleToPerformCallFromDialer() throws Throwable {
-        app.callPage().enterPhoneNumber(Constants.smsOutgoingNumber);
+        app.callPage().enterPhoneNumber(Constants.incomingCall);
 
         app.callPage().clickCall();
 
@@ -85,8 +86,17 @@ public class CallSteps extends BaseSteps {
     public void userIsAbleToPerformCallFromTheTextsUsingSwipeMenu() throws Throwable {
         app.textsPage().refreshHistory();
 
-        app.textsPage().callBack(SharedData.textsMap.get(app.textsPage().getFirstEntry()));
+        app.textsPage().callBack(SharedData.textsMap.get(0).mobileElement);
 
         Assert.assertTrue("Verify Call is being performed", app.wifiCallPage().isWifiCallPresent());
+    }
+
+    @Then("^the call is performed via PSTN$")
+    public void theCallIsPerformedViaPSTN() throws Throwable {
+        app.callPage().enterPhoneNumber(Constants.incomingCall);
+
+        app.callPage().clickCall();
+
+        Assert.assertFalse("Verify Call is being performed via PSTN", app.wifiCallPage().isWifiCallPresent());
     }
 }

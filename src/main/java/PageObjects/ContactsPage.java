@@ -2,6 +2,7 @@ package PageObjects;
 
 import PageObjects.base.BasePage;
 import helper.Contact;
+import helper.Helper;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
@@ -9,7 +10,7 @@ import org.openqa.selenium.By;
 
 import java.util.*;
 
-public class ContactsPage extends BasePage {
+public class ContactsPage extends BasePageWithBackButton {
     public ContactsPage(AppiumDriver driver) {
         super(driver);
     }
@@ -63,4 +64,7 @@ public class ContactsPage extends BasePage {
         contactsMap.get(keysAsArray.get(r.nextInt(keysAsArray.size()))).click();
     }
 
+    public void enterContactNumber(String number){
+        searchEditBox.sendKeys(Helper.modifyFormattedNumber(number));
+    }
 }
