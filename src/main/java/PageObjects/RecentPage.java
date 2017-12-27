@@ -46,9 +46,7 @@ public class RecentPage extends BaseHistoryPage {
             for (MobileElement element : elementList){
 
                 try {
-                    RecentInboxEntry entry = new RecentInboxEntry(element.findElement(By.id(recentMapContact)).getText(),
-                            element.findElement(By.id(recentMapTimestamp)).getText(),
-                            element.findElement(By.id(recentMapExtension)).getText());
+                    RecentInboxEntry entry = new RecentInboxEntry(element);
                     SharedData.recentMap.put(entry, element);
                 }
                 catch (Exception x){

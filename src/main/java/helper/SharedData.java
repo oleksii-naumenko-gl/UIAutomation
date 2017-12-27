@@ -2,10 +2,7 @@ package helper;
 
 import io.appium.java_client.MobileElement;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class SharedData {
 
@@ -19,7 +16,9 @@ public class SharedData {
 
     public static Map<Contact, MobileElement> favoritesMap = new HashMap<>();
 
-    public static Map<RecentInboxEntry, MobileElement> inboxMap = new HashMap<>();
+    public static List<RecentInboxEntry> inboxMap = new ArrayList<>();
+
+    public static List<RecentInboxEntry> deletedInboxMap = new ArrayList<>();
 
     public static Map<RecentInboxEntry, MobileElement> recentMap = new HashMap<>();
 
@@ -29,5 +28,5 @@ public class SharedData {
 
     public static Map<String, Integer> textDropdownUnreadCounter = new HashMap<>();
 
-   public static List<TextMessage> messagesList = new ArrayList<>();
+    public static List<TextMessage> messagesList = new ArrayList<>();
 }

@@ -1,5 +1,6 @@
 package PageObjects;
 
+import helper.InboxDropdownValue;
 import helper.RecentInboxEntry;
 import helper.SharedData;
 import io.appium.java_client.AppiumDriver;
@@ -11,30 +12,33 @@ import java.util.List;
 import java.util.Map;
 
 public class InboxPage extends BaseHistoryPage{
+
     private String recentEntryId = "com.grasshopper.dialer:id/swipe";
-
-    private String recentMapContact = "com.grasshopper.dialer:id/from";
-
-    private String recentMapTimestamp = "com.grasshopper.dialer:id/received_time";
-
-    private String recentMapExtension = "com.grasshopper.dialer:id/extension_info";
 
     private String detailsId = "com.grasshopper.dialer:id/info";
 
     @AndroidFindBy(id = "com.grasshopper.dialer:id/inbox_list")
     private MobileElement historyParent;
 
+    @AndroidFindBy(id = "com.grasshopper.dialer:id/swipe_delete")
+    private MobileElement swipeDeleteButton;
+
     public InboxPage(AppiumDriver driver) {
         super(driver);
     }
 
     public RecentInboxEntry getFirstEntry(){
-        Map.Entry<RecentInboxEntry, MobileElement> entry = SharedData.inboxMap.entrySet().iterator().next();
-        return entry.getKey();
+        return SharedData.inboxMap.get(0);
     }
 
-    public void refreshHistory(){
-        SharedData.inboxMap.clear();
+    public void refreshHistory(InboxDropdownValue selectedTab){
+
+        if (selectedTab == InboxDropdownValue.INBOX){
+            SharedData.inboxMap.clear();
+        }
+        if (selectedTab == InboxDropdownValue.DELETED){
+            SharedData.deletedInboxMap.clear();
+        }
 
         List<MobileElement> elementList = historyParent.findElements(By.id(recentEntryId));
 
@@ -43,10 +47,16 @@ public class InboxPage extends BaseHistoryPage{
             for (MobileElement element : elementList){
 
                 try {
-                    RecentInboxEntry entry = new RecentInboxEntry(element.findElement(By.id(recentMapContact)).getText(),
-                            element.findElement(By.id(recentMapTimestamp)).getText(),
-                            element.findElement(By.id(recentMapExtension)).getText());
-                    SharedData.inboxMap.put(entry, element);
+                    RecentInboxEntry entry = new RecentInboxEntry(element);
+
+
+                    if (selectedTab == InboxDropdownValue.INBOX){
+                        SharedData.inboxMap.add(entry);
+                    }
+                    if (selectedTab == InboxDropdownValue.DELETED){
+                        SharedData.deletedInboxMap.add(entry);
+                    }
+
                 }
                 catch (Exception x){
                     //todo: ADD SCROLLING
@@ -65,4 +75,17 @@ public class InboxPage extends BaseHistoryPage{
         entry.findElement(By.id(detailsId)).click();
     }
 
+    public void updateUnreadDropdownCounters() {
+
+
+    }
+
+    public void deleteEntry(RecentInboxEntry entry){
+        swipeLeftfromObject(entry.mobileElement, 3000);
+        pressDeleteButton();
+    }
+
+    private void pressDeleteButton(){
+        swipeDeleteButton.click();
+    }
 }

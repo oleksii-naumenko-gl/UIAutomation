@@ -155,7 +155,6 @@ public class LoginSteps extends BaseSteps{
      * Temporary method as there's no possibility to accept dialog.
      */
     private void acceptLegalDisclaimer(){
-
         app.loginPage().acceptLegalDisclaimer();
 
     }

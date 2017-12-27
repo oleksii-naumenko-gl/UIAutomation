@@ -70,8 +70,8 @@ public class CallSteps extends BaseSteps {
 
     @Then("^user is able to perform call from the Inbox screen by using swipe menu$")
     public void userIsAbleToPerformCallFromTheInboxScreenByUsingSwipeMenu() throws Throwable {
-        app.inboxPage().refreshHistory();
-        app.inboxPage().callBack(SharedData.inboxMap.get(app.inboxPage().getFirstEntry()));
+        app.inboxPage().refreshHistory(InboxDropdownValue.INBOX);
+        app.inboxPage().callBack(SharedData.inboxMap.get(0).mobileElement);
         Assert.assertTrue("Verify Call is being performed", app.wifiCallPage().isWifiCallPresent());
     }
 
@@ -98,5 +98,14 @@ public class CallSteps extends BaseSteps {
         app.callPage().clickCall();
 
         Assert.assertFalse("Verify Call is being performed via PSTN", app.wifiCallPage().isWifiCallPresent());
+    }
+
+    @And("^leaves new Voicemail from (.*) to (.*)$")
+    public void leavesNewVoicemailFromFromNumberToToNumber(String fromNumber, String toNumber) throws Throwable {
+        app.callPage().updateUnreadCounters();
+        app.callPage().setDropdownValue(fromNumber);
+        app.callPage().enterPhoneNumber(Helper.modifyFormattedNumber(toNumber));
+        app.callPage().clickCall();
+        app.wifiCallPage().leaveVoicemail();
     }
 }
