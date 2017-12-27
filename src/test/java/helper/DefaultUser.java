@@ -1,9 +1,5 @@
 package helper;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 public class DefaultUser {
 
     public static String login = "Oleksii.Naumenko@logmein.com";
@@ -16,6 +12,7 @@ public class DefaultUser {
 
     public static String forwardingNumber = "6314524045";
 
+    public  static String forwardingNumberAfterEditing = "6314524040";
 
     public static Number[] numbers = new Number[]
             {

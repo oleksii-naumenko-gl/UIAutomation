@@ -83,21 +83,21 @@ public class SettingsSteps extends BaseSteps {
     public void editForwardingNumber(String extDescription) {
         app.callForwardingSettingsPage().clickExtentionStatusButton(extDescription);
         app.callForwardingNumbersPage().refreshForwardingNumbersPage();
-        app.callForwardingNumbersPage().clickForwardingNumber(DefaultUser.forwardingNumberForEditing);
-        app.editDestinationPage().editNumber(DefaultUser.forwardingNumberForEditing);
+        app.callForwardingNumbersPage().clickForwardingNumber(DefaultUser.forwardingNumberAfterEditing);
+        app.editDestinationPage().editNumber(DefaultUser.forwardingNumberAfterEditing);
     }
 
     @And("^unchecks/checks forwarding number$")
     public void uncheckCheckForwardingNumber(String extDescription) {
         app.callForwardingNumbersPage().refreshForwardingNumbersPage();
-        app.callForwardingNumbersPage().clickForwardingNumberCheckbox(DefaultUser.forwardingNumberForEditing);
+        app.callForwardingNumbersPage().clickForwardingNumberCheckbox(DefaultUser.forwardingNumberAfterEditing);
 
     }
 
     @And("^deletes forwarding number for (.*) extension$")
     public void deleteForwardingNumber(String extDescription) {
 
-        app.callForwardingNumbersPage().clickForwardingNumber(DefaultUser.forwardingNumberForEditing);
+        app.callForwardingNumbersPage().clickForwardingNumber(DefaultUser.forwardingNumberAfterEditing);
         app.editDestinationPage().clickDelete();
 
         //           pop-up;
