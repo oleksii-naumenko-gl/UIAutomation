@@ -1,5 +1,6 @@
 package PageObjects;
 
+import PageObjects.SettingsPages.*;
 import PageObjects.dialogs.BaseAlert;
 import PageObjects.dialogs.BaseDialog;
 import PageObjects.dialogs.PermissionRequest;
@@ -108,6 +109,10 @@ public class GrasshopperApp {
         return new CallForwardingNumbersPage(driver);
     }
 
+    public EditDestinationPage editDestinationPage() {
+        return new EditDestinationPage(driver);
+    }
+
     public NewDestinationPage newDestinationPage() {
         return new NewDestinationPage(driver);
     }
@@ -122,6 +127,14 @@ public class GrasshopperApp {
 
     public PermissionRequest permissionRequest() {
         return new PermissionRequest(driver);
+    }
+
+    public AccessNumberPage accessNumberPage() {
+        return  new AccessNumberPage(driver);
+    }
+
+    public MakingCallsPage makingCallsPage() {
+        return new MakingCallsPage(driver);
     }
 
     public static void getProperties() {

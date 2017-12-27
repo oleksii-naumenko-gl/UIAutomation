@@ -1,9 +1,11 @@
-package PageObjects;
+package PageObjects.SettingsPages;
 
 import PageObjects.base.BasePage;
+import helper.SettingsItem;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
+import org.openqa.selenium.By;
 
 public class SettingsScreen extends BasePage {
 
@@ -94,8 +96,17 @@ public class SettingsScreen extends BasePage {
         return callForwardingSettingsItemSubtext.getText();
     }
 
-    public void clickOnCallForwardingSettingsNavigationArrow() {
-        callForwardingSettingsNavigationArrow.click();
-    }
+    public static SettingsItem[] settingsItems = SettingsItem.values();
 
+    public void selectSettingsItem(String settingsItemName) {
+        scrollUntilText(settingsItemName);
+        String itemId = "";
+        for (SettingsItem item : settingsItems) {
+            if (item.getText().equalsIgnoreCase(settingsItemName)) {
+                itemId = item.getId();
+                break;
+            }
+        }
+        driver.findElement(By.id(itemId)).click();
+    }
 }

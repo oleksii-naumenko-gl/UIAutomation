@@ -14,6 +14,8 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import static org.junit.Assert.assertTrue;
+
 public abstract class BasePage {
 
     public static org.apache.logging.log4j.Logger logger = LogManager.getLogger("PageLogger");
@@ -26,6 +28,10 @@ public abstract class BasePage {
     }
     @AndroidFindBy(id = "com.grasshopper.dialer:id/toolbar")
     protected MobileElement parentTopToolBar;
+
+    @AndroidFindBy(xpath = "//android.view.View/android.widget.TextView[@index='1']")
+    protected MobileElement pageTitle;
+    //private MobileElement pageTitle = parentTopToolBar.findElementByClassName("android.widget.TextView");
 
     public MobileElement findElementWithTimeout(By by, int timeOutInSeconds) {
         return (MobileElement)(new WebDriverWait(driver, timeOutInSeconds)).until(ExpectedConditions.presenceOfElementLocated(by));
@@ -40,6 +46,9 @@ public abstract class BasePage {
     }
 
     private void PressHome(){
+    }
+    public String getTextFromPageTitle() {
+        return pageTitle.getText();
     }
 
     // todo method from generic steps here
@@ -56,6 +65,19 @@ public abstract class BasePage {
     public void swipeLeftfromObject(MobileElement element, Integer steps){
         Dimension size = driver.manage().window().getSize();
         driver.swipe(element.getLocation().getX()+Math.round(((element.getSize().width)*98)/100),element.getLocation().getY()+Math.round((element.getSize().height)/2),Math.round(size.getWidth()/10), element.getLocation().getY()+Math.round((element.getSize().height)/2),steps);
+    }
+
+    public void scrollUntilText(String textToFind) {
+        try {
+            driver.findElement(MobileBy.AndroidUIAutomator("new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView(new UiSelector().text(\"" + textToFind + "\"))"));
+            WebElement x = driver.findElement(MobileBy.AndroidUIAutomator("new UiSelector().text(\"" + textToFind + "\")"));
+            //logger.info(" - Object found by Text: " + textToFind);
+            assertTrue(textToFind, x.isDisplayed());
+            //x.click();
+        } catch (Exception e) {
+            logger.error("***FAILED: Object not found due Invalid Text: " + textToFind);
+            throw e;
+        }
     }
 
 }
