@@ -1,9 +1,16 @@
 package PageObjects;
 
 import PageObjects.base.BasePage;
+import helper.Helper;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
+import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.util.List;
 
 public class WifiCallPage extends BasePage {
     public WifiCallPage(AppiumDriver driver) {
@@ -31,6 +38,12 @@ public class WifiCallPage extends BasePage {
     @AndroidFindBy(id = "com.grasshopper.dialer:id/hold_button_icon")
     private MobileElement holdIcon;
 
+    @AndroidFindBy(id = "com.grasshopper.dialer:id/time_text")
+    private MobileElement callTimeText;
+
+    @AndroidFindBy(id = "com.grasshopper.dialer:id/gv_keypad")
+    private MobileElement dialpadParent;
+
     public boolean isWifiCallPresent(){
 
         boolean isPresent = false;
@@ -52,6 +65,48 @@ public class WifiCallPage extends BasePage {
         catch (Exception x){
             logger.error("End call button is not present");
         }
+    }
+
+    public void openDialpad(){
+            dialIcon.click();
+    }
+
+    public void waitUntilCallIsConnected(){
+        try {
+            (new WebDriverWait(driver, 30)).until(ExpectedConditions.visibilityOf(callTimeText));
+        }
+        catch (TimeoutException e)
+        {
+        }
+    }
+
+    public void enterPhoneNumber(String number) throws InterruptedException {
+        logger.debug("Entering " + number + " number.");
+
+        List<MobileElement> keys = dialpadParent.findElements(By.id("com.grasshopper.dialer:id/tv_keypad_label"));
+
+        for (char ch: number.toCharArray()) {
+
+            for(MobileElement element : keys)
+            {
+                if (element.getText().equalsIgnoreCase(Character.toString(ch))){
+                    logger.debug("Clicking " + ch + " button");
+                    element.click();
+                }
+            }
+        }
+    }
+
+    public void leaveVoicemail() throws InterruptedException {
+        waitUntilCallIsConnected();
+        openDialpad();
+        Thread.sleep(3000);
+        enterPhoneNumber("0");
+        Thread.sleep(5000);
+        enterPhoneNumber("*");
+        Thread.sleep(10000);
+        enterPhoneNumber("2");
+        Thread.sleep(10000);
     }
 
 }
