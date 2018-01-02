@@ -1,6 +1,7 @@
 package PageObjects.SettingsPages;
 
 import PageObjects.base.BasePage;
+import helper.Extension;
 import helper.SettingsItem;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
@@ -37,7 +38,17 @@ public class SettingsScreen extends BasePage {
     @AndroidFindBy(id = "com.grasshopper.dialer:id/tv_call_forwarding_subtext")
     private MobileElement callForwardingSettingsItemSubtext;
 
-    private MobileElement callForwardingSettingsNavigationArrow = callForwardingSettingsItem.findElementById("com.grasshopper.dialer:id/arrow");
+    @AndroidFindBy(id = "com.grasshopper.dialer:id/rl_my_extension_number")
+    private MobileElement myExtensionSettingsItem;
+
+    @AndroidFindBy(id = "com.grasshopper.dialer:id/my_extension_number")
+    private MobileElement myExtensionSettingsItemTitle;
+
+    @AndroidFindBy(id = "com.grasshopper.dialer:id/my_extension_subtext")
+    private MobileElement myExtensionSettingsItemSubtext;
+
+    @AndroidFindBy(xpath = "[//com.grasshopper.dialer:id/rl_settings_call_forwarding_id/com.grasshopper.dialer:id/arrow")
+    private MobileElement callForwardingSettingsNavigationArrow;
 
     private MobileElement screenName = parentTopToolBar.findElementsByClassName("android.widget.TextView").get(0);
 
@@ -59,7 +70,6 @@ public class SettingsScreen extends BasePage {
 
     public boolean isCallForwardingSettingsNavigationArrowPresent() {
         boolean isPresent = false;
-
         try {
             isPresent = callForwardingSettingsNavigationArrow.isDisplayed();
         } catch (Exception x) {
@@ -108,5 +118,12 @@ public class SettingsScreen extends BasePage {
             }
         }
         driver.findElement(By.id(itemId)).click();
+    }
+
+    public String getMainExtensionDescription() {
+        scrollUntilText(SettingsItem.MY_EXTENSION.getText());
+        String text =  myExtensionSettingsItemSubtext.getText();
+        String desc= text.split("-")[0].trim();
+return desc;
     }
 }

@@ -2,10 +2,7 @@ package helper;
 
 import io.appium.java_client.MobileElement;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class SharedData {
 
@@ -24,5 +21,8 @@ public class SharedData {
     public static List<AccessNumberOption> accessNumberOptionsList = new ArrayList<>();
 
     public static List<MakingCallsOption> makingCallsOptionsList = new ArrayList<>();
+
+    public static List<Extension> myExtensionSettingsList = new ArrayList<>();
+
 
 }

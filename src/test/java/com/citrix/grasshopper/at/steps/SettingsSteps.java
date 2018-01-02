@@ -6,6 +6,7 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import helper.DefaultUser;
 import helper.Extension;
+import helper.SharedData;
 import org.junit.Assert;
 
 import java.util.Arrays;
@@ -88,7 +89,7 @@ public class SettingsSteps extends BaseSteps {
     }
 
     @And("^unchecks/checks forwarding number$")
-    public void uncheckCheckForwardingNumber(String extDescription) {
+    public void uncheckCheckForwardingNumber() {
         app.callForwardingNumbersPage().refreshForwardingNumbersPage();
         app.callForwardingNumbersPage().clickForwardingNumberCheckbox(DefaultUser.forwardingNumberAfterEditing);
 
@@ -166,5 +167,29 @@ public class SettingsSteps extends BaseSteps {
             app.makingCallsPage().refreshMakingCallsPage();
             Assert.assertTrue("Verify " + optionNamesArray[index] + " option can be selected", app.makingCallsPage().isMakingCallsOptionSelected(optionNamesArray[index]));
         }
+    }
+
+    @Then("^My Extension page is displayed$")
+    public void myExtensionPageIsDisplayed() {
+        Assert.assertTrue("Verify page title on My Extension page", app.myExtensionPage().getTextFromPageTitle().equalsIgnoreCase(app.myExtensionPage().PAGE_TITLE_TEXT));
+    }
+
+    @And("^each Extension can be selected$")
+    public void eachExtensionCanBeSelected() {
+        app.myExtensionPage().refreshMyExtensionsSettingsList();
+
+//        String defaultException = SharedData.myExtensionSettingsList.get(0).getExtDescription();
+//        Assert.assertTrue("Verify the first Extension is selected by default", app.myExtensionPage().isExtensionMain(SharedData.myExtensionSettingsList.get(0).getExtNumber()));
+//        app.myExtensionPage().navigateBack();
+//        app.settingsScreen().scrollUntilText("My Extension");
+//        Assert.assertTrue(app.settingsScreen().getMainExtensionDescription().equalsIgnoreCase(defaultException));
+
+        for(int index = 0; index<SharedData.myExtensionSettingsList.size(); index++){
+            app.myExtensionPage().scrollUntilText((SharedData.myExtensionSettingsList.get(index)).getExtNumber());
+            app.myExtensionPage().clickExtension((SharedData.myExtensionSettingsList.get(index)).getExtNumber());
+            Assert.assertTrue(app.settingsScreen().getMainExtensionDescription().equalsIgnoreCase(SharedData.myExtensionSettingsList.get(index).getExtNumber()));
+            selectSettingsItem("My Extension");
+        }
+
     }
 }

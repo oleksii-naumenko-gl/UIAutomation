@@ -5,22 +5,20 @@ import org.openqa.selenium.By;
 // parent class for Access Number and Making Calls settings options
 public abstract class AbstractCallsSettingsOption {
 
-    private String optionId = "com.grasshopper.dialer:id/title";
-    private String checkboxId = "com.grasshopper.dialer:id/checkbox";
     private String optionName;
     private Boolean isCheckboxExisted;
 
     private MobileElement optionMobileElement;
 
-    private MobileElement mobileElement;
-
     public AbstractCallsSettingsOption(MobileElement element) {
-        this.mobileElement = element;
+        String optionId = "com.grasshopper.dialer:id/title";
+        String checkboxId = "com.grasshopper.dialer:id/checkbox";
 
-        optionMobileElement = mobileElement.findElement(By.id(optionId));
+        optionMobileElement = element.findElement(By.id(optionId));
         optionName = optionMobileElement.getText();
         try {
-            isCheckboxExisted = mobileElement.findElement(By.id(checkboxId)).isEnabled();
+
+            isCheckboxExisted = element.findElement(By.id(checkboxId)).isEnabled();
         }catch(Exception e){
             isCheckboxExisted = false;
         }

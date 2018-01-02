@@ -1,59 +1,83 @@
 package helper;
 
-import java.util.Arrays;
+import io.appium.java_client.MobileElement;
+import org.openqa.selenium.By;
+
 import java.util.List;
 
 import static helper.DefaultUser.extensions;
 
 public class Extension {
 
-    public String name;
 
-    public String description;
+    private String extDescription;
 
-    public int forwardingNumberCounter;
+    private String extNumber;
+
+    private int forwardingNumberCounter;
+
+    private MobileElement element;
 
     // todo
-    public boolean isMain = true;
+    private boolean isMain;
 
     // todo List
     public String forwardingNumber = "";
 
     public List<String> forwardingNumbers;
 
-
     public int availableNumbers = 0;
 
     public Extension(String extDescription, String extNumber, int forwardingNumberCounter) {
-        name = extDescription;
-        description = extNumber;
+        this.extDescription = extDescription;
+        this.extNumber = extNumber;
         this.forwardingNumberCounter = forwardingNumberCounter;
     }
 
     public Extension(String extDescription, String extNumber) {
-        name = extDescription;
-        description = extNumber;
-
+        this.extDescription = extDescription;
+        this.extNumber = extNumber;
     }
-    public static String getExtensionName(String extDescription){
-        String extensionName="";
-        for(int index=0; index < extensions.length; index++){
-            if(extDescription.equalsIgnoreCase(extensions[index].description)){
-                extensionName =  extensions[index].name;
+public Extension(MobileElement element){
+
+}
+
+    public Extension(String extDescription, String extNumber, boolean isCheckboxExisted, MobileElement element) {
+        this.extDescription = extDescription;
+        this.extNumber = extNumber;
+        this.isMain = isCheckboxExisted;
+        this.element = element;
+    }
+
+
+    public String getExtDescription() {
+        return extDescription;
+    }
+
+    public String getExtNumber() {
+        return extNumber;
+    }
+
+    public int getForwardingNumberCounter() {
+        return forwardingNumberCounter;
+    }
+
+    public boolean isMain() {
+        return isMain;
+    }
+
+    public MobileElement getExtMobileElement() {
+        return element;
+    }
+
+    public static String getExtensionName(String extDescription) {
+        String extensionName = "";
+        for (int index = 0; index < extensions.length; index++) {
+            if (extDescription.equalsIgnoreCase(extensions[index].extNumber)) {
+                extensionName = extensions[index].extDescription;
             }
         }
         return extensionName;
-    }
-
-
-
-    
-    @Override
-    public String toString() {
-        return "Extension{" +
-                "name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                '}';
     }
 
     @Override
@@ -63,14 +87,21 @@ public class Extension {
 
         Extension extension = (Extension) o;
 
-        if (name != null ? !name.equals(extension.name) : extension.name != null) return false;
-        return description != null ? description.equals(extension.description) : extension.description == null;
+        if (forwardingNumberCounter != extension.forwardingNumberCounter) return false;
+        if (isMain != extension.isMain) return false;
+        if (extDescription != null ? !extDescription.equals(extension.extDescription) : extension.extDescription != null)
+            return false;
+        if (extNumber != null ? !extNumber.equals(extension.extNumber) : extension.extNumber != null) return false;
+        return element != null ? element.equals(extension.element) : extension.element == null;
     }
 
     @Override
     public int hashCode() {
-        int result = name != null ? name.hashCode() : 0;
-        result = 31 * result + (description != null ? description.hashCode() : 0);
+        int result = extDescription != null ? extDescription.hashCode() : 0;
+        result = 31 * result + (extNumber != null ? extNumber.hashCode() : 0);
+        result = 31 * result + forwardingNumberCounter;
+        result = 31 * result + (element != null ? element.hashCode() : 0);
+        result = 31 * result + (isMain ? 1 : 0);
         return result;
     }
 }

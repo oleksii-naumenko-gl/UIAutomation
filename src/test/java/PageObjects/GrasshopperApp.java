@@ -130,11 +130,15 @@ public class GrasshopperApp {
     }
 
     public AccessNumberPage accessNumberPage() {
-        return  new AccessNumberPage(driver);
+        return new AccessNumberPage(driver);
     }
 
     public MakingCallsPage makingCallsPage() {
         return new MakingCallsPage(driver);
+    }
+
+    public MyExtensionPage myExtensionPage() {
+        return new MyExtensionPage(driver);
     }
 
     public static void getProperties() {

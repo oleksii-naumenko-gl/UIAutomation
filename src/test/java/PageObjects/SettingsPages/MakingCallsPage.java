@@ -51,7 +51,7 @@ public class MakingCallsPage extends BasePage {
     }
 
     public void clickMakingCallsOption(String optionName) {
-        logger.info(String.format("Click \"-%s\" Access Number option", optionName));
+        logger.info(String.format("Click \"-%s\" Making Calls option", optionName));
         selectMakingCallsOption(optionName).getOptionMobileElement().click();
     }
 

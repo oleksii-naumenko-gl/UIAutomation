@@ -90,8 +90,8 @@ public class CallForwardingSettingsPage extends BasePage {
         List<Extension> extensionList = getAllAvailableExtensions();
         int forwardingNumberCounter = 0;
         for (Extension ext : extensionList) {
-            if (ext.description.equalsIgnoreCase(extDescription)) {
-                forwardingNumberCounter = ext.forwardingNumberCounter;
+            if (ext.getExtNumber().equalsIgnoreCase(extDescription)) {
+                forwardingNumberCounter = ext.getForwardingNumberCounter();
             }
         }
         return forwardingNumberCounter;
