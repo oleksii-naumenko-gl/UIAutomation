@@ -13,7 +13,7 @@ public class EditDestinationPage extends NewDestinationPage {
     private MobileElement deleteButton;
 
     public void editNumber(String number) {
-   //     phoneInput.sendKeys(Keys.BACK_SPACE);
+        // phoneInput.sendKeys(Keys.BACK_SPACE);
         phoneInput.clear();
         phoneInput.sendKeys(number);
         clickSaveButton();

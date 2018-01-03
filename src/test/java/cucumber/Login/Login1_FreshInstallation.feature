@@ -6,7 +6,3 @@ Feature: Grasshopper Smoke Test
     And user logs in with default credentials
     Then Inbox page is displayed as Default
 
-
-#    Examples:
-#      | login                                    | password            |
-#      | oleksii.naumenko@logmein.com                      | abc123              |

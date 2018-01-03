@@ -1,7 +1,6 @@
 package helper;
 
 import io.appium.java_client.MobileElement;
-import org.openqa.selenium.By;
 
 import java.util.List;
 
@@ -38,9 +37,9 @@ public class Extension {
         this.extDescription = extDescription;
         this.extNumber = extNumber;
     }
-public Extension(MobileElement element){
+    public Extension(MobileElement element){
 
-}
+    }
 
     public Extension(String extDescription, String extNumber, boolean isCheckboxExisted, MobileElement element) {
         this.extDescription = extDescription;

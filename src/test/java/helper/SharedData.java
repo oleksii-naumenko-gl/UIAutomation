@@ -24,5 +24,17 @@ public class SharedData {
 
     public static List<Extension> myExtensionSettingsList = new ArrayList<>();
 
+    public static List<RecentInboxEntry> inboxMap = new ArrayList<>();
 
+    public static List<RecentInboxEntry> deletedInboxMap = new ArrayList<>();
+
+    public static Map<RecentInboxEntry, MobileElement> recentMap = new HashMap<>();
+
+    public static List<TextsEntry> textsMap = new ArrayList<>();
+
+    public static Map<NavigationTab, Integer>  unreadCounterMap = new HashMap<NavigationTab, Integer>();
+
+    public static Map<String, Integer> textDropdownUnreadCounter = new HashMap<>();
+
+    public static List<TextMessage> messagesList = new ArrayList<>();
 }

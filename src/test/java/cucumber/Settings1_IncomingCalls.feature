@@ -1,5 +1,5 @@
 @incomingCalls
-Feature: Settings screen
+Feature: Settings screen - Incoming Calls item
 
   Scenario Outline: Verify Incoming calls section
     Given Grasshopper is installed on a clean device
@@ -7,7 +7,6 @@ Feature: Settings screen
     When user navigates to Settings screen
     Then Settings screen is displayed
     Given INCOMING CALLS section is displayed on Settings screen
-#    When user navigates to Settings screen
     And Call Forwarding settings item is displayed
     When user clicks Call Forwarding settings item
     Then Call Forwarding page is displayed
@@ -23,15 +22,3 @@ Feature: Settings screen
       | extension |
       | Ext 0     |
       | Ext 1     |
-
-
-
-
-
-
-
-
-
-
-
-

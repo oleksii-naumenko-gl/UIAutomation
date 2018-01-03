@@ -6,4 +6,3 @@ Feature: Grasshopper Smoke Test
     And user enters valid credentials
     When user enters invalid cell phone number
     Then invalid number error message should be shown
-

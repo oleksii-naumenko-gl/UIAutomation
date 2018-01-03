@@ -1,4 +1,4 @@
-@myExtension
+@settings @myExtension
 Feature: Settings screen - My Extension item
 
   Scenario: Verify Making Calls Default Settings

@@ -26,6 +26,7 @@ public abstract class BasePage {
         this.driver = driver;
         PageFactory.initElements(new AppiumFieldDecorator(driver), this);
     }
+
     @AndroidFindBy(id = "com.grasshopper.dialer:id/toolbar")
     protected MobileElement parentTopToolBar;
 
@@ -51,7 +52,6 @@ public abstract class BasePage {
         return pageTitle.getText();
     }
 
-    // todo method from generic steps here
     public void tapInTheMiddleOfTheScreen(){
         try {
             WebElement x = driver.findElementById("com.grasshopper.dialer:id/toolbar");

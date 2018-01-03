@@ -12,25 +12,24 @@ public class AppiumFactory {
 
     public static final Logger log = LogManager.getLogger(AppiumFactory.class);
 
-        private static AppiumDriverLocalService service = AppiumDriverLocalService.buildService(new AppiumServiceBuilder()
-                .withStartUpTimeOut(5000, TimeUnit.SECONDS)
-                .withArgument(GeneralServerFlag.SESSION_OVERRIDE)
-                .withArgument(GeneralServerFlag.LOG_LEVEL, "error"));
+    private static AppiumDriverLocalService service = AppiumDriverLocalService.buildService(new AppiumServiceBuilder()
+            .withStartUpTimeOut(5000, TimeUnit.SECONDS)
+            .withArgument(GeneralServerFlag.SESSION_OVERRIDE)
+            .withArgument(GeneralServerFlag.LOG_LEVEL, "error"));
 
-        public static AppiumDriverLocalService getService() {
-            return service;
-        }
-
-        public static void startAppium() {
-            log.info("-----------------START APPIUM-----------------------------");
-            service.start();
-            if (service.isRunning())
-                log.info("-----------------APPIUM STARTED---------------------------");
-        }
-
-        public static void stopAppium() {
-            log.info("----------------- APPIUM STOPPED -----------------------------");
-            service.stop();
-        }
+    public static AppiumDriverLocalService getService() {
+        return service;
     }
 
+    public static void startAppium() {
+        log.info("-----------------START APPIUM-----------------------------");
+        service.start();
+        if (service.isRunning())
+            log.info("-----------------APPIUM STARTED---------------------------");
+    }
+
+    public static void stopAppium() {
+        log.info("----------------- APPIUM STOPPED -----------------------------");
+        service.stop();
+    }
+}

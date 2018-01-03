@@ -1,4 +1,4 @@
-@callerInfo
+@settings @callerInfo
 Feature: Settings screen - Caller Info switch
 
   Scenario: Verify Caller Info is turned off by default

@@ -1,4 +1,4 @@
-@accessNumber
+@settings @accessNumber
 Feature: Settings screen - Access Number
 
   Scenario: Verify Access Number Default Settings

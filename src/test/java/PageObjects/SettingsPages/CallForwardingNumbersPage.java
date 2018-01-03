@@ -85,12 +85,12 @@ public class CallForwardingNumbersPage extends BasePage {
 
     public void clickForwardingNumberCheckbox(String number) {
         logger.info("Clicking on " + number+ " forwarding number checkbox");
-            for (ForwardingNumber n : SharedData.forwardingNumberList) {
-                if (n.getNumber().equalsIgnoreCase(number)) {
-                    n.getCheckboxMobileElement().click();
-                    break;
-                }
+        for (ForwardingNumber n : SharedData.forwardingNumberList) {
+            if (n.getNumber().equalsIgnoreCase(number)) {
+                n.getCheckboxMobileElement().click();
+                break;
             }
+        }
     }
 
     public void clickForwardingNumber(String numberToChange) {
@@ -106,4 +106,3 @@ public class CallForwardingNumbersPage extends BasePage {
 
     }
 }
-

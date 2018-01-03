@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="x-ua-compatible" content="IE=edge"/>
+<title>Test results - Class runner.RunCucumberTest</title>
+<link href="../css/base-style.css" rel="stylesheet" type="text/css"/>
+<link href="../css/style.css" rel="stylesheet" type="text/css"/>
+<script src="../js/report.js" type="text/javascript"></script>
+</head>
+<body>
+<div id="content">
+<h1>Class runner.RunCucumberTest</h1>
+<div class="breadcrumbs">
+<a href="../index.html">all</a> &gt; 
+<a href="../packages/runner.html">runner</a> &gt; RunCucumberTest</div>
+<div id="summary">
+<table>
+<tr>
+<td>
+<div class="summaryGroup">
+<table>
+<tr>
+<td>
+<div class="infoBox" id="tests">
+<div class="counter">0</div>
+<p>tests</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="failures">
+<div class="counter">0</div>
+<p>failures</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="ignored">
+<div class="counter">0</div>
+<p>ignored</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="duration">
+<div class="counter">-</div>
+<p>duration</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</td>
+<td>
+<div class="infoBox success" id="successRate">
+<div class="percent">-</div>
+<p>successful</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div id="tabs">
+<ul class="tabLinks">
+<li>
+<a href="#tab0">Tests</a>
+</li>
+<li>
+<a href="#tab1">Standard output</a>
+</li>
+</ul>
+<div id="tab0" class="tab">
+<h2>Tests</h2>
+<table>
+<thead>
+<tr>
+<th>Test</th>
+<th>Duration</th>
+<th>Result</th>
+</tr>
+</thead>
+</table>
+</div>
+<div id="tab1" class="tab">
+<h2>Standard output</h2>
+<span class="code">
+<pre>@settings @accessNumber
+Feature: Settings screen - Access Number
+[INFO ] 2018-01-03 17:17:34  GrasshopperApp - Login user name -Oleksii.Naumenko@logmein.com , password -abc123
+[INFO ] 2018-01-03 17:18:55  PageLogger - Click &quot;-Local&quot; Access Number option
+[INFO ] 2018-01-03 17:19:03  PageLogger - Click &quot;-Toll free&quot; Access Number option
+[INFO ] 2018-01-03 17:19:13  AppiumFactory - ----------------- APPIUM STOPPED -----------------------------
+
+  Scenario: Verify Access Number Default Settings         ?[90m# Settings2_AccessNumber.feature:4?[0m
+    ?[32mGiven ?[0m?[32mGrasshopper is installed on a clean device?[0m      ?[90m# LoginSteps.grasshopperIsInstalledOnACleanDevice()?[0m
+    ?[32mAnd ?[0m?[32muser logs in with default credentials?[0m             ?[90m# LoginSteps.userLogsInWithDefaultCredentials()?[0m
+    ?[32mWhen ?[0m?[32muser navigates to ?[0m?[32m?[1mSettings?[0m?[32m screen?[0m                ?[90m# CommonSteps.navigateToTab(String)?[0m
+    ?[32mAnd ?[0m?[32muser clicks ?[0m?[32m?[1mAccess Number?[0m?[32m settings item?[0m           ?[90m# SettingsSteps.selectSettingsItem(String)?[0m
+    ?[32mThen ?[0m?[32mAccess Number page is displayed?[0m                  ?[90m# SettingsSteps.accessNumberPageIsDisplayed()?[0m
+    ?[32mAnd ?[0m?[32mUse plus one while dialing option can be switched?[0m ?[90m# SettingsSteps.usePlusOneWhileDialingOptionCanBeSwitched()?[0m
+    ?[32mAnd ?[0m?[32meach access number option can be selected?[0m         ?[90m# SettingsSteps.eachAccessNumberOptionCanBeSelected()?[0m
+@settings @makingCalls
+Feature: Settings screen - Making Calls item
+[INFO ] 2018-01-03 17:19:27  GrasshopperApp - Login user name -Oleksii.Naumenko@logmein.com , password -abc123
+[INFO ] 2018-01-03 17:20:42  PageLogger - Click &quot;-Always Make Calls via Grasshopper&quot; Making Calls option
+[INFO ] 2018-01-03 17:20:50  PageLogger - Click &quot;-Ask to Use Grasshopper for Each Call&quot; Making Calls option
+[INFO ] 2018-01-03 17:20:59  AppiumFactory - ----------------- APPIUM STOPPED -----------------------------
+
+  Scenario: Verify Making Calls Default Settings     ?[90m# Settings3_MakingCalls.feature:4?[0m
+    ?[32mGiven ?[0m?[32mGrasshopper is installed on a clean device?[0m ?[90m# LoginSteps.grasshopperIsInstalledOnACleanDevice()?[0m
+    ?[32mAnd ?[0m?[32muser logs in with default credentials?[0m        ?[90m# LoginSteps.userLogsInWithDefaultCredentials()?[0m
+    ?[32mWhen ?[0m?[32muser navigates to ?[0m?[32m?[1mSettings?[0m?[32m screen?[0m           ?[90m# CommonSteps.navigateToTab(String)?[0m
+    ?[32mAnd ?[0m?[32muser clicks ?[0m?[32m?[1mMaking Calls?[0m?[32m settings item?[0m       ?[90m# SettingsSteps.selectSettingsItem(String)?[0m
+    ?[32mThen ?[0m?[32mMaking Calls page is displayed?[0m              ?[90m# SettingsSteps.makingCallsPageIsDisplayed()?[0m
+    ?[32mAnd ?[0m?[32meach making calls option can be selected?[0m     ?[90m# SettingsSteps.eachMakingCallsOptionCanBeSelected()?[0m
+@settings @myExtension
+Feature: Settings screen - My Extension item
+[INFO ] 2018-01-03 17:21:18  GrasshopperApp - Login user name -Oleksii.Naumenko@logmein.com , password -abc123
+[INFO ] 2018-01-03 17:22:40  PageLogger - Click &quot;-Ext 0&quot; Extension 
+[INFO ] 2018-01-03 17:22:49  PageLogger - Click &quot;-Ext 1&quot; Extension 
+[INFO ] 2018-01-03 17:22:59  PageLogger - Click &quot;-Ext 2&quot; Extension 
+[INFO ] 2018-01-03 17:23:08  PageLogger - Click &quot;-Ext 700&quot; Extension 
+[INFO ] 2018-01-03 17:23:18  PageLogger - Click &quot;-Ext 701&quot; Extension 
+[INFO ] 2018-01-03 17:23:28  PageLogger - Click &quot;-Ext 702&quot; Extension 
+[INFO ] 2018-01-03 17:23:38  PageLogger - Click &quot;-Ext 703&quot; Extension 
+[INFO ] 2018-01-03 17:23:48  AppiumFactory - ----------------- APPIUM STOPPED -----------------------------
+
+  Scenario: Verify Making Calls Default Settings     ?[90m# Settings4_MyExtension.feature:4?[0m
+    ?[32mGiven ?[0m?[32mGrasshopper is installed on a clean device?[0m ?[90m# LoginSteps.grasshopperIsInstalledOnACleanDevice()?[0m
+    ?[32mAnd ?[0m?[32muser logs in with default credentials?[0m        ?[90m# LoginSteps.userLogsInWithDefaultCredentials()?[0m
+    ?[32mWhen ?[0m?[32muser navigates to ?[0m?[32m?[1mSettings?[0m?[32m screen?[0m           ?[90m# CommonSteps.navigateToTab(String)?[0m
+    ?[32mAnd ?[0m?[32muser clicks ?[0m?[32m?[1mMy Extension?[0m?[32m settings item?[0m       ?[90m# SettingsSteps.selectSettingsItem(String)?[0m
+    ?[32mThen ?[0m?[32mMy Extension page is displayed?[0m              ?[90m# SettingsSteps.myExtensionPageIsDisplayed()?[0m
+    ?[32mAnd ?[0m?[32meach Extension can be selected?[0m               ?[90m# SettingsSteps.eachExtensionCanBeSelected()?[0m
+@settings @callerInfo
+Feature: Settings screen - Caller Info switch
+[INFO ] 2018-01-03 17:24:02  GrasshopperApp - Login user name -Oleksii.Naumenko@logmein.com , password -abc123
+[INFO ] 2018-01-03 17:25:20  PageLogger - Switch Caller Info toggle
+[INFO ] 2018-01-03 17:25:21  PageLogger - Switch Caller Info toggle
+[INFO ] 2018-01-03 17:25:25  AppiumFactory - ----------------- APPIUM STOPPED -----------------------------
+
+  Scenario: Verify Caller Info is turned off by default ?[90m# Settings5-CallerInfo.feature:4?[0m
+    ?[32mGiven ?[0m?[32mGrasshopper is installed on a clean device?[0m    ?[90m# LoginSteps.grasshopperIsInstalledOnACleanDevice()?[0m
+    ?[32mAnd ?[0m?[32muser logs in with default credentials?[0m           ?[90m# LoginSteps.userLogsInWithDefaultCredentials()?[0m
+    ?[32mWhen ?[0m?[32muser navigates to ?[0m?[32m?[1mSettings?[0m?[32m screen?[0m              ?[90m# CommonSteps.navigateToTab(String)?[0m
+    ?[32mAnd ?[0m?[32mCaller Info switch can be turned ON/OFF?[0m         ?[90m# SettingsSteps.callerInfoSwitchCanBeTurnedONOFF()?[0m
+
+4 Scenarios (?[32m4 passed?[0m)
+23 Steps (?[32m23 passed?[0m)
+8m15.896s
+
+</pre>
+</span>
+</div>
+</div>
+<div id="footer">
+<p>
+<div>
+<label class="hidden" id="label-for-line-wrapping-toggle" for="line-wrapping-toggle">Wrap lines
+<input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
+</label>
+</div>Generated by 
+<a href="http://www.gradle.org">Gradle 2.9</a> at Jan 3, 2018 5:25:27 PM</p>
+</div>
+</div>
+</body>
+</html>

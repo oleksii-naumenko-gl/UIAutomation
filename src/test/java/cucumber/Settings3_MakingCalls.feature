@@ -1,4 +1,4 @@
-@makingCalls
+@settings @makingCalls
 Feature: Settings screen - Making Calls item
 
   Scenario: Verify Making Calls Default Settings

@@ -99,14 +99,12 @@ public class SettingsSteps extends BaseSteps {
 
     @And("^deletes forwarding number for (.*) extension$")
     public void deleteForwardingNumber(String extDescription) {
-
         app.callForwardingNumbersPage().clickForwardingNumber(DefaultUser.forwardingNumberAfterEditing);
         app.editDestinationPage().clickDelete();
 
-        //           pop-up;
+        //     todo      pop-up;
         app.callForwardingNumbersPage().clickBack();
         counterAfterAddingNewNumbers = app.callForwardingSettingsPage().getCounterOfForwardingNumbers(extDescription);
-
     }
 
     @Then("counter of Forwarding numbers is unchanged$")

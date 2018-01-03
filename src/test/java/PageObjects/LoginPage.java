@@ -53,4 +53,14 @@ public class LoginPage extends BasePage {
         return "Error is not present";
     }
 
+    public void acceptLegalDisclaimer(){
+        try {
+            driver.tap(1, 500, 200, 1);
+        }
+        catch (Exception x){
+
+        }
+    }
+
+
 }

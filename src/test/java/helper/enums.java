@@ -2,11 +2,15 @@ package helper;
 
 public class enums {
 
-    public enum Level {
+    public static enum Level {
         HIGH,
         MEDIUM,
         LOW
     }
 
+    public static enum TextTabs {
+        ALL,
+        DONE
+    }
 
 }

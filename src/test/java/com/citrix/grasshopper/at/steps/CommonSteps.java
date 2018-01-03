@@ -11,6 +11,7 @@ public class CommonSteps extends BaseSteps{
     public void navigateToTab(String tabName) {
         NavigationTab tab = getTabNameFromString(tabName);
         app.bottomNavigationBar().selectTab(tab);
+        app.bottomNavigationBar().updateUnreadCounters();
     }
 
     @Then("^(.*) screen is displayed$")
