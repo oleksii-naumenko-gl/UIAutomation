@@ -1,4 +1,4 @@
-package PageObjects.base.Interfaces;
+package PageObjects.base.interfaces;
 
 import org.openqa.selenium.By;
 
