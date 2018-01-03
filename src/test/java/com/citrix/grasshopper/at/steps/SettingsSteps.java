@@ -1,11 +1,13 @@
 package com.citrix.grasshopper.at.steps;
 
+import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import helper.DefaultUser;
 import helper.Extension;
+import helper.SettingsItem;
 import helper.SharedData;
 import org.junit.Assert;
 
@@ -20,22 +22,22 @@ public class SettingsSteps extends BaseSteps {
     public void settingsPageIsDisplayed() {
         Assert.assertTrue("Verify Settings page is displayed ", app.settingsScreen().getScreenNameFromTopBar().equalsIgnoreCase("Settings"));
         Assert.assertTrue("Verify Sign out button is displayed ", app.settingsScreen().isSignOutButtonPresent());
-        Assert.assertTrue("Verify Sign out button text ", app.settingsScreen().getTextFromSignOutButton().equalsIgnoreCase("Sign Out"));
-        Assert.assertTrue("Verify numberLabel is displayed ", app.settingsScreen().getTextFromNumberLabel().equalsIgnoreCase("Your Number is: "));
-        Assert.assertTrue("Verify your loginName is displayed ", app.settingsScreen().getTextFromUserName().equalsIgnoreCase(DefaultUser.login));
-        Assert.assertTrue("Verify your GH Number is displayed ", app.settingsScreen().getTextFromUserNumber().equalsIgnoreCase(String.valueOf(DefaultUser.numbers.toString().charAt(0))));
+        Assert.assertTrue("Verify Sign out button text ", app.settingsScreen().getSignOutButtonText().equalsIgnoreCase("Sign Out"));
+        Assert.assertTrue("Verify numberLabel is displayed ", app.settingsScreen().getNumberLabel().equalsIgnoreCase("Your Number is: "));
+        Assert.assertTrue("Verify your loginName is displayed ", app.settingsScreen().getUserNameText().equalsIgnoreCase(DefaultUser.login));
+        Assert.assertTrue("Verify your GH Number is displayed ", app.settingsScreen().getUserNumberText().equalsIgnoreCase(String.valueOf(DefaultUser.numbers.toString().charAt(0))));
     }
 
     @Given("^(.*) section is displayed on Settings screen$")
     public void incomingCallsIsDisplayed(String sectionTitle) {
-        Assert.assertTrue("Verify " + sectionTitle + " is displayed ", app.settingsScreen().getTextFromIncomingCallsSectionTitle().equalsIgnoreCase(sectionTitle));
+        Assert.assertTrue("Verify " + sectionTitle + " is displayed ", app.settingsScreen().getIncomingCallsSectionTitle().equalsIgnoreCase(sectionTitle));
     }
 
     @And("^Call Forwarding settings item is displayed$")
 
     public void callForwardingSettingsItemIsDisplayed() {
-        Assert.assertTrue("Verify Call Forwarding settings item is displayed ", app.settingsScreen().getTextFromCallForwardingSettingsItemTitle().equalsIgnoreCase("Call Forwarding"));
-        Assert.assertTrue("Verify Call Forwarding settings item subtext is displayed", app.settingsScreen().getTextFromCallForwardingSettingsItemSubtext().equalsIgnoreCase("Call Forwarding Numbers"));
+        Assert.assertTrue("Verify Call Forwarding settings item is displayed ", app.settingsScreen().getCallForwardingSettingsItemTitle().equalsIgnoreCase("Call Forwarding"));
+        Assert.assertTrue("Verify Call Forwarding settings item subtext is displayed", app.settingsScreen().getCallForwardingSettingsItemSubtext().equalsIgnoreCase("Call Forwarding Numbers"));
         Assert.assertTrue("Verify navigation arrow is present ", app.settingsScreen().isCallForwardingSettingsNavigationArrowPresent());
     }
 
@@ -177,19 +179,21 @@ public class SettingsSteps extends BaseSteps {
     @And("^each Extension can be selected$")
     public void eachExtensionCanBeSelected() {
         app.myExtensionPage().refreshMyExtensionsSettingsList();
-
-//        String defaultException = SharedData.myExtensionSettingsList.get(0).getExtDescription();
-//        Assert.assertTrue("Verify the first Extension is selected by default", app.myExtensionPage().isExtensionMain(SharedData.myExtensionSettingsList.get(0).getExtNumber()));
-//        app.myExtensionPage().navigateBack();
-//        app.settingsScreen().scrollUntilText("My Extension");
-//        Assert.assertTrue(app.settingsScreen().getMainExtensionDescription().equalsIgnoreCase(defaultException));
-
-        for(int index = 0; index<SharedData.myExtensionSettingsList.size(); index++){
+        for (int index = 0; index < SharedData.myExtensionSettingsList.size(); index++) {
             app.myExtensionPage().scrollUntilText((SharedData.myExtensionSettingsList.get(index)).getExtNumber());
             app.myExtensionPage().clickExtension((SharedData.myExtensionSettingsList.get(index)).getExtNumber());
             Assert.assertTrue(app.settingsScreen().getMainExtensionDescription().equalsIgnoreCase(SharedData.myExtensionSettingsList.get(index).getExtNumber()));
             selectSettingsItem("My Extension");
         }
+    }
 
+    @And("^Caller Info switch can be turned ON/OFF$")
+    public void callerInfoSwitchCanBeTurnedONOFF() {
+        app.settingsScreen().scrollUntilText(SettingsItem.CALLER_INFO.getText());
+        Assert.assertFalse("Verify Caller Info is turned OFF by default", app.settingsScreen().isCallerInfoTurnedOn());
+        app.settingsScreen().toggleCallerInfoSwitch();
+        Assert.assertTrue("Verify Caller Info is turned ON", app.settingsScreen().isCallerInfoTurnedOn());
+        app.settingsScreen().toggleCallerInfoSwitch();
+        Assert.assertFalse("Verify Caller Info is turned OFF", app.settingsScreen().isCallerInfoTurnedOn());
     }
 }

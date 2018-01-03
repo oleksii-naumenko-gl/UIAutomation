@@ -1,6 +1,7 @@
 package PageObjects.SettingsPages;
 
 import PageObjects.base.BasePage;
+import cucumber.api.java.en_scouse.An;
 import helper.Extension;
 import helper.SettingsItem;
 import io.appium.java_client.AppiumDriver;
@@ -50,21 +51,64 @@ public class SettingsScreen extends BasePage {
     @AndroidFindBy(xpath = "[//com.grasshopper.dialer:id/rl_settings_call_forwarding_id/com.grasshopper.dialer:id/arrow")
     private MobileElement callForwardingSettingsNavigationArrow;
 
+    @AndroidFindBy(id = "com.grasshopper.dialer:id/rl_settings_caller_info")
+    private MobileElement callerInfoSettingsItemTitle;
+
+    @AndroidFindBy(id = "com.grasshopper.dialer:id/tv_caller_info_subtext")
+    private MobileElement callerInfoSettingsSubtext;
+
+    @AndroidFindBy(id = "com.grasshopper.dialer:id/iv_caller_info_switch")
+    private MobileElement callerInfoSwitchButton;
+
     private MobileElement screenName = parentTopToolBar.findElementsByClassName("android.widget.TextView").get(0);
 
     public String getScreenNameFromTopBar() {
         return screenName.getText();
     }
 
+    public String getIncomingCallsSectionTitle() {
+        return incomingCallsSectionTitle.getText();
+    }
+
+    public String getUserNameText() {
+        return userName.getText();
+    }
+
+    public String getNumberLabel() {
+        return numberLabel.getText();
+    }
+
+    public String getUserNumberText() {
+        return userNumber.getText();
+    }
+
+    public String getSignOutButtonText() {
+        return signOutButton.getText();
+    }
+
+    public String getCallForwardingSettingsItemTitle() {
+        return callForwardingSettingsItemTitle.getText();
+    }
+
+    public String getCallForwardingSettingsItemSubtext() {
+        return callForwardingSettingsItemSubtext.getText();
+    }
+
+    public String getCallerInfoSettingsItemTitle() {
+        return callerInfoSettingsItemTitle.getText();
+    }
+
+    public String getCallerInfoSettingsDescriptionText() {
+        return callerInfoSettingsSubtext.getText();
+    }
+
     public boolean isSignOutButtonPresent() {
         boolean isPresent = false;
-
         try {
             isPresent = signOutButton.isDisplayed();
         } catch (Exception x) {
 
         }
-
         return isPresent;
     }
 
@@ -78,32 +122,17 @@ public class SettingsScreen extends BasePage {
         return isPresent;
     }
 
-    public String getTextFromIncomingCallsSectionTitle() {
-        return incomingCallsSectionTitle.getText();
+    public Boolean isCallerInfoTurnedOn() {
+        Boolean state = false;
+        if (callerInfoSwitchButton.getAttribute("text").equalsIgnoreCase("ON")) {
+            state = true;
+        }
+        return state;
     }
 
-    public String getTextFromUserName() {
-        return userName.getText();
-    }
-
-    public String getTextFromNumberLabel() {
-        return numberLabel.getText();
-    }
-
-    public String getTextFromUserNumber() {
-        return userNumber.getText();
-    }
-
-    public String getTextFromSignOutButton() {
-        return signOutButton.getText();
-    }
-
-    public String getTextFromCallForwardingSettingsItemTitle() {
-        return callForwardingSettingsItemTitle.getText();
-    }
-
-    public String getTextFromCallForwardingSettingsItemSubtext() {
-        return callForwardingSettingsItemSubtext.getText();
+    public void toggleCallerInfoSwitch() {
+        logger.info("Switch Caller Info toggle");
+        callerInfoSwitchButton.click();
     }
 
     public static SettingsItem[] settingsItems = SettingsItem.values();
@@ -122,8 +151,8 @@ public class SettingsScreen extends BasePage {
 
     public String getMainExtensionDescription() {
         scrollUntilText(SettingsItem.MY_EXTENSION.getText());
-        String text =  myExtensionSettingsItemSubtext.getText();
-        String desc= text.split("-")[0].trim();
-return desc;
+        String text = myExtensionSettingsItemSubtext.getText();
+        String desc = text.split("-")[0].trim();
+        return desc;
     }
 }
