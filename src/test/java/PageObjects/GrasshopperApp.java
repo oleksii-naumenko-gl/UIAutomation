@@ -1,5 +1,6 @@
 package PageObjects;
 
+import PageObjects.SettingsPages.*;
 import PageObjects.dialogs.BaseAlert;
 import PageObjects.dialogs.BaseDialog;
 import PageObjects.dialogs.PermissionRequest;
@@ -76,19 +77,37 @@ public class GrasshopperApp {
         return new CallForwardingSettingsPage(driver);
     }
 
-    public VoicemailDetails voicemailDetails() { return new VoicemailDetails(driver); }
-
-    public SingleContactPage singleContactPage() { return new SingleContactPage(driver); }
+    public ContactsPage contactsPage() { return new ContactsPage(driver); }
 
     public CallForwardingNumbersPage callForwardingNumbersPage() { return new CallForwardingNumbersPage(driver); }
 
     public NewDestinationPage newDestinationPage() {return new NewDestinationPage(driver); }
 
-    public ContactsPage contactsPage() { return new ContactsPage(driver); }
+    public EditDestinationPage editDestinationPage() {
+        return new EditDestinationPage(driver);
+    }
+
+    public AccessNumberPage accessNumberPage() {
+        return new AccessNumberPage(driver);
+    }
+
+    public MakingCallsPage makingCallsPage() {
+        return new MakingCallsPage(driver);
+    }
+
+    public MyExtensionPage myExtensionPage() {
+        return new MyExtensionPage(driver);
+    }
+
+    public VoicemailDetails voicemailDetails() { return new VoicemailDetails(driver); }
+
+    public SingleContactPage singleContactPage() { return new SingleContactPage(driver); }
+
+    public BaseDialog baseDialog(){
+        return new BaseDialog(driver);
+    }
 
     public NewConversationScreen newConversationScreen() { return new NewConversationScreen(driver); }
-
-    public BaseDialog baseDialog(){ return new BaseDialog(driver); }
 
     public BaseAlert baseAlert() { return new BaseAlert(driver); }
 
@@ -168,8 +187,6 @@ public class GrasshopperApp {
 
         capabilities.setCapability("platformVersion", SharedData.phoneAndroidVersion);
         capabilities.setCapability("app", app.getAbsolutePath());
-
-//        setupRestartCapabilities(capabilities);
     }
 
     private static void setupEmulatorCapabilities(DesiredCapabilities capabilities, String emulatorName, String androidVersion){
@@ -181,7 +198,7 @@ public class GrasshopperApp {
      * Sets up capabilities for running the script with restarting the same version of app etc/
      * @param capabilities
      */
-    private static void setupRestartCapabilities(DesiredCapabilities capabilities){
+    private void setupRestartCapabilities(DesiredCapabilities capabilities){
         capabilities.setCapability("fullReset", false);
         capabilities.setCapability("noReset", true);
     }

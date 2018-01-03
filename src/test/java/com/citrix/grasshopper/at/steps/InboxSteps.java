@@ -17,7 +17,7 @@ public class InboxSteps extends BaseSteps {
     @Then("^each item from Inbox dropdown can be selected$")
     public void eachItemFromInboxDropdownCanBeSelected() throws Throwable {
         for (InboxDropdownValue value: InboxDropdownValue.values()
-             ) {
+                ) {
 
             app.inboxPage().setDropdownValue(value.getText());
             Assert.assertTrue(app.inboxPage().getSelectedDropdownValue().equalsIgnoreCase(value.getText()));
@@ -48,7 +48,7 @@ public class InboxSteps extends BaseSteps {
 
     @And("^opens any new Inbox entry$")
     public void opensAnyNewInboxEntry() throws Throwable {
-         app.inboxPage().refreshHistory(InboxDropdownValue.INBOX);
+        app.inboxPage().refreshHistory(InboxDropdownValue.INBOX);
 
         for (RecentInboxEntry inboxEntry : SharedData.inboxMap){
 

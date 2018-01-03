@@ -55,8 +55,8 @@ public class TextsPage extends BaseHistoryPage{
         if (elementList.size() != 0){
 
             for (MobileElement element : elementList){
-                    TextsEntry entry = new TextsEntry(element);
-                    SharedData.textsMap.add(entry);
+                TextsEntry entry = new TextsEntry(element);
+                SharedData.textsMap.add(entry);
             }
         }
         else
@@ -123,7 +123,7 @@ public class TextsPage extends BaseHistoryPage{
     public int getUnreadDropdownCounterForNumber(String number){
         updateUnreadDropdownCounters();
 
-       return SharedData.textDropdownUnreadCounter.get(number);
+        return SharedData.textDropdownUnreadCounter.get(number);
     }
 
     /**

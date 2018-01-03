@@ -93,7 +93,7 @@ public class TextsSteps extends BaseSteps {
 
     @And("^creates contact with (.*) for the (.*) dialog$")
     public void createsContactWithContactNameForTheNumberFromDialog(String contactName, String number) throws Throwable {
-       TextsEntry newEntry;
+        TextsEntry newEntry;
 
         // deleting the contact if it exists for the number.
         app.textsPage().refreshHistory();

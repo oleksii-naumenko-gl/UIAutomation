@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="Scenario: Verify Access Number Default Settings" tests="8" skipped="0" failures="0" errors="0" timestamp="2018-01-03T15:17:34" hostname="HRK1-LHP-F49989" time="99.392">
+  <properties/>
+  <testcase name="Given Grasshopper is installed on a clean device" classname="Scenario: Verify Access Number Default Settings" time="0.001"/>
+  <testcase name="And user logs in with default credentials" classname="Scenario: Verify Access Number Default Settings" time="0.0"/>
+  <testcase name="When user navigates to Settings screen" classname="Scenario: Verify Access Number Default Settings" time="0.0"/>
+  <testcase name="And user clicks Access Number settings item" classname="Scenario: Verify Access Number Default Settings" time="0.0"/>
+  <testcase name="Then Access Number page is displayed" classname="Scenario: Verify Access Number Default Settings" time="0.0"/>
+  <testcase name="And Use plus one while dialing option can be switched" classname="Scenario: Verify Access Number Default Settings" time="0.0"/>
+  <testcase name="And each access number option can be selected" classname="Scenario: Verify Access Number Default Settings" time="0.0"/>
+  <testcase name="classMethod" classname="Scenario: Verify Access Number Default Settings" time="124.627"/>
+  <system-out><![CDATA[[INFO ] 2018-01-03 17:17:15  AppiumFactory - -----------------START APPIUM-----------------------------
+[INFO ] 2018-01-03 17:17:16  AppiumFactory - -----------------APPIUM STARTED---------------------------
+[HTTP] Could not start REST http interface listener. The requested port may already be in use. Please make sure there is no other instance of this server running already.
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

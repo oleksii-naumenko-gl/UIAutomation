@@ -1,4 +1,4 @@
-package PageObjects;
+package PageObjects.SettingsPages;
 
 import PageObjects.base.BasePage;
 import helper.Extension;
@@ -82,19 +82,19 @@ public class CallForwardingSettingsPage extends BasePage {
         return extensionHashMap;
     }
 
-    public void clickOnExtentionStatusButton(String extDescription) {
+    public void clickExtentionStatusButton(String extDescription) {
         setExtensionMap().get(extDescription).click();
     }
 
     public int getCounterOfForwardingNumbers(String extDescription) {
         List<Extension> extensionList = getAllAvailableExtensions();
-        int forwardingStatus = 0;
+        int forwardingNumberCounter = 0;
         for (Extension ext : extensionList) {
-            if (ext.description.equalsIgnoreCase(extDescription)) {
-                forwardingStatus = ext.forwardingNumberCounter;
+            if (ext.getExtNumber().equalsIgnoreCase(extDescription)) {
+                forwardingNumberCounter = ext.getForwardingNumberCounter();
             }
         }
-        return forwardingStatus;
+        return forwardingNumberCounter;
     }
 
     public boolean isBackButtonDisplayed() {

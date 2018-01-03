@@ -7,6 +7,7 @@ import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.iOSFindBy;
 
 public class GetStartedPage extends BasePage {
+
     public GetStartedPage(AppiumDriver driver) {
         super(driver);
     }
@@ -20,6 +21,7 @@ public class GetStartedPage extends BasePage {
     @AndroidFindBy(id = "com.grasshopper.dialer:id/textinput_error")
     private MobileElement errorMessage;
 
+    public static final String INVALID_NUMBER_ERROR_MESSAGE="The number you entered doesn't look valid.";
     public void enterPhone(String number){
         phoneInput.clear();
 

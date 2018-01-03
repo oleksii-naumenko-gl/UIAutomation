@@ -1,4 +1,4 @@
-package PageObjects;
+package PageObjects.SettingsPages;
 
 import PageObjects.base.BasePage;
 import io.appium.java_client.AppiumDriver;
@@ -11,13 +11,13 @@ public class NewDestinationPage extends BasePage {
     }
 
     @AndroidFindBy(className = "android.widget.EditText")
-    private MobileElement phoneInput;
+    protected MobileElement phoneInput;
 
     @AndroidFindBy(id = "com.grasshopper.dialer:id/save")
-    private MobileElement saveButton;
+    protected MobileElement saveButton;
 
     @AndroidFindBy(id = "com.grasshopper.dialer:id/your_mobile_number")
-    private MobileElement inputFieldDescription;
+    protected MobileElement inputFieldDescription;
 
     public void enterPhone(String number) {
         phoneInput.sendKeys(number);

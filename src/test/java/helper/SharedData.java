@@ -16,6 +16,14 @@ public class SharedData {
 
     public static Map<Contact, MobileElement> favoritesMap = new HashMap<>();
 
+    public static List<ForwardingNumber> forwardingNumberList = new ArrayList<>();
+
+    public static List<AccessNumberOption> accessNumberOptionsList = new ArrayList<>();
+
+    public static List<MakingCallsOption> makingCallsOptionsList = new ArrayList<>();
+
+    public static List<Extension> myExtensionSettingsList = new ArrayList<>();
+
     public static List<RecentInboxEntry> inboxMap = new ArrayList<>();
 
     public static List<RecentInboxEntry> deletedInboxMap = new ArrayList<>();

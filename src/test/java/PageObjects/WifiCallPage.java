@@ -68,7 +68,7 @@ public class WifiCallPage extends BasePage {
     }
 
     public void openDialpad(){
-            dialIcon.click();
+        dialIcon.click();
     }
 
     public void waitUntilCallIsConnected(){
