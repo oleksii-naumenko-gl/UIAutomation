@@ -1,5 +1,5 @@
-@incomingCalls
-Feature: Settings screen - Incoming Calls item
+@incomingCalls @setiings @ignored
+Feature: Settings
 
   Scenario Outline: Verify Incoming calls section
     Given Grasshopper is installed on a clean device

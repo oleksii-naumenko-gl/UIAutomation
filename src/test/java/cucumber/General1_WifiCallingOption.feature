@@ -1,5 +1,5 @@
-@General
-Feature: Grasshopper Smoke Test
+@general
+Feature: WiFi Calling Option
 
   Scenario: Verify turning Wi-Fi calls off during login
     Given Grasshopper is installed on a clean device
