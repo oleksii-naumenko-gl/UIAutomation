@@ -1,7 +1,7 @@
 package helper;
 
 public enum SettingsItem {
-    CALL_FORWARDING("com.grasshopper.dialer:id/rl_settings_making_calls", "Call Forwarding"),
+    CALL_FORWARDING("com.grasshopper.dialer:id/rl_settings_call_forwarding_id", "Call Forwarding"),
     WIFI_CALLING("com.grasshopper.dialer:id/rl_settings_calling_method", "WiFi Calling"),
     SYNC_AND_NOTIFICATION_SETTINGS("com.grasshopper.dialer:id/rl_sync_settings", "Sync & Notification Settings"),
     ACCESS_NUMBER("com.grasshopper.dialer:id/rl_settings_access_number", "Access Number"),

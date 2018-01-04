@@ -2,6 +2,7 @@ package PageObjects.SettingsPages;
 
 import PageObjects.base.BasePage;
 import helper.Extension;
+import helper.SharedData;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
@@ -18,6 +19,10 @@ public class CallForwardingSettingsPage extends BasePage {
         super(driver);
     }
 
+    public final String PAGE_TITLE = "Call Forwarding Settings";
+
+    public  final  String PAGE_DESCRIPTION  = "Choose extension for which you want to update the call forwarding numbers";
+
     @AndroidFindBy(className = "android.widget.LinearLayout")
     private MobileElement pageContainer;
 
@@ -27,15 +32,11 @@ public class CallForwardingSettingsPage extends BasePage {
     @AndroidFindBy(id = "com.grasshopper.dialer:id/list")
     private MobileElement listOfExtensionsContainer;
 
-    private MobileElement pageTitle = parentTopToolBar.findElementByClassName("android.widget.TextView");
+   // private MobileElement pageTitle = parentTopToolBar.findElementByClassName("android.widget.TextView");
 
     private MobileElement pageDescription = pageContainer.findElementsByClassName("android.widget.TextView").get(0);
 
     private List<MobileElement> listOfExtension = listOfExtensionsContainer.findElements(By.className("android.widget.RelativeLayout"));
-
-    public String getTextFromPageTitle() {
-        return pageTitle.getText();
-    }
 
     public String getTextFromPageDescription() {
         return pageDescription.getText();
@@ -43,35 +44,35 @@ public class CallForwardingSettingsPage extends BasePage {
 
     private MobileElement backButton = parentTopToolBar.findElementByClassName("android.widget.ImageButton");
 
-    public List<Extension> getAllAvailableExtensions() {
-        List<Extension> extList = new ArrayList<>();
+    public void refreshAllAvailableExtensions() {
+        SharedData.availableExtensionList.clear();
 
         for (MobileElement element : listOfExtension) {
 
-            String extensionName;
-            String extensionDescription;
+            String extensionName="";
+            String extensionDescription="";
             int forwardingNumberCounter;
 
             try {
                 extensionDescription = element.findElement(By.id("com.grasshopper.dialer:id/description")).getText();
                 extensionName = element.findElement(By.id("com.grasshopper.dialer:id/name")).getText();
             } catch (Exception x) {
-                return extList;
+
             }
 
             String[] status = element.findElement(By.id("com.grasshopper.dialer:id/status")).getText().split(" ");
             String s = status[0];
             forwardingNumberCounter = Integer.parseInt(s);
 
-            extList.add(new Extension(extensionName, extensionDescription, forwardingNumberCounter));
+            SharedData.availableExtensionList.add(new Extension(extensionName, extensionDescription, forwardingNumberCounter));
         }
-        return extList;
     }
 
     private Map<String, MobileElement> setExtensionMap() {
         Map extensionHashMap = new HashMap<String, MobileElement>();
         MobileElement statusButton;
         String extensionDescription;
+
 
         for (MobileElement element : listOfExtension) {
 
@@ -87,7 +88,7 @@ public class CallForwardingSettingsPage extends BasePage {
     }
 
     public int getCounterOfForwardingNumbers(String extDescription) {
-        List<Extension> extensionList = getAllAvailableExtensions();
+        List<Extension> extensionList = SharedData.availableExtensionList;
         int forwardingNumberCounter = 0;
         for (Extension ext : extensionList) {
             if (ext.getExtNumber().equalsIgnoreCase(extDescription)) {
