@@ -97,31 +97,57 @@ public class TextsSteps extends BaseSteps {
 
         // deleting the contact if it exists for the number.
         app.textsPage().refreshHistory();
+
         newEntry = app.textsPage().findEntryByContactName(contactName);
 
         if  (newEntry != null){
             app.textsPage().editContactForEntry(newEntry);
 
             app.addNewContactMoto().deleteContact();
+            // contact becomes selected here
+            app.textsPage().navigateBack();
         }
 
         app.textsPage().refreshHistory();
-        TextsEntry entry = app.textsPage().findEntryByContactName(number);
-        app.textsPage().createContactForEntry(entry, contactName);
+        newEntry = app.textsPage().findEntryByContactName(number);
+
+        if  (newEntry == null){
+            // sending new text from the other number
+            app.textsPage().setDropdownValue(number);
+            app.textsPage().startNewConversation();
+            app.newConversationScreen().enterContactNumber(DefaultUser.numbers[0].number);
+            app.newConversationScreen().startConversation();
+            app.newConversationScreen().sendNewRandomMessageWithTimestamp();
+            app.newConversationScreen().clickOnBackButton();
+            app.textsPage().setDropdownValue(DefaultUser.numbers[0].number);
+            app.textsPage().refreshHistory();
+            newEntry = app.textsPage().findEntryByContactName(number);
+        }
+
+        app.textsPage().createContactForEntry(newEntry, contactName);
         app.addNewContactMoto().enterContactName(contactName);
         app.addNewContactMoto().saveContact();
+
+        // contact becomes selected here
+        app.textsPage().navigateBack();
     }
 
     @Then("^all entities with (.*) on Texts screen will be displayed with the (.*) contact name$")
     public void allEntitiesWithNumberFromOnTextsScreenWillBeDisplayedWithTheContactNameContactName(String number, String contactName) throws Throwable {
-        TextsEntry newEntry;
+        TextsEntry newEntry = null;
+
+        Thread.sleep(10000);
         app.textsPage().refreshHistory();
         newEntry = app.textsPage().findEntryByContactName(number);
         Assert.assertTrue("Verify there are no entries with the number instead of contact name", newEntry == null);
         newEntry = app.textsPage().findEntryByContactName(contactName);
         Assert.assertTrue("Verify all entries with the number are replaced with contact name", newEntry != null);
 
-        // todo: delete contact here for next tests
+        // Deleting contact here
+        app.textsPage().editContactForEntry(newEntry);
+        app.addNewContactMoto().deleteContact();
+        // contact becomes selected here
+        app.textsPage().navigateBack();
     }
 
     @And("^marks unread message from (.*) as Done$")

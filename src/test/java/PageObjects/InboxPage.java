@@ -47,7 +47,7 @@ public class InboxPage extends BaseHistoryPage{
             for (MobileElement element : elementList){
 
                 try {
-                    RecentInboxEntry entry = new RecentInboxEntry(element);
+                    RecentInboxEntry entry = new RecentInboxEntry(element, false);
 
 
                     if (selectedTab == InboxDropdownValue.INBOX){

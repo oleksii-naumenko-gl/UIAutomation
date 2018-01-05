@@ -9,5 +9,5 @@ Feature: Grasshopper Smoke Test
     Then unread counter for <numberTo> updates in the dropdown menu
 
     Examples:
-      | numberFrom                                    | numberTo            |
-      | (617) 249-0540                                | (617) 221-3553              |
+      | numberFrom         | numberTo            |
+      | (617) 249-0540     | (617) 221-3553      |
