@@ -3,6 +3,7 @@ package PageObjects.base;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
+import io.appium.java_client.TouchAction;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import org.apache.logging.log4j.LogManager;
@@ -13,6 +14,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
 
 import static org.junit.Assert.assertTrue;
 
@@ -30,9 +33,12 @@ public abstract class BasePage {
     @AndroidFindBy(id = "com.grasshopper.dialer:id/toolbar")
     protected MobileElement parentTopToolBar;
 
-    @AndroidFindBy(xpath = "//android.view.View/android.widget.TextView[@index='1']")
+    @AndroidFindBy(xpath = "//android.view.ViewGroup/android.widget.TextView[@index='1']")
     protected MobileElement pageTitle;
-    //private MobileElement pageTitle = parentTopToolBar.findElementByClassName("android.widget.TextView");
+
+    @AndroidFindBy(xpath = "//android.view.ViewGroup/android.widget.ImageButton")
+    protected MobileElement backButton;
+
 
     public MobileElement findElementWithTimeout(By by, int timeOutInSeconds) {
         return (MobileElement)(new WebDriverWait(driver, timeOutInSeconds)).until(ExpectedConditions.presenceOfElementLocated(by));
@@ -79,5 +85,6 @@ public abstract class BasePage {
             throw e;
         }
     }
+
 
 }

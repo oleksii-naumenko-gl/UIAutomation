@@ -1,5 +1,5 @@
 @login
-Feature: Grasshopper Smoke Test
+Feature: Login
 
   Scenario Outline: Verify Logging In with password that is too short
     Given Grasshopper is installed on a clean device

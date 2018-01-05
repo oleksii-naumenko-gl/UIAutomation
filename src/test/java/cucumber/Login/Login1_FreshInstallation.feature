@@ -1,5 +1,5 @@
 @login
-Feature: Grasshopper Smoke Test
+Feature: Login
 
   Scenario: Verify Logging In
     Given Grasshopper is installed on a clean device

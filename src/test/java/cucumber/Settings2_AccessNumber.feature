@@ -1,5 +1,5 @@
 @settings @accessNumber
-Feature: Settings screen - Access Number
+Feature: Settings
 
   Scenario: Verify Access Number Default Settings
     Given Grasshopper is installed on a clean device

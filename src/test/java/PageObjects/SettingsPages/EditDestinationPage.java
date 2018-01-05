@@ -12,6 +12,9 @@ public class EditDestinationPage extends NewDestinationPage {
     @AndroidFindBy(id = "com.grasshopper.dialer:id/delete")
     private MobileElement deleteButton;
 
+    @AndroidFindBy(id="com.grasshopper.dialer:id/save")
+    private MobileElement saveButton;
+
     public void editNumber(String number) {
         // phoneInput.sendKeys(Keys.BACK_SPACE);
         phoneInput.clear();
@@ -22,4 +25,6 @@ public class EditDestinationPage extends NewDestinationPage {
     public void clickDelete() {
         deleteButton.click();
     }
+
+    public void clickSave(){ saveButton.click();}
 }

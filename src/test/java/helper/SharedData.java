@@ -16,6 +16,8 @@ public class SharedData {
 
     public static Map<Contact, MobileElement> favoritesMap = new HashMap<>();
 
+    public static List<Extension> availableExtensionList = new ArrayList<>();
+
     public static List<ForwardingNumber> forwardingNumberList = new ArrayList<>();
 
     public static List<AccessNumberOption> accessNumberOptionsList = new ArrayList<>();

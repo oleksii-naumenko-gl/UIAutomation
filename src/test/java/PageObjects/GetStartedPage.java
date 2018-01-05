@@ -12,6 +12,8 @@ public class GetStartedPage extends BasePage {
         super(driver);
     }
 
+    public final String INVALID_NUMBER_ERROR_MESSAGE = "The number you entered doesn't look valid.";
+
     @AndroidFindBy(id = "com.grasshopper.dialer:id/phone_input")
     private MobileElement phoneInput;
 
@@ -21,24 +23,23 @@ public class GetStartedPage extends BasePage {
     @AndroidFindBy(id = "com.grasshopper.dialer:id/textinput_error")
     private MobileElement errorMessage;
 
-    public static final String INVALID_NUMBER_ERROR_MESSAGE="The number you entered doesn't look valid.";
-    public void enterPhone(String number){
+
+    public void enterPhone(String number) {
         phoneInput.clear();
 
         phoneInput.sendKeys(number);
     }
 
-    public String getInputErrorMessage(){
+    public String getInputErrorMessage() {
         try {
             return errorMessage.getText();
-        }
-        catch (Exception x){
+        } catch (Exception x) {
         }
 
         return "Error is not present";
     }
 
-    public void navigateNext(){
+    public void navigateNext() {
         nextButton.click();
     }
 

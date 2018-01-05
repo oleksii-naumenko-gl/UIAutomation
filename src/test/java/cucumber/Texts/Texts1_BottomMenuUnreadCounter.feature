@@ -1,5 +1,5 @@
-@Texts
-Feature: Grasshopper Smoke Test
+@texts
+Feature: Texts
 
   Scenario Outline: Verify Unread Counter For Text Icon
     Given Grasshopper is installed on a clean device

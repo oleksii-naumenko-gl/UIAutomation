@@ -3,9 +3,13 @@ package PageObjects;
 import PageObjects.SettingsPages.*;
 import PageObjects.dialogs.BaseAlert;
 import PageObjects.dialogs.BaseDialog;
+import PageObjects.dialogs.DeleteDestinationDialog;
 import PageObjects.dialogs.PermissionRequest;
+import cucumber.api.Scenario;
 import helper.SharedData;
 import io.appium.java_client.android.AndroidDriver;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.io.File;
@@ -86,6 +90,8 @@ public class GrasshopperApp {
     public EditDestinationPage editDestinationPage() {
         return new EditDestinationPage(driver);
     }
+
+    public DeleteDestinationDialog deleteDestinationDialog() { return new DeleteDestinationDialog(driver);}
 
     public AccessNumberPage accessNumberPage() {
         return new AccessNumberPage(driver);
@@ -242,5 +248,16 @@ public class GrasshopperApp {
         }
 
         return driver;
+    }
+
+    public void embedScreenshot(Scenario scenario) {
+        try {
+            byte[] screenshot =  driver.getScreenshotAs(OutputType.BYTES);
+            scenario.embed(screenshot, "image/png");
+        } catch (WebDriverException wde) {
+            System.err.println(wde.getMessage());
+        } catch (ClassCastException cce) {
+            cce.printStackTrace();
+        }
     }
 }

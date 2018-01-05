@@ -36,11 +36,9 @@ public class MyExtensionPage extends BasePage {
         for (MobileElement ext : myExtensionList) {
 
             String extDescription = ext.findElementById(extNameId).getText();
-
             String extNumber = ext.findElementById(extDescriptionId).getText();
             Boolean isCheckboxExisted;
             try {
-
                 isCheckboxExisted = ext.findElementById(checkboxId).isDisplayed();
             } catch (Exception e) {
                 isCheckboxExisted = false;

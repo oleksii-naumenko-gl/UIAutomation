@@ -1,5 +1,5 @@
-@DefaultValues
-Feature: Grasshopper Smoke Test
+@defaultValues
+Feature: Default dropdown values
 
   Scenario: Verify Recent Dropbox Default Values
     Given Grasshopper is installed on a clean device

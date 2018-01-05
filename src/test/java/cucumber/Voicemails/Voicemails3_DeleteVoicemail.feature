@@ -1,5 +1,5 @@
-@Voicemails
-Feature: Grasshopper Smoke Test
+@voicemails
+Feature: Voicemail
 
   Scenario: Verify new Voicemail
     Given Grasshopper is installed on a clean device
