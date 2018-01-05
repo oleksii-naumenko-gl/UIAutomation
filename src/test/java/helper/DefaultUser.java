@@ -31,7 +31,7 @@ public class DefaultUser {
                     new Extension("New Extension", "Ext 700"),
                     new Extension("New Extension", "Ext 701"),
                     new Extension("New Extension", "Ext 702"),
-                    new Extension("New Extension", "Ext 703"),
+//                    new Extension("New Extension", "Ext 703"),
                    // new Extension("New Extension","Ext 704"),
 //                    new Extension("New Extension","Ext 705"),
 //                    new Extension("New Extension","Ext 706"),

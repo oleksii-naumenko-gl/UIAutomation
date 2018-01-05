@@ -10,8 +10,6 @@ Feature: Settings
     Then Call Forwarding page is displayed
     And Page description text is displayed
     And all extensions are displayed on Call Forwarding page
-#    When user adds new forwarding number for <extension> extension
-#    Then counter of Forwarding numbers has been increased
     When user edits forwarding number for <extension> extension
     And unchecks/checks forwarding number
     And deletes forwarding number for <extension>  extension

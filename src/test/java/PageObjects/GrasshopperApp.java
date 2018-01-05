@@ -3,6 +3,7 @@ package PageObjects;
 import PageObjects.SettingsPages.*;
 import PageObjects.dialogs.BaseAlert;
 import PageObjects.dialogs.BaseDialog;
+import PageObjects.dialogs.DeleteDestinationDialog;
 import PageObjects.dialogs.PermissionRequest;
 import cucumber.api.Scenario;
 import helper.SharedData;
@@ -89,6 +90,8 @@ public class GrasshopperApp {
     public EditDestinationPage editDestinationPage() {
         return new EditDestinationPage(driver);
     }
+
+    public DeleteDestinationDialog deleteDestinationDialog() { return new DeleteDestinationDialog(driver);}
 
     public AccessNumberPage accessNumberPage() {
         return new AccessNumberPage(driver);

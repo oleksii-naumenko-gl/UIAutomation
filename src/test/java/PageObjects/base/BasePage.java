@@ -36,6 +36,9 @@ public abstract class BasePage {
     @AndroidFindBy(xpath = "//android.view.ViewGroup/android.widget.TextView[@index='1']")
     protected MobileElement pageTitle;
 
+    @AndroidFindBy(xpath = "//android.view.ViewGroup/android.widget.ImageButton")
+    protected MobileElement backButton;
+
 
     public MobileElement findElementWithTimeout(By by, int timeOutInSeconds) {
         return (MobileElement)(new WebDriverWait(driver, timeOutInSeconds)).until(ExpectedConditions.presenceOfElementLocated(by));
@@ -82,5 +85,6 @@ public abstract class BasePage {
             throw e;
         }
     }
+
 
 }

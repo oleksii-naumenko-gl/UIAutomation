@@ -1,17 +1,21 @@
 package PageObjects.SettingsPages;
 
 import PageObjects.base.BasePage;
+import helper.DefaultUser;
 import helper.Extension;
 import helper.SharedData;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import org.openqa.selenium.By;
+import sun.security.provider.SHA;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import static helper.DefaultUser.extensions;
 
 public class CallForwardingSettingsPage extends BasePage {
 
@@ -46,6 +50,7 @@ public class CallForwardingSettingsPage extends BasePage {
 
     public void refreshAllAvailableExtensions() {
         SharedData.availableExtensionList.clear();
+        scrollUntilText(extensions[extensions.length-1].getExtNumber());
 
         for (MobileElement element : listOfExtension) {
 

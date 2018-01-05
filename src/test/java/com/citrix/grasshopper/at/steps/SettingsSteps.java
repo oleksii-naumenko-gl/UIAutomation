@@ -50,7 +50,7 @@ public class SettingsSteps extends BaseSteps {
         Assert.assertTrue(SharedData.availableExtensionList.equals(Arrays.asList(DefaultUser.extensions)));
     }
 
-    //    @When("^user adds new forwarding number for (.*) extension$")
+        @When("^user adds new forwarding number for (.*) extension$")
     public void addNewForwardingNumber(String extDescription) throws Exception {
         counterBeforeAddingNewNumber = app.callForwardingSettingsPage().getCounterOfForwardingNumbers(extDescription);
         app.callForwardingSettingsPage().clickExtentionStatusButton(extDescription);
@@ -65,7 +65,7 @@ public class SettingsSteps extends BaseSteps {
         counterAfterAddingNewNumbers = app.callForwardingSettingsPage().getCounterOfForwardingNumbers(extDescription);
     }
 
-    //    @Then("^counter of Forwarding numbers has been increased$")
+        @Then("^counter of Forwarding numbers has been increased$")
     public void verifyForwardingNumberCounterAfterAddingNumber() {
         Assert.assertTrue(counterAfterAddingNewNumbers == counterBeforeAddingNewNumber + 1);
     }
@@ -74,7 +74,7 @@ public class SettingsSteps extends BaseSteps {
     public void editForwardingNumber(String extDescription) {
         app.callForwardingSettingsPage().clickExtentionStatusButton(extDescription);
         app.callForwardingNumbersPage().refreshForwardingNumbersPage();
-        app.callForwardingNumbersPage().clickForwardingNumber(DefaultUser.forwardingNumberAfterEditing);
+        app.callForwardingNumbersPage().clickForwardingNumber(DefaultUser.forwardingNumber);
         app.editDestinationPage().editNumber(DefaultUser.forwardingNumberAfterEditing);
     }
 
@@ -90,7 +90,7 @@ public class SettingsSteps extends BaseSteps {
         app.callForwardingNumbersPage().clickForwardingNumber(DefaultUser.forwardingNumberAfterEditing);
         app.editDestinationPage().clickDelete();
 
-        //     todo      pop-up;
+        app.deleteDestinationDialog().cliclDelete();
         app.callForwardingNumbersPage().clickBack();
         counterAfterAddingNewNumbers = app.callForwardingSettingsPage().getCounterOfForwardingNumbers(extDescription);
     }
