@@ -28,7 +28,7 @@ public class SharedData {
 
     public static List<RecentInboxEntry> deletedInboxMap = new ArrayList<>();
 
-    public static Map<RecentInboxEntry, MobileElement> recentMap = new HashMap<>();
+    public static List<RecentInboxEntry> recentMap = new ArrayList<>();
 
     public static List<TextsEntry> textsMap = new ArrayList<>();
 

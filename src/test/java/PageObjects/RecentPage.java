@@ -28,12 +28,11 @@ public class RecentPage extends BaseHistoryPage {
     }
 
     public void callByClickingEntry(RecentInboxEntry entry){
-        SharedData.recentMap.get(entry).click();
+        entry.mobileElement.click();
     }
 
     public RecentInboxEntry getFirstEntry(){
-        Map.Entry<RecentInboxEntry, MobileElement> entry = SharedData.recentMap.entrySet().iterator().next();
-        return entry.getKey();
+        return SharedData.recentMap.get(0);
     }
 
     public void refreshHistory(){
@@ -46,8 +45,8 @@ public class RecentPage extends BaseHistoryPage {
             for (MobileElement element : elementList){
 
                 try {
-                    RecentInboxEntry entry = new RecentInboxEntry(element);
-                    SharedData.recentMap.put(entry, element);
+                    RecentInboxEntry entry = new RecentInboxEntry(element,  true);
+                    SharedData.recentMap.add(entry);
                 }
                 catch (Exception x){
                     //todo: ADD SCROLLING

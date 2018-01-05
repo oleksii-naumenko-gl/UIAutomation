@@ -11,7 +11,7 @@ public class VoicemailSteps extends BaseSteps{
     public void unreadCounterForVoicemailsIsUpdated() throws Throwable {
         int unreadCounterBefore = SharedData.unreadCounterMap.get(NavigationTab.INBOX);
 
-        Thread.sleep(20000);
+        Thread.sleep(30000);
 
         app.inboxPage().updateUnreadCounters();
 

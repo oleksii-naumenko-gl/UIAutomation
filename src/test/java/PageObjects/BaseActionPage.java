@@ -59,20 +59,18 @@ public class BaseActionPage extends BasePage{
         return dropboxValue.getText();
     }
 
-    public void setDropdownValue(String value) throws InterruptedException {
+    public void setDropdownValue(String value) {
         openDropdownMenu();
 
         // getting all elements
         List<MobileElement> listOfValues = driver.findElements(By.id("android:id/text1"));
 
-        for (MobileElement entry : listOfValues){
-            if (entry.getText().equalsIgnoreCase(value)){
-                entry.click();
-                return;
+            for (MobileElement entry : listOfValues) {
+                if (entry.getText().equalsIgnoreCase(value)) {
+                    entry.click();
+                    return;
+                }
             }
-        }
-
-        throw (new NoSuchElementException());
     }
 
     public void updateUnreadCounters(){

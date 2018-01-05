@@ -22,13 +22,15 @@ public class RecentInboxEntry {
 
     private String recentMapTimestamp = "com.grasshopper.dialer:id/received_time";
 
-    private String recentMapExtension = "com.grasshopper.dialer:id/extension_info";
+    private String recentMapExtension = "com.grasshopper.dialer:id/extension_name";
+
+    private String inboxMapExtension = "com.grasshopper.dialer:id/extension_info";
 
     private String unreadCounterIconId = "com.grasshopper.dialer:id/dot_icon";
 
     private String detailsIconId = "com.grasshopper.dialer:id/info";
 
-    public RecentInboxEntry(MobileElement element) {
+    public RecentInboxEntry(MobileElement element, boolean isRecent) {
 
         this.mobileElement = element;
 
@@ -44,7 +46,14 @@ public class RecentInboxEntry {
 
         this.contact = element.findElement(By.id(recentMapContact)).getText();
         this.timestamp = element.findElement(By.id(recentMapTimestamp)).getText();
-        this.extension = element.findElement(By.id(recentMapExtension)).getText();
+
+        if (isRecent) {
+            this.extension = element.findElement(By.id(recentMapExtension)).getText();
+        }
+        else {
+            this.extension = element.findElement(By.id(inboxMapExtension)).getText();
+
+        }
     }
 
     public void openDetails() {

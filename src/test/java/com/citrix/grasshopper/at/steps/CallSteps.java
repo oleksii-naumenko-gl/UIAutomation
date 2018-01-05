@@ -63,7 +63,7 @@ public class CallSteps extends BaseSteps {
     public void userIsAbleToPerformCallFromTheRecentScreenByUsingSwipeMenu() throws Throwable {
         app.recentPage().refreshHistory();
 
-        app.recentPage().callBack(SharedData.recentMap.get(app.recentPage().getFirstEntry()));
+        app.recentPage().callBack(SharedData.recentMap.get(0).mobileElement);
 
         Assert.assertTrue("Verify Call is being performed", app.wifiCallPage().isWifiCallPresent());
     }
