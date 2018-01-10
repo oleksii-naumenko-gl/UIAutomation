@@ -2,6 +2,8 @@ package helper;
 
 public class DefaultUser {
 
+    public static String userName  = "Oleksii Naumenko";
+
     public static String login = "Oleksii.Naumenko@logmein.com";
 
     public static String password = "abc123";

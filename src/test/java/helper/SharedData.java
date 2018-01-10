@@ -6,6 +6,8 @@ import java.util.*;
 
 public class SharedData {
 
+    public static final String  BASE_URL="https://webclient.ghuser.com/webclient/";
+
     public static String appPath;
 
     public static String phoneAndroidVersion;

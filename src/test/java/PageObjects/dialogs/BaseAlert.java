@@ -23,7 +23,7 @@ public class BaseAlert extends BasePage {
     private MobileElement noButton;
 
     @AndroidFindBy(id = "com.grasshopper.dialer:id/titleDividerNoCustom")
-    // есть везде
+    // is everywhere
     private MobileElement alert;
 
     public boolean isAlertPresent(){

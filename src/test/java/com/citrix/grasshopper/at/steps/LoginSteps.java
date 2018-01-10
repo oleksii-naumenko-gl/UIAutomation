@@ -158,4 +158,29 @@ public class LoginSteps extends BaseSteps{
         app.loginPage().acceptLegalDisclaimer();
 
     }
+
+
+    @When("^user logs in with valid credentials$")
+    public void userLogsInWithValidCredentials() throws Throwable {
+        appWeb.loginHelper().logInDefauultUser();
+        Thread.sleep(Constants.Timeouts.longActionTimeout);
+    }
+
+    @Then("^Dialer web page is displayed as Default$")
+    public void dialerPageIsDisplayedAsDefault() throws Throwable {
+        Assert.assertTrue(appWeb.dialerHelper().isDialerPresent());
+        Assert.assertTrue(appWeb.dialerHelper().getUserName().equalsIgnoreCase(DefaultUser.userName));
+    }
+
+    @When("^user logs in Webclient with invalid credentials (.*) and (.*)$")
+    public void userLogsInWebclientWithInvalidCredentials(String userName, String password) throws Throwable {
+       appWeb.loginHelper().logInAnyUser(userName,password);
+        Thread.sleep(Constants.Timeouts.defaultActionTimeout);
+    }
+
+    @Then("^alert message is displayed on webpage$")
+    public void alertMessageAlertIsDisplayedOnWebpage() throws Throwable {
+        Assert.assertTrue(appWeb.loginHelper().getAlert().equalsIgnoreCase(appWeb.loginHelper().ALERT_ERROR_MESSAGE));
+        Thread.sleep(Constants.Timeouts.defaultActionTimeout);
+    }
 }

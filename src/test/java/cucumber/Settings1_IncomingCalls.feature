@@ -8,12 +8,12 @@ Feature: Settings
     Then Settings screen is displayed
     When user clicks Call Forwarding settings item
     Then Call Forwarding page is displayed
-    And Page description text is displayed
     And all extensions are displayed on Call Forwarding page
-    When user edits forwarding number for <extension> extension
+    When user adds new forwarding number for <extension> extension
+    And user edits forwarding number for <extension> extension
     And unchecks/checks forwarding number
-    And deletes forwarding number for <extension>  extension
-    Then counter of Forwarding numbers is unchanged
+    Then forwarding number for <extension>  extension can be deleted
+
     Examples:
       | extension |
       | Ext 0     |

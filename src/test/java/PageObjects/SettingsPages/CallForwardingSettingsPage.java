@@ -1,21 +1,18 @@
 package PageObjects.SettingsPages;
 
 import PageObjects.base.BasePage;
-import helper.DefaultUser;
+import helper.Constants;
 import helper.Extension;
 import helper.SharedData;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import org.openqa.selenium.By;
-import sun.security.provider.SHA;
 
-import java.util.ArrayList;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import static helper.DefaultUser.extensions;
 
 public class CallForwardingSettingsPage extends BasePage {
 
@@ -25,7 +22,7 @@ public class CallForwardingSettingsPage extends BasePage {
 
     public final String PAGE_TITLE = "Call Forwarding Settings";
 
-    public  final  String PAGE_DESCRIPTION  = "Choose extension for which you want to update the call forwarding numbers";
+    public final String PAGE_DESCRIPTION = "Choose extension for which you want to update the call forwarding numbers";
 
     @AndroidFindBy(className = "android.widget.LinearLayout")
     private MobileElement pageContainer;
@@ -36,9 +33,11 @@ public class CallForwardingSettingsPage extends BasePage {
     @AndroidFindBy(id = "com.grasshopper.dialer:id/list")
     private MobileElement listOfExtensionsContainer;
 
-   // private MobileElement pageTitle = parentTopToolBar.findElementByClassName("android.widget.TextView");
+    @AndroidFindBy(xpath = "//android.widget.LinearLayout/android.widget.TextView")
+    private MobileElement pageDescription;
+    // private MobileElement pageTitle = parentTopToolBar.findElementByClassName("android.widget.TextView");
 
-    private MobileElement pageDescription = pageContainer.findElementsByClassName("android.widget.TextView").get(0);
+   // private MobileElement pageDescription = pageContainer.findElementByClassName("android.widget.TextView");
 
     private List<MobileElement> listOfExtension = listOfExtensionsContainer.findElements(By.className("android.widget.RelativeLayout"));
 
@@ -50,45 +49,40 @@ public class CallForwardingSettingsPage extends BasePage {
 
     public void refreshAllAvailableExtensions() {
         SharedData.availableExtensionList.clear();
-        scrollUntilText(extensions[extensions.length-1].getExtNumber());
 
         for (MobileElement element : listOfExtension) {
 
-            String extensionName="";
-            String extensionDescription="";
-            int forwardingNumberCounter;
-
+            String extensionName = "";
+            String extensionDescription = "";
+            int forwardingNumberCounter=0;
             try {
                 extensionDescription = element.findElement(By.id("com.grasshopper.dialer:id/description")).getText();
                 extensionName = element.findElement(By.id("com.grasshopper.dialer:id/name")).getText();
+                String[] status = element.findElement(By.id("com.grasshopper.dialer:id/status")).getText().split(" ");
+                String s = status[0];
+                forwardingNumberCounter = Integer.parseInt(s);
             } catch (Exception x) {
 
             }
-
-            String[] status = element.findElement(By.id("com.grasshopper.dialer:id/status")).getText().split(" ");
-            String s = status[0];
-            forwardingNumberCounter = Integer.parseInt(s);
 
             SharedData.availableExtensionList.add(new Extension(extensionName, extensionDescription, forwardingNumberCounter));
         }
     }
 
-    private Map<String, MobileElement> setExtensionMap() {
-        Map extensionHashMap = new HashMap<String, MobileElement>();
+    private Map<String, MobileElement> setExtensionMap() throws InterruptedException {
+        Map<String, MobileElement> extensionHashMap = new HashMap<>();
         MobileElement statusButton;
         String extensionDescription;
 
-
         for (MobileElement element : listOfExtension) {
-
-            extensionDescription = element.findElement(By.id("com.grasshopper.dialer:id/description")).getText();
-            statusButton = element.findElement(By.id("com.grasshopper.dialer:id/status"));
-            extensionHashMap.put(extensionDescription, statusButton);
+                extensionDescription = element.findElement(By.id("com.grasshopper.dialer:id/description")).getText();
+                statusButton = element.findElement(By.id("com.grasshopper.dialer:id/status"));
+                extensionHashMap.put(extensionDescription, statusButton);
         }
         return extensionHashMap;
     }
 
-    public void clickExtentionStatusButton(String extDescription) {
+    public void clickExtentionStatusButton(String extDescription) throws InterruptedException {
         setExtensionMap().get(extDescription).click();
     }
 
