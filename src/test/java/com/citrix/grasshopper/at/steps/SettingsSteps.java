@@ -1,22 +1,15 @@
 package com.citrix.grasshopper.at.steps;
 
-import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
-import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import helper.DefaultUser;
-import helper.Extension;
-import helper.SettingsItem;
-import helper.SharedData;
+import helper.*;
 import org.junit.Assert;
 
 import java.util.Arrays;
 
 
 public class SettingsSteps extends BaseSteps {
-    private int counterBeforeAddingNewNumber;
-    private int counterAfterAddingNewNumbers;
 
     @Then("^Settings page is displayed$")
     public void settingsPageIsDisplayed() {
@@ -36,7 +29,7 @@ public class SettingsSteps extends BaseSteps {
     @Then("^Call Forwarding page is displayed$")
     public void callForwardingPageIsDisplayed() {
         Assert.assertTrue("Verify page title on Call Forwarding Settings page", app.callForwardingSettingsPage().getTextFromPageTitle().equalsIgnoreCase(app.callForwardingSettingsPage().PAGE_TITLE));
-        Assert.assertTrue(app.callForwardingSettingsPage().getTextFromPageDescription().equalsIgnoreCase(app.callForwardingSettingsPage().PAGE_DESCRIPTION));
+
     }
 
     @And("^Page description text is displayed$")
@@ -50,9 +43,8 @@ public class SettingsSteps extends BaseSteps {
         Assert.assertTrue(SharedData.availableExtensionList.equals(Arrays.asList(DefaultUser.extensions)));
     }
 
-        @When("^user adds new forwarding number for (.*) extension$")
-    public void addNewForwardingNumber(String extDescription) throws Exception {
-        counterBeforeAddingNewNumber = app.callForwardingSettingsPage().getCounterOfForwardingNumbers(extDescription);
+    @When("^user adds new forwarding number for (.*) extension$")
+    public void addNewForwardingNumber(String extDescription) throws Throwable {
         app.callForwardingSettingsPage().clickExtentionStatusButton(extDescription);
         String extName = Extension.getExtensionName(extDescription);
         Assert.assertTrue("Verify " + extName + "page  is displayed ", app.callForwardingNumbersPage().getTextFromPageTitle().equalsIgnoreCase(extName));
@@ -60,18 +52,14 @@ public class SettingsSteps extends BaseSteps {
         Assert.assertTrue(app.callForwardingNumbersPage().isIconToAddDisplayed());
         app.callForwardingNumbersPage().clickIconToAdd();
         app.newDestinationPage().enterPhone(DefaultUser.forwardingNumber);
-        app.newDestinationPage().clickSaveButton();
+        Thread.sleep(Constants.Timeouts.defaultActionTimeout);
         app.callForwardingNumbersPage().clickBack();
-        counterAfterAddingNewNumbers = app.callForwardingSettingsPage().getCounterOfForwardingNumbers(extDescription);
-    }
-
-        @Then("^counter of Forwarding numbers has been increased$")
-    public void verifyForwardingNumberCounterAfterAddingNumber() {
-        Assert.assertTrue(counterAfterAddingNewNumbers == counterBeforeAddingNewNumber + 1);
+        app.callForwardingNumbersPage().clickBack();
+        app.callForwardingSettingsPage().refreshAllAvailableExtensions();
     }
 
     @When("^user edits forwarding number for (.*) extension$")
-    public void editForwardingNumber(String extDescription) {
+    public void editForwardingNumber(String extDescription) throws Throwable {
         app.callForwardingSettingsPage().clickExtentionStatusButton(extDescription);
         app.callForwardingNumbersPage().refreshForwardingNumbersPage();
         app.callForwardingNumbersPage().clickForwardingNumber(DefaultUser.forwardingNumber);
@@ -79,25 +67,19 @@ public class SettingsSteps extends BaseSteps {
     }
 
     @And("^unchecks/checks forwarding number$")
-    public void uncheckCheckForwardingNumber() {
+    public void uncheckCheckForwardingNumber() throws Throwable {
         app.callForwardingNumbersPage().refreshForwardingNumbersPage();
         app.callForwardingNumbersPage().clickForwardingNumberCheckbox(DefaultUser.forwardingNumberAfterEditing);
 
     }
 
-    @And("^deletes forwarding number for (.*) extension$")
-    public void deleteForwardingNumber(String extDescription) {
+    @Then("^forwarding number for (.*) extension can be deleted$")
+    public void deleteForwardingNumber(String extDescription) throws Throwable {
         app.callForwardingNumbersPage().clickForwardingNumber(DefaultUser.forwardingNumberAfterEditing);
         app.editDestinationPage().clickDelete();
-
-        app.deleteDestinationDialog().cliclDelete();
+        Thread.sleep(Constants.Timeouts.defaultActionTimeout);
+        app.deleteDestinationDialog().clickDelete();
         app.callForwardingNumbersPage().clickBack();
-        counterAfterAddingNewNumbers = app.callForwardingSettingsPage().getCounterOfForwardingNumbers(extDescription);
-    }
-
-    @Then("counter of Forwarding numbers is unchanged$")
-    public void verifyForwardingNumberCounter() {
-        Assert.assertTrue(counterBeforeAddingNewNumber == counterAfterAddingNewNumbers);
     }
 
 

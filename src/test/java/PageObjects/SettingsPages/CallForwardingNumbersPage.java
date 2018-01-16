@@ -1,6 +1,7 @@
 package PageObjects.SettingsPages;
 
 import PageObjects.base.BasePage;
+import helper.Constants;
 import helper.ForwardingNumber;
 import helper.SharedData;
 import io.appium.java_client.AppiumDriver;
@@ -27,7 +28,7 @@ public class CallForwardingNumbersPage extends BasePage {
     private MobileElement iconToAdd;
 
 
-    public void clickIconToAdd() throws IOException {
+    public void clickIconToAdd() {
         logger.debug("Clicking on icon to add new forwarding number");
         iconToAdd.click();
     }
@@ -59,9 +60,10 @@ public class CallForwardingNumbersPage extends BasePage {
         backButton.click();
     }
 
-    public void refreshForwardingNumbersPage() {
+    public void refreshForwardingNumbersPage() throws InterruptedException {
         SharedData.forwardingNumberList.clear();
         logger.info("Refresh forwarding number list");
+        Thread.sleep(Constants.Timeouts.defaultActionTimeout);
         List<MobileElement> availableNumbersList = parentListOfNumbersForExtension.findElements(By.className("android.widget.RelativeLayout"));
 
         if (availableNumbersList.size() != 0) {

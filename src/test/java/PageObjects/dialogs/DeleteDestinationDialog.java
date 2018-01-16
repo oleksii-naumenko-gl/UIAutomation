@@ -27,7 +27,7 @@ public class DeleteDestinationDialog extends BasePage {
         cancelButton.click();
     }
 
-    public void cliclDelete(){
+    public void clickDelete(){
         deleteButton.click();
     }
 
