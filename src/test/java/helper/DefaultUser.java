@@ -14,7 +14,7 @@ public class DefaultUser {
 
     public static String forwardingNumber = "6314524045";
 
-    public  static String forwardingNumberAfterEditing = "6314524040";
+    public  static String newForwardingNumber = "6314524040";
 
     public static Number[] numbers = new Number[]
             {

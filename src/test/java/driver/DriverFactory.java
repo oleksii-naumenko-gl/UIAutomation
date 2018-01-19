@@ -13,7 +13,7 @@ class DriverFactory {
         WebDriver driver;
         String driverName = System.getProperty("browser");
         if ("firefox".equals(driverName)) {
-            System.setProperty("webdriver.gecko.driver", "drivers/chromedriver.exe");
+            System.setProperty("webdriver.gecko.driver", "drivers/geckodriver.exe");
             driver = new FirefoxDriver();
         } else if ("chrome".equals(driverName)) {
             System.setProperty("webdriver.chrome.driver", "drivers/chromedriver.exe");
