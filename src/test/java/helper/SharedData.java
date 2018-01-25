@@ -6,6 +6,8 @@ import java.util.*;
 
 public class SharedData {
 
+    public static Collection<String> scenarioTags;
+
     public static String appPath;
 
     public static String phoneAndroidVersion;
