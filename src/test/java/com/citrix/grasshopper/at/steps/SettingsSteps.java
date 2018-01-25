@@ -46,42 +46,44 @@ public class SettingsSteps extends BaseSteps {
     @When("^user adds new forwarding number for (.*) extension$")
     public void addNewForwardingNumber(String extDescription) throws Throwable {
         app.callForwardingSettingsPage().clickExtentionStatusButton(extDescription);
+        app.callForwardingNumbersPage().refreshForwardingNumbersPage();
+        int amountOfForwardingNumbersBeforeAction = SharedData.forwardingNumberList.size();
         String extName = Extension.getExtensionName(extDescription);
         Assert.assertTrue("Verify " + extName + "page  is displayed ", app.callForwardingNumbersPage().getTextFromPageTitle().equalsIgnoreCase(extName));
         Assert.assertTrue("Verify backButton is present ", app.callForwardingNumbersPage().isBackButtonDisplayed());
         Assert.assertTrue(app.callForwardingNumbersPage().isIconToAddDisplayed());
         app.callForwardingNumbersPage().clickIconToAdd();
         app.newDestinationPage().enterPhone(DefaultUser.forwardingNumber);
+        app.newDestinationPage().clickSaveButton();
         Thread.sleep(Constants.Timeouts.defaultActionTimeout);
-        app.callForwardingNumbersPage().clickBack();
-        app.callForwardingNumbersPage().clickBack();
-        app.callForwardingSettingsPage().refreshAllAvailableExtensions();
+        app.callForwardingNumbersPage().refreshForwardingNumbersPage();
+        Assert.assertTrue(amountOfForwardingNumbersBeforeAction != SharedData.forwardingNumberList.size());
+
     }
 
-    @When("^user edits forwarding number for (.*) extension$")
+    @And("^user edits forwarding number for (.*) extension$")
     public void editForwardingNumber(String extDescription) throws Throwable {
-        app.callForwardingSettingsPage().clickExtentionStatusButton(extDescription);
-        app.callForwardingNumbersPage().refreshForwardingNumbersPage();
-        app.callForwardingNumbersPage().clickForwardingNumber(DefaultUser.forwardingNumber);
-        app.editDestinationPage().editNumber(DefaultUser.forwardingNumberAfterEditing);
+        app.callForwardingNumbersPage().clickForwardingNumber(SharedData.forwardingNumberList.get(0).getNumber());
+        app.editDestinationPage().editNumber();
     }
 
     @And("^unchecks/checks forwarding number$")
     public void uncheckCheckForwardingNumber() throws Throwable {
         app.callForwardingNumbersPage().refreshForwardingNumbersPage();
-        app.callForwardingNumbersPage().clickForwardingNumberCheckbox(DefaultUser.forwardingNumberAfterEditing);
-
+        app.callForwardingNumbersPage().clickForwardingNumberCheckbox(SharedData.forwardingNumberList.get(0).getNumber());
     }
 
     @Then("^forwarding number for (.*) extension can be deleted$")
     public void deleteForwardingNumber(String extDescription) throws Throwable {
-        app.callForwardingNumbersPage().clickForwardingNumber(DefaultUser.forwardingNumberAfterEditing);
+        app.callForwardingNumbersPage().refreshForwardingNumbersPage();
+        int amountOfForwardingNumbersBeforeAction = SharedData.forwardingNumberList.size();
+        app.callForwardingNumbersPage().clickForwardingNumber(SharedData.forwardingNumberList.get(0).getNumber());
         app.editDestinationPage().clickDelete();
         Thread.sleep(Constants.Timeouts.defaultActionTimeout);
         app.deleteDestinationDialog().clickDelete();
-        app.callForwardingNumbersPage().clickBack();
+        app.callForwardingNumbersPage().refreshForwardingNumbersPage();
+        Assert.assertTrue(amountOfForwardingNumbersBeforeAction != SharedData.forwardingNumberList.size());
     }
-
 
     @Then("^Access Number page is displayed$")
     public void accessNumberPageIsDisplayed() {

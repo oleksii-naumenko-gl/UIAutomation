@@ -9,14 +9,14 @@ import helper.AppiumFactory;
 
 public class Hooks extends BaseSteps {
 
-    @Before()
+    @Before(value = "~@web")
     public void beforeScenario() {
         AppiumFactory.startAppium();
         app = GrasshopperApp.getInstance();
 
     }
 
-    @After()
+    @After(value = "~@web")
     public void afterScenario(Scenario scenario) {
         if (scenario.isFailed()) {
             app.embedScreenshot(scenario);
