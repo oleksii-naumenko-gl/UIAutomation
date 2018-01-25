@@ -10,7 +10,7 @@ import io.appium.java_client.pagefactory.iOSFindBy;
 public class LoginPage extends BasePage {
 
     @AndroidFindBy(id = "com.grasshopper.dialer:id/email_input")
-    @iOSFindBy(id = "phone_input")
+    @iOSFindBy(id = "email_input")
     private MobileElement loginUserId;
 
     @AndroidFindBy(id = "com.grasshopper.dialer:id/password_input")

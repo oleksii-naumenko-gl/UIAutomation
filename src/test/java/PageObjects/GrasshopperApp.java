@@ -7,7 +7,11 @@ import PageObjects.dialogs.DeleteDestinationDialog;
 import PageObjects.dialogs.PermissionRequest;
 import cucumber.api.Scenario;
 import helper.SharedData;
+import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.ios.IOSDriver;
+import io.appium.java_client.remote.MobileCapabilityType;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -27,6 +31,9 @@ public class GrasshopperApp {
 
     private static AndroidDriver driver;
 
+    // test
+    private static AppiumDriver iosDriver;
+
     private static GrasshopperApp instance;
 
     public static GrasshopperApp getInstance() {
@@ -40,6 +47,18 @@ public class GrasshopperApp {
 
         return instance;
     }
+
+    public static GrasshopperApp getIosInstance() throws MalformedURLException {
+        if (instance == null) {
+            getProperties();
+
+            iosDriver = setupIOSCapabilities();
+            instance = new GrasshopperApp();
+        }
+
+        return instance;
+    }
+
 
     public void endSession(){
         driver.quit();
@@ -207,6 +226,26 @@ public class GrasshopperApp {
     private void setupRestartCapabilities(DesiredCapabilities capabilities){
         capabilities.setCapability("fullReset", false);
         capabilities.setCapability("noReset", true);
+    }
+
+    private static IOSDriver setupIOSCapabilities() throws MalformedURLException {
+
+        // valid simulator capabilities
+        File appDir = new File(SharedData.appPath);
+
+        File app = new File(appDir, "Grasshopper" + ".ipa");
+
+        DesiredCapabilities capabilitiesIOS = new DesiredCapabilities();
+        capabilitiesIOS.setCapability(MobileCapabilityType.APPIUM_VERSION, "1.7.1");
+        capabilitiesIOS.setCapability(MobileCapabilityType.AUTOMATION_NAME, "XCUITest");
+
+        capabilitiesIOS.setCapability(MobileCapabilityType.UDID, "963ac0cfa755e8102b52ba78af046accec2d95d3");
+        capabilitiesIOS.setCapability(MobileCapabilityType.PLATFORM_NAME, "iOS");
+
+        capabilitiesIOS.setCapability(MobileCapabilityType.DEVICE_NAME, "iPhone");
+        capabilitiesIOS.setCapability(MobileCapabilityType.APP, app.getAbsolutePath());
+
+        return new IOSDriver<MobileElement>(new URL("http://127.0.0.1:4723/wd/hub"), capabilitiesIOS);
     }
 
     /**
