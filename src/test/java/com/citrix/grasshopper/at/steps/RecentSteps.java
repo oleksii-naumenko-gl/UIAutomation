@@ -13,8 +13,6 @@ public class RecentSteps extends BaseSteps{
         {
             app.recentPage().setDropdownValue(value.getText());
             Assert.assertTrue(app.recentPage().getSelectedDropdownValue().equalsIgnoreCase(value.getText()));
-
-            // todo: verify the list of actual elements
         }
     }
 
