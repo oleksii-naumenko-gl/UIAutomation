@@ -1,22 +1,15 @@
 package com.citrix.grasshopper.at.steps;
 
-import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
-import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import helper.DefaultUser;
-import helper.Extension;
-import helper.SettingsItem;
-import helper.SharedData;
+import helper.*;
 import org.junit.Assert;
 
 import java.util.Arrays;
 
 
 public class SettingsSteps extends BaseSteps {
-    private int counterBeforeAddingNewNumber;
-    private int counterAfterAddingNewNumbers;
 
     @Then("^Settings page is displayed$")
     public void settingsPageIsDisplayed() {
@@ -28,44 +21,33 @@ public class SettingsSteps extends BaseSteps {
         Assert.assertTrue("Verify your GH Number is displayed ", app.settingsScreen().getUserNumberText().equalsIgnoreCase(String.valueOf(DefaultUser.numbers.toString().charAt(0))));
     }
 
-    @Given("^(.*) section is displayed on Settings screen$")
-    public void incomingCallsIsDisplayed(String sectionTitle) {
-        Assert.assertTrue("Verify " + sectionTitle + " is displayed ", app.settingsScreen().getIncomingCallsSectionTitle().equalsIgnoreCase(sectionTitle));
-    }
-
-    @And("^Call Forwarding settings item is displayed$")
-
-    public void callForwardingSettingsItemIsDisplayed() {
-        Assert.assertTrue("Verify Call Forwarding settings item is displayed ", app.settingsScreen().getCallForwardingSettingsItemTitle().equalsIgnoreCase("Call Forwarding"));
-        Assert.assertTrue("Verify Call Forwarding settings item subtext is displayed", app.settingsScreen().getCallForwardingSettingsItemSubtext().equalsIgnoreCase("Call Forwarding Numbers"));
-        Assert.assertTrue("Verify navigation arrow is present ", app.settingsScreen().isCallForwardingSettingsNavigationArrowPresent());
-    }
-
     @When("^user clicks (.*) settings item$")
     public void selectSettingsItem(String itemName) {
         app.settingsScreen().selectSettingsItem(itemName);
     }
 
     @Then("^Call Forwarding page is displayed$")
-    public void callForwardingPageIsDisplayed(String pageTitle) {
-        Assert.assertTrue("Verify " + pageTitle + "page  is displayed ", app.callForwardingSettingsPage().getTextFromPageTitle().equalsIgnoreCase(pageTitle));
-        Assert.assertTrue("Verify backButton is present ", app.callForwardingSettingsPage().isBackButtonDisplayed());
+    public void callForwardingPageIsDisplayed() {
+        Assert.assertTrue("Verify page title on Call Forwarding Settings page", app.callForwardingSettingsPage().getTextFromPageTitle().equalsIgnoreCase(app.callForwardingSettingsPage().PAGE_TITLE));
+
     }
 
-    @And("^(.*) page description text is displayed$")
-    public void pageDescriptionIsDisplayed(String pageDescription) {
-        Assert.assertTrue(app.callForwardingSettingsPage().getTextFromPageDescription().equalsIgnoreCase(pageDescription));
+    @And("^Page description text is displayed$")
+    public void pageDescriptionIsDisplayed() {
+        Assert.assertTrue(app.callForwardingSettingsPage().getTextFromPageDescription().equalsIgnoreCase(app.callForwardingSettingsPage().PAGE_DESCRIPTION));
     }
 
     @And("^all extensions are displayed on Call Forwarding page$")
     public void allExtensionAreDisplayed() {
-        Assert.assertTrue(app.callForwardingSettingsPage().getAllAvailableExtensions().equals(Arrays.asList(DefaultUser.extensions)));
+        app.callForwardingSettingsPage().refreshAllAvailableExtensions();
+        Assert.assertTrue(SharedData.availableExtensionList.equals(Arrays.asList(DefaultUser.extensions)));
     }
 
-    //    @When("^user adds new forwarding number for (.*) extension$")
-    public void addNewForwardingNumber(String extDescription) throws Exception {
-        counterBeforeAddingNewNumber = app.callForwardingSettingsPage().getCounterOfForwardingNumbers(extDescription);
+    @When("^user adds new forwarding number for (.*) extension$")
+    public void addNewForwardingNumber(String extDescription) throws Throwable {
         app.callForwardingSettingsPage().clickExtentionStatusButton(extDescription);
+        app.callForwardingNumbersPage().refreshForwardingNumbersPage();
+        int amountOfForwardingNumbersBeforeAction = SharedData.forwardingNumberList.size();
         String extName = Extension.getExtensionName(extDescription);
         Assert.assertTrue("Verify " + extName + "page  is displayed ", app.callForwardingNumbersPage().getTextFromPageTitle().equalsIgnoreCase(extName));
         Assert.assertTrue("Verify backButton is present ", app.callForwardingNumbersPage().isBackButtonDisplayed());
@@ -73,49 +55,39 @@ public class SettingsSteps extends BaseSteps {
         app.callForwardingNumbersPage().clickIconToAdd();
         app.newDestinationPage().enterPhone(DefaultUser.forwardingNumber);
         app.newDestinationPage().clickSaveButton();
-        app.callForwardingNumbersPage().clickBack();
-        counterAfterAddingNewNumbers = app.callForwardingSettingsPage().getCounterOfForwardingNumbers(extDescription);
-    }
-
-    //    @Then("^counter of Forwarding numbers has been increased$")
-    public void verifyForwardingNumberCounterAfterAddingNumber() {
-        Assert.assertTrue(counterAfterAddingNewNumbers == counterBeforeAddingNewNumber + 1);
-    }
-
-    @When("^user edits forwarding number for (.*) extension$")
-    public void editForwardingNumber(String extDescription) {
-        app.callForwardingSettingsPage().clickExtentionStatusButton(extDescription);
+        Thread.sleep(Constants.Timeouts.defaultActionTimeout);
         app.callForwardingNumbersPage().refreshForwardingNumbersPage();
-        app.callForwardingNumbersPage().clickForwardingNumber(DefaultUser.forwardingNumberAfterEditing);
-        app.editDestinationPage().editNumber(DefaultUser.forwardingNumberAfterEditing);
+        Assert.assertTrue(amountOfForwardingNumbersBeforeAction != SharedData.forwardingNumberList.size());
+
+    }
+
+    @And("^user edits forwarding number for (.*) extension$")
+    public void editForwardingNumber(String extDescription) throws Throwable {
+        app.callForwardingNumbersPage().clickForwardingNumber(SharedData.forwardingNumberList.get(0).getNumber());
+        app.editDestinationPage().editNumber();
     }
 
     @And("^unchecks/checks forwarding number$")
-    public void uncheckCheckForwardingNumber() {
+    public void uncheckCheckForwardingNumber() throws Throwable {
         app.callForwardingNumbersPage().refreshForwardingNumbersPage();
-        app.callForwardingNumbersPage().clickForwardingNumberCheckbox(DefaultUser.forwardingNumberAfterEditing);
-
+        app.callForwardingNumbersPage().clickForwardingNumberCheckbox(SharedData.forwardingNumberList.get(0).getNumber());
     }
 
-    @And("^deletes forwarding number for (.*) extension$")
-    public void deleteForwardingNumber(String extDescription) {
-        app.callForwardingNumbersPage().clickForwardingNumber(DefaultUser.forwardingNumberAfterEditing);
+    @Then("^forwarding number for (.*) extension can be deleted$")
+    public void deleteForwardingNumber(String extDescription) throws Throwable {
+        app.callForwardingNumbersPage().refreshForwardingNumbersPage();
+        int amountOfForwardingNumbersBeforeAction = SharedData.forwardingNumberList.size();
+        app.callForwardingNumbersPage().clickForwardingNumber(SharedData.forwardingNumberList.get(0).getNumber());
         app.editDestinationPage().clickDelete();
-
-        //     todo      pop-up;
-        app.callForwardingNumbersPage().clickBack();
-        counterAfterAddingNewNumbers = app.callForwardingSettingsPage().getCounterOfForwardingNumbers(extDescription);
+        Thread.sleep(Constants.Timeouts.defaultActionTimeout);
+        app.deleteDestinationDialog().clickDelete();
+        app.callForwardingNumbersPage().refreshForwardingNumbersPage();
+        Assert.assertTrue(amountOfForwardingNumbersBeforeAction != SharedData.forwardingNumberList.size());
     }
-
-    @Then("counter of Forwarding numbers is unchanged$")
-    public void verifyForwardingNumberCounter() {
-        Assert.assertTrue(counterBeforeAddingNewNumber == counterAfterAddingNewNumbers);
-    }
-
 
     @Then("^Access Number page is displayed$")
     public void accessNumberPageIsDisplayed() {
-        Assert.assertTrue("Verify page title on Access Number page", app.accessNumberPage().getTextFromPageTitle().equalsIgnoreCase("Access Number"));
+        Assert.assertTrue("Verify page title on Access Number page", app.accessNumberPage().getTextFromPageTitle().equalsIgnoreCase(app.accessNumberPage().PAGE_TITLE));
         Assert.assertTrue(app.accessNumberPage().getPageDescriptionText().equalsIgnoreCase(app.accessNumberPage().PAGE_DESCRIPTION_TEXT));
     }
 

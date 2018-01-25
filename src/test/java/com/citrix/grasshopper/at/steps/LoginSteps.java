@@ -66,9 +66,9 @@ public class LoginSteps extends BaseSteps{
         app.getStartedPage().navigateNext();
     }
 
-    @Then("^invalid number error (.*) should be shown$")
-    public void invalidNumberErrorShouldBeShown(String errorMessage) throws Throwable {
-        Assert.assertTrue("Verify invalid number error is shown", app.getStartedPage().getInputErrorMessage().equalsIgnoreCase(errorMessage));
+    @Then("^invalid number error message should be shown$")
+    public void invalidNumberErrorShouldBeShown() throws Throwable {
+        Assert.assertTrue("Verify invalid number error is shown", app.getStartedPage().getInputErrorMessage().equalsIgnoreCase(app.getStartedPage().INVALID_NUMBER_ERROR_MESSAGE));
     }
 
     @And("^user logs in with default credentials with Wi-Fi turned off$")
@@ -157,5 +157,30 @@ public class LoginSteps extends BaseSteps{
     private void acceptLegalDisclaimer(){
         app.loginPage().acceptLegalDisclaimer();
 
+    }
+
+
+    @When("^user logs in with valid credentials$")
+    public void userLogsInWithValidCredentials() throws Throwable {
+        appWeb.loginHelper().logInDefauultUser();
+        Thread.sleep(Constants.Timeouts.longActionTimeout);
+    }
+
+    @Then("^Dialer web page is displayed as Default$")
+    public void dialerPageIsDisplayedAsDefault() throws Throwable {
+        Assert.assertTrue(appWeb.dialerHelper().isDialerPresent());
+        Assert.assertTrue(appWeb.dialerHelper().getUserName().equalsIgnoreCase(DefaultUser.userName));
+    }
+
+    @When("^user logs in Webclient with invalid credentials (.*) and (.*)$")
+    public void userLogsInWebclientWithInvalidCredentials(String userName, String password) throws Throwable {
+       appWeb.loginHelper().logInAnyUser(userName,password);
+        Thread.sleep(Constants.Timeouts.defaultActionTimeout);
+    }
+
+    @Then("^alert message is displayed on webpage$")
+    public void alertMessageAlertIsDisplayedOnWebpage() throws Throwable {
+        Assert.assertTrue(appWeb.loginHelper().getAlert().equalsIgnoreCase(appWeb.loginHelper().ALERT_ERROR_MESSAGE));
+        Thread.sleep(Constants.Timeouts.defaultActionTimeout);
     }
 }

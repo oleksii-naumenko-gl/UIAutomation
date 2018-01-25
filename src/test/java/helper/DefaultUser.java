@@ -2,6 +2,8 @@ package helper;
 
 public class DefaultUser {
 
+    public static String userName  = "Oleksii Naumenko";
+
     public static String login = "Oleksii.Naumenko@logmein.com";
 
     public static String password = "abc123";
@@ -12,7 +14,7 @@ public class DefaultUser {
 
     public static String forwardingNumber = "6314524045";
 
-    public  static String forwardingNumberAfterEditing = "6314524040";
+    public  static String newForwardingNumber = "6314524040";
 
     public static Number[] numbers = new Number[]
             {
@@ -31,7 +33,7 @@ public class DefaultUser {
                     new Extension("New Extension", "Ext 700"),
                     new Extension("New Extension", "Ext 701"),
                     new Extension("New Extension", "Ext 702"),
-                    new Extension("New Extension", "Ext 703"),
+//                    new Extension("New Extension", "Ext 703"),
                    // new Extension("New Extension","Ext 704"),
 //                    new Extension("New Extension","Ext 705"),
 //                    new Extension("New Extension","Ext 706"),

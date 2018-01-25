@@ -1,5 +1,5 @@
-@login
-Feature: Grasshopper Smoke Test
+@login @ignored
+Feature: Login
 
   Scenario: Verify Logging In with invalid phone number
     Given Grasshopper is installed on a clean device

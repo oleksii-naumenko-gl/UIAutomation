@@ -1,13 +1,15 @@
 package PageObjects.SettingsPages;
 
 import PageObjects.base.BasePage;
+import helper.Constants;
 import helper.Extension;
+import helper.SharedData;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import org.openqa.selenium.By;
 
-import java.util.ArrayList;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,6 +20,10 @@ public class CallForwardingSettingsPage extends BasePage {
         super(driver);
     }
 
+    public final String PAGE_TITLE = "Call Forwarding Settings";
+
+    public final String PAGE_DESCRIPTION = "Choose extension for which you want to update the call forwarding numbers";
+
     @AndroidFindBy(className = "android.widget.LinearLayout")
     private MobileElement pageContainer;
 
@@ -27,15 +33,13 @@ public class CallForwardingSettingsPage extends BasePage {
     @AndroidFindBy(id = "com.grasshopper.dialer:id/list")
     private MobileElement listOfExtensionsContainer;
 
-    private MobileElement pageTitle = parentTopToolBar.findElementByClassName("android.widget.TextView");
+    @AndroidFindBy(xpath = "//android.widget.LinearLayout/android.widget.TextView")
+    private MobileElement pageDescription;
+    // private MobileElement pageTitle = parentTopToolBar.findElementByClassName("android.widget.TextView");
 
-    private MobileElement pageDescription = pageContainer.findElementsByClassName("android.widget.TextView").get(0);
+   // private MobileElement pageDescription = pageContainer.findElementByClassName("android.widget.TextView");
 
     private List<MobileElement> listOfExtension = listOfExtensionsContainer.findElements(By.className("android.widget.RelativeLayout"));
-
-    public String getTextFromPageTitle() {
-        return pageTitle.getText();
-    }
 
     public String getTextFromPageDescription() {
         return pageDescription.getText();
@@ -43,51 +47,47 @@ public class CallForwardingSettingsPage extends BasePage {
 
     private MobileElement backButton = parentTopToolBar.findElementByClassName("android.widget.ImageButton");
 
-    public List<Extension> getAllAvailableExtensions() {
-        List<Extension> extList = new ArrayList<>();
+    public void refreshAllAvailableExtensions() {
+        SharedData.availableExtensionList.clear();
 
         for (MobileElement element : listOfExtension) {
 
-            String extensionName;
-            String extensionDescription;
-            int forwardingNumberCounter;
-
+            String extensionName = "";
+            String extensionDescription = "";
+            int forwardingNumberCounter=0;
             try {
                 extensionDescription = element.findElement(By.id("com.grasshopper.dialer:id/description")).getText();
                 extensionName = element.findElement(By.id("com.grasshopper.dialer:id/name")).getText();
+                String[] status = element.findElement(By.id("com.grasshopper.dialer:id/status")).getText().split(" ");
+                String s = status[0];
+                forwardingNumberCounter = Integer.parseInt(s);
             } catch (Exception x) {
-                return extList;
+
             }
 
-            String[] status = element.findElement(By.id("com.grasshopper.dialer:id/status")).getText().split(" ");
-            String s = status[0];
-            forwardingNumberCounter = Integer.parseInt(s);
-
-            extList.add(new Extension(extensionName, extensionDescription, forwardingNumberCounter));
+            SharedData.availableExtensionList.add(new Extension(extensionName, extensionDescription, forwardingNumberCounter));
         }
-        return extList;
     }
 
-    private Map<String, MobileElement> setExtensionMap() {
-        Map extensionHashMap = new HashMap<String, MobileElement>();
+    private Map<String, MobileElement> setExtensionMap() throws InterruptedException {
+        Map<String, MobileElement> extensionHashMap = new HashMap<>();
         MobileElement statusButton;
         String extensionDescription;
 
         for (MobileElement element : listOfExtension) {
-
-            extensionDescription = element.findElement(By.id("com.grasshopper.dialer:id/description")).getText();
-            statusButton = element.findElement(By.id("com.grasshopper.dialer:id/status"));
-            extensionHashMap.put(extensionDescription, statusButton);
+                extensionDescription = element.findElement(By.id("com.grasshopper.dialer:id/description")).getText();
+                statusButton = element.findElement(By.id("com.grasshopper.dialer:id/status"));
+                extensionHashMap.put(extensionDescription, statusButton);
         }
         return extensionHashMap;
     }
 
-    public void clickExtentionStatusButton(String extDescription) {
+    public void clickExtentionStatusButton(String extDescription) throws InterruptedException {
         setExtensionMap().get(extDescription).click();
     }
 
     public int getCounterOfForwardingNumbers(String extDescription) {
-        List<Extension> extensionList = getAllAvailableExtensions();
+        List<Extension> extensionList = SharedData.availableExtensionList;
         int forwardingNumberCounter = 0;
         for (Extension ext : extensionList) {
             if (ext.getExtNumber().equalsIgnoreCase(extDescription)) {

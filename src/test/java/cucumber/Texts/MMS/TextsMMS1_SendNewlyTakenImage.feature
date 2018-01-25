@@ -1,5 +1,5 @@
-@Texts @MMS
-Feature: Grasshopper Smoke Test
+@texts @MMS @ignored
+Feature: MMS
 
   Scenario Outline: Verify sending new MMS message with newly taken image
     Given Grasshopper is installed on a clean device

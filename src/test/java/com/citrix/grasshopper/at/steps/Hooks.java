@@ -4,6 +4,7 @@ import PageObjects.GrasshopperApp;
 import cucumber.api.Scenario;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
+import driver.MyDriver;
 import helper.AppiumFactory;
 import helper.SharedData;
 
@@ -12,34 +13,24 @@ import java.net.MalformedURLException;
 public class Hooks extends BaseSteps{
 
     @Before
-    public void beforeScenario(Scenario scenario) throws MalformedURLException {
+    public void beforeScenario(){
         AppiumFactory.startAppium();
-
-        SharedData.scenarioTags = scenario.getSourceTagNames();
-
-        if (SharedData.scenarioTags.contains("@ios")){
-            app = GrasshopperApp.getIosInstance();
-
-        }
-//
-//        if (SharedData.scenarioTags.contains("@android")){
-//            app = GrasshopperApp.getInstance();
-//        }
-//
-//        if (SharedData.scenarioTags.contains("@browser")){
-//            // TODO
-//       }
+        app = GrasshopperApp.getInstance();
     }
 
-    @After
-    public void afterScenarion(){
+    @After(value = "~@web")
+    public void afterScenario(Scenario scenario) {
+        if (scenario.isFailed()) {
+            app.embedScreenshot(scenario);
+        }
         app.endSession();
         AppiumFactory.stopAppium();
-
-        if (SharedData.scenarioTags.contains("@browser")){
-            // TODO
-        }
-
     }
 
+
+    @After(value = "@web")
+    public void endSession() {
+        MyDriver.getMyDriver().quit();
+
+    }
 }

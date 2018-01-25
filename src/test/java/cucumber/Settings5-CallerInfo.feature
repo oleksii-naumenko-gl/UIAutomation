@@ -1,5 +1,5 @@
 @settings @callerInfo
-Feature: Settings screen - Caller Info switch
+Feature: Settings
 
   Scenario: Verify Caller Info is turned off by default
     Given Grasshopper is installed on a clean device

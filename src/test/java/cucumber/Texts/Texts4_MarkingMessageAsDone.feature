@@ -1,4 +1,4 @@
-@Texts
+@texts @ignored
 Feature: Grasshopper Smoke Test
 
   Scenario Outline: Verify Unread Counter For Text Icon

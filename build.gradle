@@ -35,9 +35,11 @@ dependencies {
 }
 
 task SmokeTest(type: Test) {
+    //  Properties for WebDriver
+    systemProperty "browser", "chrome"
     //Properties for run from Jenkins Job
     systemProperty "cucumber.options",
-            System.getProperty("cucumber.options") != null ? System.getProperty("cucumber.options") : "--tags @texts,~@mms"
+            System.getProperty("cucumber.options") != null ? System.getProperty("cucumber.options") : "--tags @web"
     useJUnit() {
         doLast {
             include "src/test/java/runner/RunCucumberTest.java"

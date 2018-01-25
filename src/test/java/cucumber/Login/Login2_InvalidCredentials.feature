@@ -1,5 +1,5 @@
 @login
-Feature: Grasshopper Smoke Test
+Feature: Login
 
   Scenario Outline: Verify Logging In with invalid credentials
     Given Grasshopper is installed on a clean device
@@ -7,7 +7,15 @@ Feature: Grasshopper Smoke Test
     Then alert message <alert> is displayed
 
     Examples:
-      | login                           |   password                                         | alert               |
-      | login                           |   password                                         |   Sign In Failed    |
+      | login | password | alert          |
+      | login | password | Sign In Failed |
 
+    @web
+  Scenario Outline:WEB Verify Logging In with invalid credentials
+    When user logs in Webclient with invalid credentials <login> and <password>
+    Then alert message is displayed on webpage
+
+    Examples:
+      | login | password |
+      | login | password |
 

@@ -3,18 +3,18 @@ package PageObjects;
 import PageObjects.SettingsPages.*;
 import PageObjects.dialogs.BaseAlert;
 import PageObjects.dialogs.BaseDialog;
+import PageObjects.dialogs.DeleteDestinationDialog;
 import PageObjects.dialogs.PermissionRequest;
+import cucumber.api.Scenario;
 import helper.SharedData;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
-import io.appium.java_client.pagefactory.AppiumFieldDecorator;
-import io.appium.java_client.remote.IOSMobileCapabilityType;
 import io.appium.java_client.remote.MobileCapabilityType;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.support.PageFactory;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -40,6 +40,7 @@ public class GrasshopperApp {
         if (instance == null) {
             getProperties();
 
+            // todo: move from here to new driver class
             driver = setup();
             instance = new GrasshopperApp();
         }
@@ -64,9 +65,9 @@ public class GrasshopperApp {
         instance = null;
     }
 
-    // TODO: test
+    // Pages initialization
     public LoginPage loginPage(){
-        return new LoginPage(iosDriver);
+        return new LoginPage(driver);
     }
 
     public GetStartedPage getStartedPage() {
@@ -108,6 +109,8 @@ public class GrasshopperApp {
     public EditDestinationPage editDestinationPage() {
         return new EditDestinationPage(driver);
     }
+
+    public DeleteDestinationDialog deleteDestinationDialog() { return new DeleteDestinationDialog(driver);}
 
     public AccessNumberPage accessNumberPage() {
         return new AccessNumberPage(driver);
@@ -169,7 +172,6 @@ public class GrasshopperApp {
 
     public static AndroidDriver setup(){
         DesiredCapabilities capabilities = new DesiredCapabilities();
-
         setupBasicCapabilities(capabilities);
 
         return setupDriver(capabilities);
@@ -285,5 +287,16 @@ public class GrasshopperApp {
         }
 
         return driver;
+    }
+
+    public void embedScreenshot(Scenario scenario) {
+        try {
+            byte[] screenshot =  driver.getScreenshotAs(OutputType.BYTES);
+            scenario.embed(screenshot, "image/png");
+        } catch (WebDriverException wde) {
+            System.err.println(wde.getMessage());
+        } catch (ClassCastException cce) {
+            cce.printStackTrace();
+        }
     }
 }

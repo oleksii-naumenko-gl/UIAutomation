@@ -8,6 +8,8 @@ public class SharedData {
 
     public static Collection<String> scenarioTags;
 
+    public static final String  BASE_URL="https://webclient.ghuser.com/webclient/";
+
     public static String appPath;
 
     public static String phoneAndroidVersion;
@@ -17,6 +19,8 @@ public class SharedData {
     public static String grasshopperVersion;
 
     public static Map<Contact, MobileElement> favoritesMap = new HashMap<>();
+
+    public static List<Extension> availableExtensionList = new ArrayList<>();
 
     public static List<ForwardingNumber> forwardingNumberList = new ArrayList<>();
 

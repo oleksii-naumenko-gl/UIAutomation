@@ -1,5 +1,5 @@
 @calls
-Feature: Grasshopper Smoke Test
+Feature: Calls
 
   Scenario: Verify Calling from Dialer
     Given Grasshopper is installed on a clean device

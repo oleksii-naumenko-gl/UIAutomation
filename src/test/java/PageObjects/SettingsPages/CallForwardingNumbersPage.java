@@ -1,6 +1,7 @@
 package PageObjects.SettingsPages;
 
 import PageObjects.base.BasePage;
+import helper.Constants;
 import helper.ForwardingNumber;
 import helper.SharedData;
 import io.appium.java_client.AppiumDriver;
@@ -23,11 +24,11 @@ public class CallForwardingNumbersPage extends BasePage {
     @AndroidFindBy(id = "com.grasshopper.dialer:id/empty_view")
     private MobileElement parentEmptyView;
 
-    private MobileElement iconToAdd = parentTopToolBar.findElementById("com.grasshopper.dialer:id/action_add");
+    @AndroidFindBy(id="com.grasshopper.dialer:id/action_add")
+    private MobileElement iconToAdd;
 
-    private MobileElement backButton = parentTopToolBar.findElementByClassName("android.widget.ImageButton");
 
-    public void clickIconToAdd() throws IOException {
+    public void clickIconToAdd() {
         logger.debug("Clicking on icon to add new forwarding number");
         iconToAdd.click();
     }
@@ -59,8 +60,10 @@ public class CallForwardingNumbersPage extends BasePage {
         backButton.click();
     }
 
-    public void refreshForwardingNumbersPage() {
+    public void refreshForwardingNumbersPage() throws InterruptedException {
+        SharedData.forwardingNumberList.clear();
         logger.info("Refresh forwarding number list");
+        Thread.sleep(Constants.Timeouts.defaultActionTimeout);
         List<MobileElement> availableNumbersList = parentListOfNumbersForExtension.findElements(By.className("android.widget.RelativeLayout"));
 
         if (availableNumbersList.size() != 0) {
@@ -95,7 +98,6 @@ public class CallForwardingNumbersPage extends BasePage {
 
     public void clickForwardingNumber(String numberToChange) {
         logger.info("Clicking on " + numberToChange+ " forwarding number");
-        System.out.println(SharedData.forwardingNumberList.toArray().toString());
 
         for (ForwardingNumber n : SharedData.forwardingNumberList) {
             if (n.getNumber().equalsIgnoreCase(numberToChange)) {

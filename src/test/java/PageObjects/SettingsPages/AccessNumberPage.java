@@ -15,6 +15,8 @@ public class AccessNumberPage extends BasePage {
         super(driver);
     }
 
+    public final String PAGE_TITLE = "Access Number";
+
     public final String PAGE_DESCRIPTION_TEXT = "Change your access number to a US local number to make calls from outside North America. International rates will apply.";
 
     public final String[] ACCESS_NUMBER_OPIONS = {"Default", "Local", "Toll free"};

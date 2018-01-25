@@ -48,7 +48,6 @@ public class Extension {
         this.element = element;
     }
 
-
     public String getExtDescription() {
         return extDescription;
     }
@@ -86,21 +85,15 @@ public class Extension {
 
         Extension extension = (Extension) o;
 
-        if (forwardingNumberCounter != extension.forwardingNumberCounter) return false;
-        if (isMain != extension.isMain) return false;
         if (extDescription != null ? !extDescription.equals(extension.extDescription) : extension.extDescription != null)
             return false;
-        if (extNumber != null ? !extNumber.equals(extension.extNumber) : extension.extNumber != null) return false;
-        return element != null ? element.equals(extension.element) : extension.element == null;
+        return extNumber != null ? extNumber.equals(extension.extNumber) : extension.extNumber == null;
     }
 
     @Override
     public int hashCode() {
         int result = extDescription != null ? extDescription.hashCode() : 0;
         result = 31 * result + (extNumber != null ? extNumber.hashCode() : 0);
-        result = 31 * result + forwardingNumberCounter;
-        result = 31 * result + (element != null ? element.hashCode() : 0);
-        result = 31 * result + (isMain ? 1 : 0);
         return result;
     }
 }

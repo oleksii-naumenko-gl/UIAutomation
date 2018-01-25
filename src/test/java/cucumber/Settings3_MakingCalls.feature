@@ -1,5 +1,5 @@
 @settings @makingCalls
-Feature: Settings screen - Making Calls item
+Feature: Settings
 
   Scenario: Verify Making Calls Default Settings
     Given Grasshopper is installed on a clean device
