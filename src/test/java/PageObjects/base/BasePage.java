@@ -72,6 +72,10 @@ public abstract class BasePage {
         Dimension size = driver.manage().window().getSize();
         driver.swipe(element.getLocation().getX()+Math.round(((element.getSize().width)*98)/100),element.getLocation().getY()+Math.round((element.getSize().height)/2),Math.round(size.getWidth()/10), element.getLocation().getY()+Math.round((element.getSize().height)/2),steps);
     }
+//unchecked work
+    public void swipeRightFromObject(MobileElement element){
+        new TouchAction(driver).longPress(element).moveTo(500, 400).release().perform();
+    }
 
     public void scrollUntilText(String textToFind) {
         try {

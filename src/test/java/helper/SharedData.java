@@ -41,4 +41,6 @@ public class SharedData {
     public static Map<String, Integer> textDropdownUnreadCounter = new HashMap<>();
 
     public static List<TextMessage> messagesList = new ArrayList<>();
+
+    public static TextsEntry messageMarkedAsDone;
 }

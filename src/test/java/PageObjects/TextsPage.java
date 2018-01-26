@@ -8,6 +8,7 @@ import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
@@ -28,6 +29,10 @@ public class TextsPage extends BaseHistoryPage{
 
     @AndroidFindBy(id = "com.grasshopper.dialer:id/new_chat")
     private MobileElement startConversationButton;
+
+    @AndroidFindBy(id="com.grasshopper.dialer:id/swipe_as_read")
+    private MobileElement swipeUnreadReadButton;
+
 
     private String textEntryId = "com.grasshopper.dialer:id/swipe";
 
@@ -71,6 +76,11 @@ public class TextsPage extends BaseHistoryPage{
         swipeDoneButton.click();
     }
 
+    public void markMessageAsUnread(MobileElement element){
+        swipeRightFromObject(element);
+        swipeUnreadReadButton.click();
+    }
+
     /**
      * Starts new conversation
      */
@@ -92,6 +102,13 @@ public class TextsPage extends BaseHistoryPage{
         }
 
         return null;
+    }
+    public Boolean isConversationPresent(String contactName){
+        Boolean isPresent = false;
+        if (findEntryByContactName(contactName)!=null){
+            isPresent = true;
+        }
+        return isPresent;
     }
 
     public void createContactForEntry(TextsEntry entry, String contactName){
