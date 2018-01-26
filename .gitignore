@@ -2,6 +2,12 @@
 ### Example user template template
 ### Example user template
 
+#report files
+*.xml
+*.html
+build/
+target/
+
 # IntelliJ project files
 .idea
 *.iml

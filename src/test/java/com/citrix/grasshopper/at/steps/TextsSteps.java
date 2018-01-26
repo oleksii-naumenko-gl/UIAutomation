@@ -7,6 +7,7 @@ import cucumber.api.java.en.When;
 import helper.*;
 import helper.Number;
 import org.junit.Assert;
+import org.openqa.selenium.By;
 
 public class TextsSteps extends BaseSteps {
 
@@ -15,8 +16,7 @@ public class TextsSteps extends BaseSteps {
     @Then("^each item from Texts dropdown can be selected$")
     public void eachItemFromTextsDropdownCanBeSelected() throws Throwable {
 
-        for (Number value: DefaultUser.numbers)
-        {
+        for (Number value : DefaultUser.numbers) {
             if (value.isSmsEnabled) {
                 app.textsPage().setDropdownValue(value.number);
 
@@ -35,7 +35,7 @@ public class TextsSteps extends BaseSteps {
     public void checksThereAreMessagesMarkedAsDone() throws Throwable {
         app.textsPage().refreshHistory();
 
-        if (SharedData.textsMap.size() == 0){
+        if (SharedData.textsMap.size() == 0) {
             app.textsPage().openTab(enums.TextTabs.ALL);
             app.textsPage().refreshHistory();
             app.textsPage().markMessageAsDone(SharedData.textsMap.get(0).mobileElement);
@@ -51,8 +51,8 @@ public class TextsSteps extends BaseSteps {
 
         TextsEntry entry = app.textsPage().findEntryByContactName(numberFrom);
 
-        if (entry != null){
-            if (entry.isUnread){
+        if (entry != null) {
+            if (entry.isUnread) {
                 // marking message as read.
                 SharedData.textsMap.get(SharedData.textsMap.indexOf(entry)).mobileElement.click();
                 app.newConversationScreen().clickOnBackButton();
@@ -100,7 +100,7 @@ public class TextsSteps extends BaseSteps {
 
         newEntry = app.textsPage().findEntryByContactName(contactName);
 
-        if  (newEntry != null){
+        if (newEntry != null) {
             app.textsPage().editContactForEntry(newEntry);
 
             app.addNewContactMoto().deleteContact();
@@ -111,7 +111,7 @@ public class TextsSteps extends BaseSteps {
         app.textsPage().refreshHistory();
         newEntry = app.textsPage().findEntryByContactName(number);
 
-        if  (newEntry == null){
+        if (newEntry == null) {
             // sending new text from the other number
             app.textsPage().setDropdownValue(number);
             app.textsPage().startNewConversation();
@@ -158,7 +158,7 @@ public class TextsSteps extends BaseSteps {
         app.textsPage().refreshHistory();
         newEntry = app.textsPage().findEntryByContactName(number);
 
-        if (newEntry == null || !newEntry.isUnread ){
+        if (newEntry == null || !newEntry.isUnread) {
             // that means that we need to send new message to our number from the number specified in parameter.
             app.textsPage().setDropdownValue(number);
 
@@ -213,9 +213,10 @@ public class TextsSteps extends BaseSteps {
         Thread.sleep(Constants.Timeouts.longActionTimeout * 2);
     }
 
-    @And("^message from (.*) is displayed without New icon on (.*) tab$")
-    public void messageFromNumberFromIsDisplayedWithoutNewIconOnNumberFromTab(String numberFrom, String numberTo) throws Throwable {
+    @Then("^message from (.*) is displayed with New icon on (.*) tab$")
+    public void messageFromNumberFromIsDisplayedWithNewIconOnNumberFromTab(String numberFrom, String numberTo) throws Throwable {
         app.textsPage().setDropdownValue(numberTo);
+        Thread.sleep(Constants.Timeouts.longActionTimeout * 2);
         TextsEntry newEntry;
         app.textsPage().refreshHistory();
         newEntry = app.textsPage().findEntryByContactName(numberFrom);
@@ -232,11 +233,8 @@ public class TextsSteps extends BaseSteps {
         app.textsPage().startNewConversation();
         app.newConversationScreen().enterContactNumber(toNumber);
         app.newConversationScreen().startConversation();
-
         app.newConversationScreen().sendRandomExistingImage();
-
         app.newConversationScreen().clickOnBackButton();
-
         Thread.sleep(Constants.Timeouts.longActionTimeout * 2);
     }
 
@@ -247,6 +245,60 @@ public class TextsSteps extends BaseSteps {
         app.newConversationScreen().enterContactNumber(toNumber);
         app.newConversationScreen().startConversation();
 
+    }
+
+    @And("^marks unread message as Done$")
+    public void marksUnreadMessageAsDone() throws Throwable {
+        TextsEntry newEntry = null;
+        for (int index = 0; index < DefaultUser.numbers.length; index++) {
+            app.textsPage().setDropdownValue(DefaultUser.numbers[index].number);
+            app.textsPage().refreshHistory();
+            if (SharedData.textsMap.size() != 0) {
+                for (TextsEntry text : SharedData.textsMap) {
+                    if (text.isUnread) {
+                        newEntry = text;
+                        break;
+                    }
+                }
+            }
+            if(newEntry != null) break;
+        }
+        if (newEntry == null){
+            // that means that we need to send new message to our number from the number specified in parameter.
+            app.textsPage().setDropdownValue(DefaultUser.numbers[0].number);
+
+            app.textsPage().startNewConversation();
+            app.newConversationScreen().enterContactNumber(DefaultUser.numbers[1].number);
+            app.newConversationScreen().startConversation();
+            app.newConversationScreen().sendNewRandomMessageWithTimestamp();
+            app.newConversationScreen().clickOnBackButton();
+            app.textsPage().setDropdownValue(DefaultUser.numbers[1].number);
+        }
+
+        app.textsPage().refreshHistory();
+        app.textsPage().markMessageAsDone(newEntry.mobileElement);
+        SharedData.messageMarkedAsDone = newEntry;
+
+    }
+
+    @And("^message marked as Done is moved to Done tab$")
+    public void messageMarkedAsDoneIsMovedToDoneTab() throws Throwable {
+        app.textsPage().refreshHistory();
+        String numberOfDoneMessage = SharedData.messageMarkedAsDone.contact;
+        Assert.assertTrue("Verify that entry was removed from All tab", !app.textsPage().isConversationPresent(numberOfDoneMessage));
+        app.textsPage().openTab(enums.TextTabs.DONE);
+        app.textsPage().refreshHistory();
+        // movedMessage = app.textsPage().findEntryByContactName(numberOfDoneMessage);
+        Assert.assertTrue("Verify that entry was moved to Done tab", app.textsPage().isConversationPresent(numberOfDoneMessage));
+    }
+
+    @And("^moved message is displayed without New icon$")
+    public void movedMessageIsDisplayedWithoutNewIcon() throws Throwable {
+        String numberOfDoneMessage;
+        numberOfDoneMessage = SharedData.messageMarkedAsDone.contact;
+        TextsEntry movedMessage;
+        movedMessage = app.textsPage().findEntryByContactName(numberOfDoneMessage);
+        Assert.assertFalse("Verify that entry is displayed without New icon", movedMessage.isUnread);
 
 
     }

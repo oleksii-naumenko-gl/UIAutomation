@@ -19,9 +19,9 @@ public class ExtensionSelectionScreen extends BasePage{
 
     public void selectFirstExtension(){
         // todo: add scrolling as the method will return only all visible extension numbers
-        List<MobileElement> list = parentExtensionList.findElements(By.className("android.widget.RelativeLayout"));
+        MobileElement firstExtension = parentExtensionList.findElement(By.className("android.widget.RelativeLayout"));
 
         // selecting first extension
-        list.get(0).click();
+        firstExtension.click();
     }
 }
