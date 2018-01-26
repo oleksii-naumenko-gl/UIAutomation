@@ -4,8 +4,9 @@ public enum RecentDropdownValue {
 
     ALLCALSS(0, "All Calls"),
     MISSED(1, "Missed"),
-    RECEIVED(2, "Received"),
-    DIALED(3, "Dialed");
+    HANGUP(2, "Hangup"),
+    RECEIVED(3, "Received"),
+    DIALED(4, "Dialed");
 
     private int value;
 

@@ -6,14 +6,16 @@ import cucumber.api.java.After;
 import cucumber.api.java.Before;
 import driver.MyDriver;
 import helper.AppiumFactory;
+import helper.SharedData;
 
-public class Hooks extends BaseSteps {
+import java.net.MalformedURLException;
 
-    @Before(value = "~@web")
-    public void beforeScenario() {
+public class Hooks extends BaseSteps{
+
+    @Before
+    public void beforeScenario(){
         AppiumFactory.startAppium();
         app = GrasshopperApp.getInstance();
-
     }
 
     @After(value = "~@web")
