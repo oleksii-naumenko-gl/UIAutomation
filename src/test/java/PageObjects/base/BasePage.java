@@ -35,9 +35,7 @@ public abstract class BasePage {
     @AndroidFindBy(id = "com.grasshopper.dialer:id/toolbar")
     protected MobileElement parentTopToolBar;
 
-    //todo to make a common xpath
-    //xpath for Android 5.0.2 = "//android.view.View/android.widget.TextView[@index='1']"
-    @AndroidFindBy(xpath = "//android.view.ViewGroup/android.widget.TextView[@index='1']")
+    @AndroidFindBy(xpath = "//*/android.widget.TextView[@index='1']")
     protected MobileElement pageTitle;
 
     @AndroidFindBy(xpath = "//android.view.ViewGroup/android.widget.ImageButton")
