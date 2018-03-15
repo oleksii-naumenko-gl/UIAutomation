@@ -47,6 +47,7 @@ public class TextsSteps extends BaseSteps {
     @And("^sends new text message from (.*) to (.*)$")
     public void sendsNewTextMessageFromNumberFromToNumberTo(String numberFrom, String numberTo) throws Throwable {
         app.textsPage().refreshHistory();
+        Thread.sleep(Constants.Timeouts.defaultActionTimeout);
         app.textsPage().updateUnreadDropdownCounters();
 
         TextsEntry entry = app.textsPage().findEntryByContactName(numberFrom);
@@ -91,63 +92,56 @@ public class TextsSteps extends BaseSteps {
         Assert.assertTrue("Verify bottom menu unread counter was incremented", currentCounter != SharedData.textDropdownUnreadCounter.get(number));
     }
 
-    @And("^creates contact with (.*) for the (.*) dialog$")
-    public void createsContactWithContactNameForTheNumberFromDialog(String contactName, String number) throws Throwable {
-        TextsEntry newEntry;
-
-        // deleting the contact if it exists for the number.
-        app.textsPage().refreshHistory();
-
-        newEntry = app.textsPage().findEntryByContactName(contactName);
-
-        if (newEntry != null) {
-            app.textsPage().editContactForEntry(newEntry);
-
-            app.addNewContactMoto().deleteContact();
-            // contact becomes selected here
-            app.textsPage().navigateBack();
-        }
-
-        app.textsPage().refreshHistory();
-        newEntry = app.textsPage().findEntryByContactName(number);
-
-        if (newEntry == null) {
-            // sending new text from the other number
-            app.textsPage().setDropdownValue(number);
-            app.textsPage().startNewConversation();
-            app.newConversationScreen().enterContactNumber(DefaultUser.numbers[0].number);
-            app.newConversationScreen().startConversation();
-            app.newConversationScreen().sendNewRandomMessageWithTimestamp();
-            app.newConversationScreen().clickOnBackButton();
-            app.textsPage().setDropdownValue(DefaultUser.numbers[0].number);
-            app.textsPage().refreshHistory();
-            newEntry = app.textsPage().findEntryByContactName(number);
-        }
-
-        app.textsPage().createContactForEntry(newEntry, contactName);
-        app.addNewContactMoto().enterContactName(contactName);
-        app.addNewContactMoto().saveContact();
-
-        // contact becomes selected here
-        app.textsPage().navigateBack();
-    }
-
-    @Then("^all entities with (.*) on Texts screen will be displayed with the (.*) contact name$")
-    public void allEntitiesWithNumberFromOnTextsScreenWillBeDisplayedWithTheContactNameContactName(String number, String contactName) throws Throwable {
-        TextsEntry newEntry = null;
-
-        Thread.sleep(10000);
-        app.textsPage().refreshHistory();
-        newEntry = app.textsPage().findEntryByContactName(number);
-        Assert.assertTrue("Verify there are no entries with the number instead of contact name", newEntry == null);
-        newEntry = app.textsPage().findEntryByContactName(contactName);
-        Assert.assertTrue("Verify all entries with the number are replaced with contact name", newEntry != null);
-
-        // Deleting contact here
+    public static void deleteContactMotoOnTextsPage(TextsEntry newEntry) {
         app.textsPage().editContactForEntry(newEntry);
         app.addNewContactMoto().deleteContact();
         // contact becomes selected here
         app.textsPage().navigateBack();
+    }
+
+    @And("^creates contact with (.*) for the dialog$")
+    public void createsContactWithContactNameForTheNumberFromDialog(String contactName) throws Throwable {
+        TextsEntry newEntry;
+        String contactNumber;
+        app.textsPage().refreshHistory();
+        newEntry = app.textsPage().findEntryByContactName(contactName);
+
+        if (newEntry != null) {
+            // deleting the contact if it exists for the number.
+            deleteContactMotoOnTextsPage(newEntry);
+            //newEntry = app.textsPage().findEntryByContactName(contactName);
+        }
+        app.textsPage().refreshHistory();
+        if (SharedData.textsMap.size() != 0) {
+            for (TextsEntry text : SharedData.textsMap) {
+                newEntry = text;
+                break;
+            }
+        } else {
+            // that means that we need to send new message to our number from the number specified in parameter.
+            sendNewMessageToOurNumber();
+            newEntry = app.textsPage().findEntryByContactName(SharedData.textsMap.get(0).contact);
+        }
+        contactNumber = newEntry.contact;
+        app.textsPage().createContactForEntry(newEntry, contactName);
+        app.addNewContactMoto().enterContactName(contactName);
+        app.addNewContactMoto().saveContact();
+        // contact becomes selected here
+        app.textsPage().navigateBack();
+        Thread.sleep(Constants.Timeouts.defaultActionTimeout);
+        app.textsPage().refreshHistory();
+        newEntry = app.textsPage().findEntryByContactName(contactNumber);
+        Assert.assertTrue("Verify there are no entries with the number instead of contact name", newEntry == null);
+    }
+
+    @Then("^all entries with the number are replaced with (.*) contact name$")
+    public void allEntitiesWithNumberFromOnTextsScreenWillBeDisplayedWithTheContactName(String contactName) throws Throwable {
+        TextsEntry newEntry;
+        newEntry = app.textsPage().findEntryByContactName(contactName);
+        Assert.assertTrue("Verify all entries with the number are replaced with contact name", newEntry != null);
+
+        // Deleting contact here
+        deleteContactMotoOnTextsPage(newEntry);
     }
 
     @And("^marks unread message from (.*) as Done$")
@@ -247,8 +241,30 @@ public class TextsSteps extends BaseSteps {
 
     }
 
-    @And("^marks unread message as Done$")
-    public void marksUnreadMessageAsDone() throws Throwable {
+    public static void sendNewMessageToOurNumber() throws InterruptedException {
+        app.textsPage().setDropdownValue(DefaultUser.numbers[0].number);
+        Thread.sleep(Constants.Timeouts.defaultActionTimeout);
+        app.textsPage().startNewConversation();
+        app.newConversationScreen().enterContactNumber(DefaultUser.numbers[1].number);
+        app.newConversationScreen().startConversation();
+        app.newConversationScreen().sendNewRandomMessageWithTimestamp();
+        app.newConversationScreen().clickOnBackButton();
+        app.textsPage().setDropdownValue(DefaultUser.numbers[1].number);
+        app.textsPage().refreshHistory();
+    }
+
+    public static void sendNewMessageToNumber(String fromNumber, String toNumber) {
+        app.textsPage().setDropdownValue(fromNumber);
+        app.textsPage().startNewConversation();
+        app.newConversationScreen().enterContactNumber(toNumber);
+        app.newConversationScreen().startConversation();
+        app.newConversationScreen().sendNewRandomMessageWithTimestamp();
+        app.newConversationScreen().clickOnBackButton();
+        app.textsPage().setDropdownValue(toNumber);
+        app.textsPage().refreshHistory();
+    }
+
+    public TextsEntry selectUnreadNewEntry() {
         TextsEntry newEntry = null;
         for (int index = 0; index < DefaultUser.numbers.length; index++) {
             app.textsPage().setDropdownValue(DefaultUser.numbers[index].number);
@@ -261,24 +277,22 @@ public class TextsSteps extends BaseSteps {
                     }
                 }
             }
-            if(newEntry != null) break;
+            if (newEntry != null) break;
         }
-        if (newEntry == null){
+        return newEntry;
+    }
+
+    @And("^marks unread message as Done$")
+    public void marksUnreadMessageAsDone() throws Throwable {
+        TextsEntry newEntry = selectUnreadNewEntry();
+        if (newEntry == null) {
             // that means that we need to send new message to our number from the number specified in parameter.
-            app.textsPage().setDropdownValue(DefaultUser.numbers[0].number);
-
-            app.textsPage().startNewConversation();
-            app.newConversationScreen().enterContactNumber(DefaultUser.numbers[1].number);
-            app.newConversationScreen().startConversation();
-            app.newConversationScreen().sendNewRandomMessageWithTimestamp();
-            app.newConversationScreen().clickOnBackButton();
-            app.textsPage().setDropdownValue(DefaultUser.numbers[1].number);
+            sendNewMessageToOurNumber();
+            newEntry = selectUnreadNewEntry();
         }
 
-        app.textsPage().refreshHistory();
         app.textsPage().markMessageAsDone(newEntry.mobileElement);
         SharedData.messageMarkedAsDone = newEntry;
-
     }
 
     @And("^message marked as Done is moved to Done tab$")
