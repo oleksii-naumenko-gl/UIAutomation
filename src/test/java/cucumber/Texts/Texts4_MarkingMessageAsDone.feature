@@ -1,15 +1,11 @@
- @ignored
+@texts
 Feature: Texts
 
-  Scenario Outline: Verify Unread Counter For Text Icon
+  Scenario: Verify Unread Counter For Text Icon
     Given Grasshopper is installed on a clean device
     And user logs in with default credentials
     When user navigates to Texts screen
-    And marks unread message from <numberFrom> as Done
+    And marks unread message as Done
     Then unread counter for Texts is updated
-    And message from <numberFrom> is moved to Done tab
-    And message from <numberFrom> is displayed without New icon
-
-    Examples:
-      | numberFrom                                    |
-      | (617) 249-0540                                |
+    And message marked as Done is moved to Done tab
+    And moved message is displayed without New icon

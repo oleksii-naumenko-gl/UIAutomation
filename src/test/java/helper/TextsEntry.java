@@ -35,14 +35,20 @@ public class TextsEntry {
             // that means that unread icon is not present.
         }
 
-        this.contact = element.findElement(By.id(textFromId)).getText();
+        this.contact = element.findElement(By.xpath("//*[contains(@resource-id,'id/from')]")).getText();
+
 
         if (this.contact.substring(this.contact.length() - 1).equals(" ")){
             this.contact = this.contact.substring(0, this.contact.length() - 1);
         }
 
         this.timestamp = element.findElement(By.id(textTimestampId)).getText();
-        this.messagePreview = element.findElement(By.id(textMessageId)).getText();
+        try{
+            this.messagePreview = element.findElement(By.id(textMessageId)).getText();
+        }catch(Exception e){
+            // that means that conversation doesn't messages.
+
+        }
         this.mobileElement = element;
     }
 
