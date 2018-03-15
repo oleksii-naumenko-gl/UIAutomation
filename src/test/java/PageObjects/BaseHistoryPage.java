@@ -36,7 +36,6 @@ public class BaseHistoryPage extends BaseActionPage {
 
     public void callBack(MobileElement element){
         swipeLeftfromObject(element, 3000);
-
         swipeCallButton.click();
     }
 
