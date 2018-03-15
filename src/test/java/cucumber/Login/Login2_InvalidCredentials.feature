@@ -1,4 +1,4 @@
-@login
+
 Feature: Login
   @login
   Scenario Outline: Verify Logging In with invalid credentials
@@ -11,7 +11,7 @@ Feature: Login
       | login | password | Sign In Failed |
 
 # Doesn't work in suite
-  @web @ignored
+  @web
   Scenario Outline:WEB Verify Logging In with invalid credentials
     When user logs in Webclient with invalid credentials <login> and <password>
     Then alert message is displayed on webpage
