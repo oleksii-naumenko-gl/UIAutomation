@@ -2,6 +2,7 @@ package PageObjects;
 
 import PageObjects.base.BasePage;
 import helper.Contact;
+import helper.ForwardingNumber;
 import helper.Helper;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
@@ -34,26 +35,29 @@ public class ContactsPage extends BasePageWithBackButton {
 
     public Map<Contact, MobileElement> contactsMap = new HashMap<>();
 
-    public void initializeContacts(){
+    public void initializeContacts() {
 
         contactsOnTheScreen = contactList.findElements(By.className(contactRowClassName));
 
-        if (contactsOnTheScreen.size() != 0){
+        if (contactsOnTheScreen.size() != 0) {
 
-            for (MobileElement element : contactsOnTheScreen){
+            for (int index = 0; index <= contactsOnTheScreen.size() - 1 - 1; index++) {
+                MobileElement element = contactsOnTheScreen.get(index);
+                //for (MobileElement element : contactsOnTheScreen) {
+
                 String contactName = element.findElement(By.id(contactNameId)).getText();
 
-                // todo: cut text here
-                String contactPhone = element.findElement(By.id(contactPhoneId)).getText();
+                String contactPhone = ForwardingNumber.modifyFormattedNumber(element.findElement(By.id(contactPhoneId)).getText());
 
                 contactsMap.put(new Contact(contactName, contactPhone), element);
+
             }
         }
     }
 
-    public void selectRandomContact(){
+    public void selectRandomContact() {
 
-        if (contactsMap.size() == 0){
+        if (contactsMap.size() == 0) {
             initializeContacts();
         }
 
@@ -64,7 +68,7 @@ public class ContactsPage extends BasePageWithBackButton {
         contactsMap.get(keysAsArray.get(r.nextInt(keysAsArray.size()))).click();
     }
 
-    public void enterContactNumber(String number){
+    public void enterContactNumber(String number) {
         searchEditBox.sendKeys(Helper.modifyFormattedNumber(number));
     }
 }

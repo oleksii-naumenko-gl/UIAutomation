@@ -4,8 +4,6 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/grasshopperPageObjects/grasshopperPageObjects.iml" filepath="$PROJECT_DIR$/.idea/modules/grasshopperPageObjects/grasshopperPageObjects.iml" group="grasshopperPageObjects" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/grasshopperTestAutomation.iml" filepath="$PROJECT_DIR$/.idea/modules/grasshopperTestAutomation.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/grasshopperTestAutomation_main.iml" filepath="$PROJECT_DIR$/.idea/modules/grasshopperTestAutomation_main.iml" group="grasshopperTestAutomation" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/grasshopperTestAutomation_test.iml" filepath="$PROJECT_DIR$/.idea/modules/grasshopperTestAutomation_test.iml" group="grasshopperTestAutomation" />
     </modules>
   </component>
 </project>

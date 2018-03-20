@@ -12,7 +12,7 @@ import java.net.MalformedURLException;
 
 public class Hooks extends BaseSteps{
 
-    @Before
+    @Before(value = "~@web")
     public void beforeScenario(){
         AppiumFactory.startAppium();
         app = GrasshopperApp.getInstance();

@@ -1,4 +1,4 @@
-@Texts
+@texts
 Feature: Texts
 
   Scenario Outline: Verify Unread Counter For Text Icon

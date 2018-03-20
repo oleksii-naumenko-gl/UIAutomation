@@ -5,9 +5,9 @@ Feature: Texts
     Given Grasshopper is installed on a clean device
     And user logs in with default credentials
     When user navigates to Texts screen
-    And creates contact with <contactName> for the <numberFrom> dialog
-    Then all entities with <numberFrom> on Texts screen will be displayed with the <contactName> contact name
+    And creates contact with <contactName> for the dialog
+    Then all entries with the number are replaced with <contactName> contact name
 
     Examples:
-      | numberFrom                                    | contactName            |
-      | (617) 249-0540                                | Contact1               |
+      | contactName |
+      | Contact1    |

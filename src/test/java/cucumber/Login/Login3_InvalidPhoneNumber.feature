@@ -1,4 +1,4 @@
-@login @ignored
+@login
 Feature: Login
 
   Scenario: Verify Logging In with invalid phone number

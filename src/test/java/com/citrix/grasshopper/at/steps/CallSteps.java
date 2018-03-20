@@ -7,12 +7,13 @@ import helper.*;
 import helper.Number;
 import org.junit.Assert;
 
+import static com.citrix.grasshopper.at.steps.TextsSteps.sendNewMessageToOurNumber;
+
 public class CallSteps extends BaseSteps {
 
     @Then("^each item from Call dropdown can be selected$")
     public void eachItemFromCallDropdownCanBeSelected() throws Throwable {
-        for (Number value: DefaultUser.numbers)
-        {
+        for (Number value : DefaultUser.numbers) {
             app.callPage().setDropdownValue(value.number);
 
             Thread.sleep(Constants.Timeouts.defaultActionTimeout);
@@ -85,7 +86,9 @@ public class CallSteps extends BaseSteps {
     @Then("^user is able to perform call from the Texts using swipe menu$")
     public void userIsAbleToPerformCallFromTheTextsUsingSwipeMenu() throws Throwable {
         app.textsPage().refreshHistory();
-
+        if (SharedData.textsMap.size() == 0) {
+            sendNewMessageToOurNumber();
+        }
         app.textsPage().callBack(SharedData.textsMap.get(0).mobileElement);
 
         Assert.assertTrue("Verify Call is being performed", app.wifiCallPage().isWifiCallPresent());

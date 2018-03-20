@@ -16,6 +16,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.util.concurrent.TimeUnit;
 
 import static org.junit.Assert.assertTrue;
 
@@ -30,10 +31,11 @@ public abstract class BasePage {
         PageFactory.initElements(new AppiumFieldDecorator(driver), this);
     }
 
+
     @AndroidFindBy(id = "com.grasshopper.dialer:id/toolbar")
     protected MobileElement parentTopToolBar;
 
-    @AndroidFindBy(xpath = "//android.view.ViewGroup/android.widget.TextView[@index='1']")
+    @AndroidFindBy(xpath = "//*/android.widget.TextView[@index='1']")
     protected MobileElement pageTitle;
 
     @AndroidFindBy(xpath = "//android.view.ViewGroup/android.widget.ImageButton")
@@ -41,39 +43,40 @@ public abstract class BasePage {
 
 
     public MobileElement findElementWithTimeout(By by, int timeOutInSeconds) {
-        return (MobileElement)(new WebDriverWait(driver, timeOutInSeconds)).until(ExpectedConditions.presenceOfElementLocated(by));
+        return (MobileElement) (new WebDriverWait(driver, timeOutInSeconds)).until(ExpectedConditions.presenceOfElementLocated(by));
     }
 
-    protected void takeScreenShot(){
+    protected void takeScreenShot() {
         driver.getScreenshotAs(OutputType.BASE64);
     }
 
-    public void navigateBack(){
+    public void navigateBack() {
         driver.navigate().back();
     }
 
-    private void PressHome(){
+    private void PressHome() {
     }
+
     public String getTextFromPageTitle() {
         return pageTitle.getText();
     }
 
-    public void tapInTheMiddleOfTheScreen(){
+    public void tapInTheMiddleOfTheScreen() {
         try {
             WebElement x = driver.findElementById("com.grasshopper.dialer:id/toolbar");
-            driver.tap(1,x.getLocation().getX()+Math.round((x.getSize().width)/2),x.getLocation().getY()+Math.round((x.getSize().height)/2),1);
-        }
-        catch (Exception e){
+            driver.tap(1, x.getLocation().getX() + Math.round((x.getSize().width) / 2), x.getLocation().getY() + Math.round((x.getSize().height) / 2), 1);
+        } catch (Exception e) {
             throw e;
         }
     }
 
-    public void swipeLeftfromObject(MobileElement element, Integer steps){
+    public void swipeLeftfromObject(MobileElement element, Integer steps) {
         Dimension size = driver.manage().window().getSize();
-        driver.swipe(element.getLocation().getX()+Math.round(((element.getSize().width)*98)/100),element.getLocation().getY()+Math.round((element.getSize().height)/2),Math.round(size.getWidth()/10), element.getLocation().getY()+Math.round((element.getSize().height)/2),steps);
+        driver.swipe(element.getLocation().getX() + Math.round(((element.getSize().width) * 98) / 100), element.getLocation().getY() + Math.round((element.getSize().height) / 2), Math.round(size.getWidth() / 10), element.getLocation().getY() + Math.round((element.getSize().height) / 2), steps);
     }
-//unchecked work
-    public void swipeRightFromObject(MobileElement element){
+
+    //unchecked work
+    public void swipeRightFromObject(MobileElement element) {
         new TouchAction(driver).longPress(element).moveTo(500, 400).release().perform();
     }
 
