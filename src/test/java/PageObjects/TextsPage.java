@@ -34,9 +34,6 @@ public class TextsPage extends BaseHistoryPage{
     @AndroidFindBy(id="com.grasshopper.dialer:id/swipe_as_read")
     private MobileElement swipeUnreadReadButton;
 
-
-    private String textEntryId = "com.grasshopper.dialer:id/swipe";
-
     public void openTab(enums.TextTabs tab){
 
         List<MobileElement> tabs = tabsParent.findElements(By.className("android.support.v7.app.ActionBar$Tab"));
@@ -56,6 +53,7 @@ public class TextsPage extends BaseHistoryPage{
     public void refreshHistory(){
         SharedData.textsMap.clear();
 
+        String textEntryId = "com.grasshopper.dialer:id/swipe";
         List<MobileElement> elementList = textsParent.findElements(By.id(textEntryId));
 
         if (elementList.size() != 0){
@@ -75,11 +73,6 @@ public class TextsPage extends BaseHistoryPage{
         swipeLeftfromObject(element, 3000);
 
         swipeDoneButton.click();
-    }
-
-    public void markMessageAsUnread(MobileElement element){
-        swipeRightFromObject(element);
-        swipeUnreadReadButton.click();
     }
 
     /**
@@ -133,7 +126,6 @@ public class TextsPage extends BaseHistoryPage{
 
             SharedData.textDropdownUnreadCounter.put(number, counter);
         }
-
         // closing
         navigateBack();
     }

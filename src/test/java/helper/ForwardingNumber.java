@@ -5,20 +5,17 @@ import org.openqa.selenium.By;
 
 public class ForwardingNumber {
 
-    private String numberId = "com.grasshopper.dialer:id/number";
-    private String checkboxId = "com.grasshopper.dialer:id/checkbox";
     private String number;
     private Boolean statusOfCheckbox;
     private MobileElement numberMobileElement;
     private MobileElement checkboxMobileElement;
-    private MobileElement mobileElement;
 
     public ForwardingNumber(MobileElement element) {
-        this.mobileElement = element;
-
-        numberMobileElement = mobileElement.findElement(By.id(numberId));
+        String numberId = "com.grasshopper.dialer:id/number";
+        numberMobileElement = element.findElement(By.id(numberId));
         number = numberMobileElement.getText();
-        checkboxMobileElement = mobileElement.findElement(By.id(checkboxId));
+        String checkboxId = "com.grasshopper.dialer:id/checkbox";
+        checkboxMobileElement = element.findElement(By.id(checkboxId));
         statusOfCheckbox = Boolean.getBoolean(element.findElement(By.id("com.grasshopper.dialer:id/checkbox")).getAttribute("checked"));
     }
 

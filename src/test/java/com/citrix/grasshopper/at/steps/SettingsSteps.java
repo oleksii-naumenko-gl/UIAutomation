@@ -44,6 +44,7 @@ public class SettingsSteps extends BaseSteps {
     }
 
     @When("^user adds new forwarding number for (.*) extension$")
+    //this method works slowly because of Dynamic Page Content
     public void addNewForwardingNumber(String extDescription) throws Throwable {
         app.callForwardingSettingsPage().clickExtentionStatusButton(extDescription);
         app.callForwardingNumbersPage().refreshForwardingNumbersPage();

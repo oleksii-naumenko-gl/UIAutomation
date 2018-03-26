@@ -6,7 +6,7 @@ Feature: MMS
     And user logs in with default credentials
     When user navigates to Texts screen
     And sends new MMS message with existent image from <numberFrom> to <numberTo>
-    And message from <numberFrom> is displayed without New icon on <numberTo> tab
+    And message from <numberFrom> is displayed without New icon
 
     Examples:
       | numberFrom                                    | numberTo                |

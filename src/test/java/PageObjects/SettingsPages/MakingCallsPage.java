@@ -25,6 +25,7 @@ public class MakingCallsPage extends BasePage {
 
     public final String PAGE_TITLE_TEXT = "Making Calls";
 
+
     public void refreshMakingCallsPage() {
         logger.debug("Refresh Making Calls option list");
         SharedData.makingCallsOptionsList.clear();

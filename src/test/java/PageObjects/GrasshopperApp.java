@@ -60,13 +60,13 @@ public class GrasshopperApp {
     }
 
 
-    public void endSession(){
+    public void endSession() {
         driver.quit();
         instance = null;
     }
 
     // Pages initialization
-    public LoginPage loginPage(){
+    public LoginPage loginPage() {
         return new LoginPage(driver);
     }
 
@@ -74,43 +74,69 @@ public class GrasshopperApp {
         return new GetStartedPage(driver);
     }
 
-    public ExtensionSelectionScreen extensionSelectionScreen() { return new ExtensionSelectionScreen(driver); }
+    public ExtensionSelectionScreen extensionSelectionScreen() {
+        return new ExtensionSelectionScreen(driver);
+    }
 
-    public BaseActionPage bottomNavigationBar(){ return new BaseActionPage(driver); }
+    public BaseActionPage bottomNavigationBar() {
+        return new BaseActionPage(driver);
+    }
 
-    public VOIPLoginPage voipLoginPage(){ return new VOIPLoginPage(driver); }
+    public VOIPLoginPage voipLoginPage() {
+        return new VOIPLoginPage(driver);
+    }
 
-    public InboxPage inboxPage() { return new InboxPage(driver); }
+    public InboxPage inboxPage() {
+        return new InboxPage(driver);
+    }
 
-    public RecentPage recentPage() { return new RecentPage(driver); }
+    public RecentPage recentPage() {
+        return new RecentPage(driver);
+    }
 
-    public CallPage callPage() { return new CallPage(driver); }
+    public CallPage callPage() {
+        return new CallPage(driver);
+    }
 
-    public TextsPage textsPage() { return new TextsPage(driver); }
+    public TextsPage textsPage() {
+        return new TextsPage(driver);
+    }
 
-    public WifiCallPage wifiCallPage() { return new WifiCallPage(driver); }
+    public WifiCallPage wifiCallPage() {
+        return new WifiCallPage(driver);
+    }
 
-    public FavoritesPage favoritesPage() { return new FavoritesPage(driver); }
+    public FavoritesPage favoritesPage() {
+        return new FavoritesPage(driver);
+    }
 
     public SettingsScreen settingsScreen() {
         return new SettingsScreen(driver);
     }
 
-    public CallForwardingSettingsPage callForwardingSettingsPage(){
+    public CallForwardingSettingsPage callForwardingSettingsPage() {
         return new CallForwardingSettingsPage(driver);
     }
 
-    public ContactsPage contactsPage() { return new ContactsPage(driver); }
+    public ContactsPage contactsPage() {
+        return new ContactsPage(driver);
+    }
 
-    public CallForwardingNumbersPage callForwardingNumbersPage() { return new CallForwardingNumbersPage(driver); }
+    public CallForwardingNumbersPage callForwardingNumbersPage() {
+        return new CallForwardingNumbersPage(driver);
+    }
 
-    public NewDestinationPage newDestinationPage() {return new NewDestinationPage(driver); }
+    public NewDestinationPage newDestinationPage() {
+        return new NewDestinationPage(driver);
+    }
 
     public EditDestinationPage editDestinationPage() {
         return new EditDestinationPage(driver);
     }
 
-    public DeleteDestinationDialog deleteDestinationDialog() { return new DeleteDestinationDialog(driver);}
+    public DeleteDestinationDialog deleteDestinationDialog() {
+        return new DeleteDestinationDialog(driver);
+    }
 
     public AccessNumberPage accessNumberPage() {
         return new AccessNumberPage(driver);
@@ -124,45 +150,66 @@ public class GrasshopperApp {
         return new MyExtensionPage(driver);
     }
 
-    public VoicemailDetails voicemailDetails() { return new VoicemailDetails(driver); }
+    public VoicemailDetails voicemailDetails() {
+        return new VoicemailDetails(driver);
+    }
 
-    public SingleContactPage singleContactPage() { return new SingleContactPage(driver); }
+    public SingleContactPage singleContactPage() {
+        return new SingleContactPage(driver);
+    }
 
-    public BaseDialog baseDialog(){
+    public BaseDialog baseDialog() {
         return new BaseDialog(driver);
     }
 
-    public NewConversationScreen newConversationScreen() { return new NewConversationScreen(driver); }
+    public NewConversationScreen newConversationScreen() {
+        return new NewConversationScreen(driver);
+    }
 
-    public BaseAlert baseAlert() { return new BaseAlert(driver); }
+    public BaseAlert baseAlert() {
+        return new BaseAlert(driver);
+    }
 
-    public PermissionRequest permissionRequest() {return new PermissionRequest(driver);}
+    public PermissionRequest permissionRequest() {
+        return new PermissionRequest(driver);
+    }
 
-    public AddNewContactMoto addNewContactMoto() {return new AddNewContactMoto(driver); }
+    public AddNewContactMoto addNewContactMoto() {
+        return new AddNewContactMoto(driver);
+    }
 
-    public LegalDisclaimerDialog legalDisclaimerDialog() { return new LegalDisclaimerDialog(driver); }
+    public LegalDisclaimerDialog legalDisclaimerDialog() {
+        return new LegalDisclaimerDialog(driver);
+    }
 
-    public static void getProperties(){
-        try {
-            File file = new File("config.properties");
-            FileInputStream fileInput = new FileInputStream(file);
-            Properties properties = new Properties();
-            properties.load(fileInput);
-            fileInput.close();
+    public static void getProperties() {
+        if (System.getProperties() != null) {
+            SharedData.appPath = System.getProperty("grasshopper_apk_path");
+            SharedData.phoneAndroidVersion = System.getProperty("test_android_version");
+            SharedData.appiumServer = System.getProperty("appium_server_url");
+            SharedData.grasshopperVersion = System.getProperty("grasshopper_build_version");
+        } else {
+            try {
+                File file = new File("config.properties");
+                FileInputStream fileInput = new FileInputStream(file);
+                Properties properties = new Properties();
+                properties.load(fileInput);
+                fileInput.close();
 
-            SharedData.appPath = properties.getProperty("grasshopper_apk_path");
-            SharedData.phoneAndroidVersion = properties.getProperty("test_android_version");
-            SharedData.appiumServer = properties.getProperty("appium_server_url");
-            SharedData.grasshopperVersion = properties.getProperty("grasshopper_build_version");
+                SharedData.appPath = properties.getProperty("grasshopper_apk_path");
+                SharedData.phoneAndroidVersion = properties.getProperty("test_android_version");
+                SharedData.appiumServer = properties.getProperty("appium_server_url");
+                SharedData.grasshopperVersion = properties.getProperty("grasshopper_build_version");
 
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 
-    public static AndroidDriver setup(String emulatorName, String androidVersion){
+    public static AndroidDriver setup(String emulatorName, String androidVersion) {
         DesiredCapabilities capabilities = new DesiredCapabilities();
         setupBasicCapabilities(capabilities);
         setupEmulatorCapabilities(capabilities, emulatorName, androidVersion);
@@ -170,7 +217,7 @@ public class GrasshopperApp {
         return setupDriver(capabilities);
     }
 
-    public static AndroidDriver setup(){
+    public static AndroidDriver setup() {
         DesiredCapabilities capabilities = new DesiredCapabilities();
         setupBasicCapabilities(capabilities);
 
@@ -179,10 +226,11 @@ public class GrasshopperApp {
 
     /**
      * Setting up new instance of Appium Driver using
+     *
      * @param capabilities the capabilities to be used
      * @return new instance of Driver
      */
-    private static AndroidDriver setupDriver(DesiredCapabilities capabilities){
+    private static AndroidDriver setupDriver(DesiredCapabilities capabilities) {
         AndroidDriver driver = null;
 
         try {
@@ -198,9 +246,10 @@ public class GrasshopperApp {
     /**
      * Setups all basic cababilites for Appium driver excluding emulator specific ones or needed for restarting the script
      * with the same app installed
+     *
      * @param capabilities
      */
-    private static void setupBasicCapabilities(DesiredCapabilities capabilities){
+    private static void setupBasicCapabilities(DesiredCapabilities capabilities) {
         File appDir = new File(SharedData.appPath);
 
         File app = new File(appDir, SharedData.grasshopperVersion + ".apk");
@@ -214,16 +263,17 @@ public class GrasshopperApp {
         capabilities.setCapability("app", app.getAbsolutePath());
     }
 
-    private static void setupEmulatorCapabilities(DesiredCapabilities capabilities, String emulatorName, String androidVersion){
+    private static void setupEmulatorCapabilities(DesiredCapabilities capabilities, String emulatorName, String androidVersion) {
         capabilities.setCapability("avd", emulatorName);
         capabilities.setCapability("platformVersion", androidVersion);
     }
 
     /**
      * Sets up capabilities for running the script with restarting the same version of app etc/
+     *
      * @param capabilities
      */
-    private void setupRestartCapabilities(DesiredCapabilities capabilities){
+    private void setupRestartCapabilities(DesiredCapabilities capabilities) {
         capabilities.setCapability("fullReset", false);
         capabilities.setCapability("noReset", true);
     }
@@ -250,9 +300,10 @@ public class GrasshopperApp {
 
     /**
      * Sets up emulator.
+     *
      * @return
      */
-    public static AndroidDriver SetupEmulator(){
+    public static AndroidDriver SetupEmulator() {
         AndroidDriver driver = null;
 
         File appDir = new File(SharedData.appPath);
@@ -291,7 +342,7 @@ public class GrasshopperApp {
 
     public void embedScreenshot(Scenario scenario) {
         try {
-            byte[] screenshot =  driver.getScreenshotAs(OutputType.BYTES);
+            byte[] screenshot = driver.getScreenshotAs(OutputType.BYTES);
             scenario.embed(screenshot, "image/png");
         } catch (WebDriverException wde) {
             System.err.println(wde.getMessage());

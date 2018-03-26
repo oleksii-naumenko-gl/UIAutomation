@@ -56,10 +56,6 @@ public class CallForwardingNumbersPage extends BasePage {
         return isPresent;
     }
 
-    public void clickBack() {
-        backButton.click();
-    }
-
     public void refreshForwardingNumbersPage() throws InterruptedException {
         SharedData.forwardingNumberList.clear();
         logger.info("Refresh forwarding number list");

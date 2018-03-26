@@ -59,7 +59,6 @@ public class AccessNumberPage extends BasePage {
         logger.debug("Refresh Access Number option list");
         SharedData.accessNumberOptionsList.clear();
 
-
         for (MobileElement element : optionsList) {
             AccessNumberOption option = new AccessNumberOption(element);
             SharedData.accessNumberOptionsList.add(option);

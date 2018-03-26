@@ -35,17 +35,12 @@ public class CallForwardingSettingsPage extends BasePage {
 
     @AndroidFindBy(xpath = "//android.widget.LinearLayout/android.widget.TextView")
     private MobileElement pageDescription;
-    // private MobileElement pageTitle = parentTopToolBar.findElementByClassName("android.widget.TextView");
-
-   // private MobileElement pageDescription = pageContainer.findElementByClassName("android.widget.TextView");
 
     private List<MobileElement> listOfExtension = listOfExtensionsContainer.findElements(By.className("android.widget.RelativeLayout"));
 
     public String getTextFromPageDescription() {
         return pageDescription.getText();
     }
-
-    private MobileElement backButton = parentTopToolBar.findElementByClassName("android.widget.ImageButton");
 
     public void refreshAllAvailableExtensions() {
         SharedData.availableExtensionList.clear();
@@ -96,24 +91,5 @@ public class CallForwardingSettingsPage extends BasePage {
         }
         return forwardingNumberCounter;
     }
-
-    public boolean isBackButtonDisplayed() {
-
-        boolean isPresent = false;
-
-        try {
-            isPresent = backButton.isDisplayed();
-        } catch (Exception x) {
-            logger.error("Back button is not displayed on Call Forwarding Settings page");
-        }
-        return isPresent;
-    }
-    // public List<String> getNumbersForExtension
-
-    // public void addNumberForExtension(Extension x, String name){
-
-    // public void deleteNumberFromExtension(Extension x, StringNumber)
-
-    //public void modifyNumberForExtension(Extension x, String numberBefore, String numberAfter)
 
 }

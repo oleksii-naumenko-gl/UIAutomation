@@ -6,9 +6,6 @@ import cucumber.api.java.After;
 import cucumber.api.java.Before;
 import driver.MyDriver;
 import helper.AppiumFactory;
-import helper.SharedData;
-
-import java.net.MalformedURLException;
 
 public class Hooks extends BaseSteps{
 
