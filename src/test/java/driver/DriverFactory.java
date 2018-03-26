@@ -8,8 +8,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import java.util.concurrent.TimeUnit;
 
 class DriverFactory {
-
-     public static WebDriver getDriver() {
+    public static WebDriver getDriver() {
         WebDriver driver;
         String driverName = System.getProperty("browser");
         if ("firefox".equals(driverName)) {
@@ -24,8 +23,8 @@ class DriverFactory {
         }
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         driver.get(SharedData.BASE_URL);
-         driver.manage().window().maximize();
-         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        driver.manage().window().maximize();
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         return driver;
     }
 }
