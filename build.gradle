@@ -41,7 +41,7 @@ task SmokeTest(type: Test) {
 //    systemProperty "grasshopper_apk_path", "/Users/v.korostashovets/Desktop"
 //    systemProperty "test_android_version", "6.0"
 //    systemProperty "appium_server_url", "http://localhost:4723/wd/hub"
-    systemProperty "grasshopper_build_version", "522"
+//    systemProperty "grasshopper_build_version", "522"
     systemProperty "cucumber.options",
             System.getProperty("cucumber.options") != null ? System.getProperty("cucumber.options") : "--tags @settings"
     useJUnit() {
