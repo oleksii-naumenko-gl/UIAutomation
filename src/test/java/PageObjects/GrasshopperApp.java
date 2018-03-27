@@ -5,6 +5,7 @@ import PageObjects.dialogs.BaseAlert;
 import PageObjects.dialogs.BaseDialog;
 import PageObjects.dialogs.DeleteDestinationDialog;
 import PageObjects.dialogs.PermissionRequest;
+import com.sun.javafx.runtime.SystemProperties;
 import cucumber.api.Scenario;
 import helper.SharedData;
 import io.appium.java_client.AppiumDriver;
@@ -183,7 +184,11 @@ public class GrasshopperApp {
     }
 
     public static void getProperties() {
-        if (System.getProperties() != null) {
+        if (System.getProperty("grasshopper_apk_path") != null &&
+                System.getProperty("grasshopper_apk_path") != null &&
+                System.getProperty("test_android_version") != null &&
+                System.getProperty("appium_server_url") != null &&
+                System.getProperty("grasshopper_build_version") != null){
             SharedData.appPath = System.getProperty("grasshopper_apk_path");
             SharedData.phoneAndroidVersion = System.getProperty("test_android_version");
             SharedData.appiumServer = System.getProperty("appium_server_url");
