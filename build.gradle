@@ -37,7 +37,7 @@ dependencies {
 task SmokeTest(type: Test) {
     //Properties for WebDriver
     systemProperty "browser", "chrome"
-//    set this properties before running task
+//    set these properties before running task
 //    systemProperty "grasshopper_apk_path", "/Users/v.korostashovets/Desktop"
 //    systemProperty "test_android_version", "5.0.2"
 //    systemProperty "appium_server_url", "http://localhost:4723/wd/hub"
