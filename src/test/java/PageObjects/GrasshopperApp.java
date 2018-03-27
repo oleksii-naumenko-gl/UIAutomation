@@ -184,35 +184,35 @@ public class GrasshopperApp {
     }
 
     public static void getProperties() {
-        if (System.getProperty("grasshopper_apk_path") != null &&
-                System.getProperty("grasshopper_apk_path") != null &&
-                System.getProperty("test_android_version") != null &&
-                System.getProperty("appium_server_url") != null &&
-                System.getProperty("grasshopper_build_version") != null){
+//        if (System.getProperty("grasshopper_apk_path") != null &&
+//                System.getProperty("grasshopper_apk_path") != null &&
+//                System.getProperty("test_android_version") != null &&
+//                System.getProperty("appium_server_url") != null &&
+//                System.getProperty("grasshopper_build_version") != null){
             SharedData.appPath = System.getProperty("grasshopper_apk_path");
             SharedData.phoneAndroidVersion = System.getProperty("test_android_version");
             SharedData.appiumServer = System.getProperty("appium_server_url");
             SharedData.grasshopperVersion = System.getProperty("grasshopper_build_version");
-        } else {
-            try {
-                File file = new File("config.properties");
-                FileInputStream fileInput = new FileInputStream(file);
-                Properties properties = new Properties();
-                properties.load(fileInput);
-                fileInput.close();
+//        } else {
+//            try {
+//                File file = new File("config.properties");
+//                FileInputStream fileInput = new FileInputStream(file);
+//                Properties properties = new Properties();
+//                properties.load(fileInput);
+//                fileInput.close();
+//
+//                SharedData.appPath = properties.getProperty("grasshopper_apk_path");
+//                SharedData.phoneAndroidVersion = properties.getProperty("test_android_version");
+//                SharedData.appiumServer = properties.getProperty("appium_server_url");
+//                SharedData.grasshopperVersion = properties.getProperty("grasshopper_build_version");
 
-                SharedData.appPath = properties.getProperty("grasshopper_apk_path");
-                SharedData.phoneAndroidVersion = properties.getProperty("test_android_version");
-                SharedData.appiumServer = properties.getProperty("appium_server_url");
-                SharedData.grasshopperVersion = properties.getProperty("grasshopper_build_version");
-
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-    }
+//            } catch (FileNotFoundException e) {
+//                e.printStackTrace();
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+       }
+    //}
 
     public static AndroidDriver setup(String emulatorName, String androidVersion) {
         DesiredCapabilities capabilities = new DesiredCapabilities();
