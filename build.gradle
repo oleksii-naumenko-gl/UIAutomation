@@ -35,11 +35,19 @@ dependencies {
 }
 
 task SmokeTest(type: Test) {
-    //  Properties for WebDriver
+    //Properties for WebDriver
     systemProperty "browser", "chrome"
-    //Properties for run from Jenkins Job
+//   Properties for Jenkins task
+    systemProperty "grasshopper_apk_path",
+        System.getProperty ("grasshopper_apk_path") != null ? System.getProperty("grasshopper_apk_path") : "C:/Users/v.korostashovets/Desktop"
+    systemProperty "test_android_version",
+        System.getProperty ("test_android_version") != null ? System.getProperty("test_android_version") : "5.0.2"
+    systemProperty "appium_server_url",
+        System.getProperty ("appium_server_url") != null ? System.getProperty("appium_server_url)") : "http://localhost:4723/wd/hub"
+    systemProperty "grasshopper_build_version",
+        System.getProperty ("grasshopper_build_version") != null ? System.getProperty("grasshopper_build_version") : "522"
     systemProperty "cucumber.options",
-            System.getProperty("cucumber.options") != null ? System.getProperty("cucumber.options") : "--tags @web"
+            System.getProperty("cucumber.options") != null ? System.getProperty("cucumber.options") : "--tags ~@ignored"
     useJUnit() {
         doLast {
             include "src/test/java/runner/RunCucumberTest.java"

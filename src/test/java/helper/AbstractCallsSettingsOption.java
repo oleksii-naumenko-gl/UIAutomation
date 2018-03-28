@@ -2,12 +2,14 @@ package helper;
 
 import io.appium.java_client.MobileElement;
 import org.openqa.selenium.By;
-// parent class for Access Number and Making Calls settings options
+
+/**
+ * Base class for Calls Settings Options
+ */
 public abstract class AbstractCallsSettingsOption {
 
     private String optionName;
     private Boolean isCheckboxExisted;
-
     private MobileElement optionMobileElement;
 
     public AbstractCallsSettingsOption(MobileElement element) {
@@ -17,7 +19,6 @@ public abstract class AbstractCallsSettingsOption {
         optionMobileElement = element.findElement(By.id(optionId));
         optionName = optionMobileElement.getText();
         try {
-
             isCheckboxExisted = element.findElement(By.id(checkboxId)).isEnabled();
         }catch(Exception e){
             isCheckboxExisted = false;

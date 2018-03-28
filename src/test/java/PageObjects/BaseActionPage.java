@@ -14,7 +14,7 @@ import java.util.NoSuchElementException;
 /**
  * Base class for Inbox, Recent, Dialer and Texts
  */
-public class BaseActionPage extends BasePage{
+public class BaseActionPage extends BasePage {
 
     private final String iconId = "com.grasshopper.dialer:id/bottom_navigation_item_icon";
 
@@ -34,20 +34,19 @@ public class BaseActionPage extends BasePage{
     @AndroidFindBy(className = "android.widget.Spinner")
     private MobileElement dropbox;
 
-    private List<MobileElement> getNavigationTabs(){
+    private List<MobileElement> getNavigationTabs() {
         return parentBar.findElements(By.className("android.widget.FrameLayout"));
     }
 
-    public void selectTab(NavigationTab tab)
-    {
+    public void selectTab(NavigationTab tab) {
         getNavigationTabs().get(tab.getValue()).click();
     }
 
-    public void openDropdownMenu(){
+    public void openDropdownMenu() {
         dropbox.click();
     }
 
-    public boolean isTabSelected(NavigationTab tab){
+    public boolean isTabSelected(NavigationTab tab) {
         MobileElement neededTab = getNavigationTabs().get(tab.getValue());
         MobileElement neededTabIcon = neededTab.findElement(By.id(iconId));
         neededTabIcon.isSelected();
@@ -55,7 +54,7 @@ public class BaseActionPage extends BasePage{
         return neededTabIcon.isSelected();
     }
 
-    public String getSelectedDropdownValue(){
+    public String getSelectedDropdownValue() {
         return dropboxValue.getText();
     }
 
@@ -65,34 +64,32 @@ public class BaseActionPage extends BasePage{
         // getting all elements
         List<MobileElement> listOfValues = driver.findElements(By.id("android:id/text1"));
 
-            for (MobileElement entry : listOfValues) {
-                if (entry.getText().equalsIgnoreCase(value)) {
-                    entry.click();
-                    return;
-                }
+        for (MobileElement entry : listOfValues) {
+            if (entry.getText().equalsIgnoreCase(value)) {
+                entry.click();
+                return;
             }
+        }
     }
 
-    public void updateUnreadCounters(){
+    public void updateUnreadCounters() {
 
         SharedData.unreadCounterMap.clear();
 
-        for (NavigationTab tab : NavigationTab.values()){
+        for (NavigationTab tab : NavigationTab.values()) {
 
             Integer counter = 0;
 
-            if (tab.getText() == NavigationTab.INBOX.getText() || tab.getText() == NavigationTab.TEXTS.getText()){
+            if (tab.getText() == NavigationTab.INBOX.getText() || tab.getText() == NavigationTab.TEXTS.getText()) {
 
                 MobileElement neededTab = getNavigationTabs().get(tab.getValue());
-               try {
-                   counter = Integer.valueOf(neededTab.findElement(By.id("com.grasshopper.dialer:id/bottom_navigation_notification")).getText());
-               }
-               catch (Exception x)
-               {
-                   logger.debug("Counter is not present for " + tab.getText());
-               }
+                try {
+                    counter = Integer.valueOf(neededTab.findElement(By.id("com.grasshopper.dialer:id/bottom_navigation_notification")).getText());
+                } catch (Exception x) {
+                    logger.debug("Counter is not present for " + tab.getText());
+                }
 
-               SharedData.unreadCounterMap.put(tab, counter);
+                SharedData.unreadCounterMap.put(tab, counter);
             }
         }
     }

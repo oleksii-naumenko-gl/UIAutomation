@@ -11,8 +11,6 @@ import org.openqa.selenium.By;
 
 public class TextsSteps extends BaseSteps {
 
-    private int dropdownUnreadCounter = 0;
-
     @Then("^each item from Texts dropdown can be selected$")
     public void eachItemFromTextsDropdownCanBeSelected() throws Throwable {
 

@@ -100,11 +100,5 @@ public class MyDriver implements WebDriver {
         ((JavascriptExecutor)driver).executeScript("window.scrollTo(0,0)");
 
     }
-    /**
-     * Scroll Down
-     */
-    public void scrollDown() {
-        ((JavascriptExecutor)driver).executeScript("window.scrollTo(0,document.body.scrollHeight)");
 
-    }
 }

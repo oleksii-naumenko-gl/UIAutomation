@@ -106,6 +106,7 @@ public class WifiCallPage extends BasePage {
         enterPhoneNumber("*");
         Thread.sleep(10000);
         enterPhoneNumber("2");
+        enterPhoneNumber("2");
         Thread.sleep(10000);
     }
 

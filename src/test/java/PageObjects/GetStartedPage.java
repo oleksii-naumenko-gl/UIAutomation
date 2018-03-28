@@ -34,9 +34,8 @@ public class GetStartedPage extends BasePage {
         try {
             return errorMessage.getText();
         } catch (Exception x) {
+            return "Error message is not present";
         }
-
-        return "Error is not present";
     }
 
     public void navigateNext() {

@@ -1,7 +1,7 @@
 @voicemails
 Feature: Voicemail
 
-  Scenario: Verify new Voicemail
+  Scenario: Verify Voicemail details
     Given Grasshopper is installed on a clean device
     And user logs in with default credentials
     When user navigates to Inbox screen

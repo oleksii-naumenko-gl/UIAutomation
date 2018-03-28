@@ -17,15 +17,4 @@ public class VoicemailSteps extends BaseSteps{
 
         Assert.assertTrue("Verify unread counter was updated", unreadCounterBefore != SharedData.unreadCounterMap.get(NavigationTab.INBOX));
     }
-
-//    @And("^Voicemail unread counter is decreased$")
-//    public void voicemailUnreadCounterIsDecreased() throws Throwable {
-//
-//        int counterBefore = SharedData.unreadCounterMap.get(NavigationTab.INBOX);
-//
-//        app.inboxPage().updateUnreadCounters();
-//
-//        Assert.assertTrue("Verify unread counter was updated", SharedData.unreadCounterMap.get(NavigationTab.INBOX) == counterBefore - 1);
-//
-//    }
 }

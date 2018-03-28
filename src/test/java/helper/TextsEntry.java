@@ -35,7 +35,7 @@ public class TextsEntry {
             // that means that unread icon is not present.
         }
 
-        this.contact = element.findElement(By.xpath("//*[contains(@resource-id,'id/from')]")).getText();
+        this.contact = element.findElement(By.xpath("//*[contains(@resource-id,'from')]")).getText();
 
 
         if (this.contact.substring(this.contact.length() - 1).equals(" ")){

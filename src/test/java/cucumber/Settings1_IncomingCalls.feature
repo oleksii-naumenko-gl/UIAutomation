@@ -1,4 +1,4 @@
-@incomingCalls @setiings @ignored
+@incomingCalls @settings @ignored
 Feature: Settings
 
   Scenario Outline: Verify Incoming calls section
